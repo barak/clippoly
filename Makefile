@@ -1,5 +1,6 @@
 #CCC	= g++ -B/usr/local/lib/gcc-lib/sparc-sun-solaris2.3/rotd/
-CCC	= g++ -fno-implicit-templates
+#CCC	= g++ -Wall -ansi -pedantic
+CCC	= g++
 #CCC	= CC
 # You can use gcc as a C compiler if cc doesn't work
 CC	= gcc -traditional

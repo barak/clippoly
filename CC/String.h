@@ -1,6 +1,6 @@
 // $Log$
-// Revision 1.2  2005/02/28 17:00:30  klamer
-// PL 7
+// Revision 1.3  2005/02/28 17:09:16  klamer
+// PL8
 //
 
 #ifndef _String_h

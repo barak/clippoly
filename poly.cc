@@ -21,8 +21,8 @@ static const char rcs_id[] = "$Header$";
 //    Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 // $Log$
-// Revision 1.2  2005/02/28 17:00:31  klamer
-// PL 7
+// Revision 1.3  2005/02/28 17:09:17  klamer
+// PL8
 //
 // Revision 1.2  1994/01/04  12:55:37  klamer
 // Made copy constructor of PolyNode a dummy, and added one which also
@@ -55,6 +55,10 @@ static const char rcs_id[] = "$Header$";
 //#include	"poly_use.h"
 
 static const char h_rcs_id[] = POLY_H;
+
+#ifndef M_PI
+#define M_PI            3.14159265358979323846  /* pi */
+#endif
 
 PolyNode::PolyNode( const PolyNode &)
 {

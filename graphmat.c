@@ -1,8 +1,8 @@
 static char rcs_id[] = "$Header$";
 /*
   $Log$
-  Revision 1.2  2005/02/28 17:00:30  klamer
-  PL 7
+  Revision 1.3  2005/02/28 17:09:17  klamer
+  PL8
 
  * Revision 1.8  1993/01/28  15:25:47  klamer
  * Changed scaxis: now is scaled along the axis; the line-mirror behaviour

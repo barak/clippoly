@@ -22,8 +22,8 @@
 //    Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 // $Log$
-// Revision 1.2  2005/02/28 17:00:31  klamer
-// PL 7
+// Revision 1.3  2005/02/28 17:09:17  klamer
+// PL8
 //
 // Revision 1.1  1993/10/27  14:43:55  klamer
 // Initial revision
@@ -159,7 +159,7 @@ class PointList
 	static const int	def_len; //	= 16;
 	// Make copy constructor and assignment unusable
 	PointList( PointList &copy );
-	operator=( PointList copy );
+	PointList &operator=( const PointList &copy );
 		
 public:
 	PointList( int nr = def_len );
