@@ -1,3 +1,7 @@
+Compiling with Visual C++ seems to work. Be carefull to make sure that
+Visual C++ knows that a .cc file is a C++ file (or rename the files.)
+
+Old information:
 If you don't have g++, but a cfront based compiler like Sun C++ 3.0, then
 you should compile the files from the CC subdirectory to this directory.
 The String.{cc,h} files are not a complete implementation of a String class;
