@@ -21,8 +21,8 @@ static const char rcs_id[] = "$Header$";
 //    Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 // $Log$
-// Revision 1.1  2005/02/28 16:23:13  klamer
-// PL6
+// Revision 1.2  2005/02/28 17:00:31  klamer
+// PL 7
 //
 // Revision 1.2  1994/01/04  12:55:37  klamer
 // Added DEBUG_NCLIP support.
@@ -270,8 +270,8 @@ make_poly( const Point &start_point, const Point &point,
 	
 	follow.next();
 
-	if (follow.point() == start_point)
-		return 1;
+	// if (follow.point() == start_point)
+	//	return 1;
 			
 	double	cur_angle = angle( point, follow.point(), follow.nextpoint() );
 
@@ -360,18 +360,27 @@ make_poly( const Point &start_point, const Point &point,
 	
 	if (dir != NONE)
 	{
+
 		DirPolyIter	next_iter( follow, dir );
 		
+		if (follow.point() == start_point)
+		  if (new_poly->nextnode(new_poly->firstnode())->point() == next_iter.nextpoint())
+		    return 1;
+
 		new_poly->add( next_iter.point(), &next_iter.poly(), 
-						next_iter.edgestate() );
-	
+			      next_iter.edgestate() );
+		
 		return make_poly( start_point, follow.point(), next_iter, 
 				done, new_poly );
 	} else	{	// Continue using follow
-		new_poly->add( follow.point(), &follow.poly(), 
-							follow.edgestate() );
+	  if (follow.point() == start_point)
+	    if (new_poly->nextnode(new_poly->firstnode())->point() == follow.nextpoint())
+	      return 1;
+
+	  new_poly->add( follow.point(), &follow.poly(), 
+			follow.edgestate() );
 	
-		return make_poly( start_point, follow.point(), follow, 
+	  return make_poly( start_point, follow.point(), follow, 
 				done, new_poly );
 	}
 }

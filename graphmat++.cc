@@ -21,8 +21,8 @@ static const char rcs_id[] = "$Header$";
 //    Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 // $Log$
-// Revision 1.1  2005/02/28 16:23:13  klamer
-// PL6
+// Revision 1.2  2005/02/28 17:00:30  klamer
+// PL 7
 //
 // Revision 1.1  1992/09/11  14:51:38  klamer
 // Initial revision

@@ -22,8 +22,8 @@
 #define	POLY_H	"$Header$"
 
 // $Log$
-// Revision 1.1  2005/02/28 16:23:13  klamer
-// PL6
+// Revision 1.2  2005/02/28 17:00:31  klamer
+// PL 7
 //
 // Revision 1.2  1994/01/04  12:55:37  klamer
 // Changed PolyNode constructors.

@@ -2,8 +2,8 @@
 #define	SET_H	"$Header$"
 
 // $Log$
-// Revision 1.1  2005/02/28 16:23:13  klamer
-// PL6
+// Revision 1.2  2005/02/28 17:00:31  klamer
+// PL 7
 //
 // Revision 1.3  1994/11/09  08:08:23  schutte
 // constness fixes.

@@ -1,8 +1,8 @@
 static const char rcs_id[] = "$Header$";
 
 // $Log$
-// Revision 1.1  2005/02/28 16:23:46  klamer
-// PL6
+// Revision 1.2  2005/02/28 17:00:30  klamer
+// PL 7
 //
 
 #ifdef __GNUG__

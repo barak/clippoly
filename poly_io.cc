@@ -21,8 +21,8 @@ static const char rcs_id[] = "$Header$";
 //    Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 // $Log$
-// Revision 1.1  2005/02/28 16:23:13  klamer
-// PL6
+// Revision 1.2  2005/02/28 17:00:31  klamer
+// PL 7
 //
 // Revision 1.1  1992/12/07  10:46:35  klamer
 // Initial revision
@@ -105,7 +105,7 @@ operator<<(ostream &out, const Poly &poly)
 	ConstPolyIter	iter(poly);
 	
 	while(iter())
-		out << iter.point();
+		out << (iter.point());
 
 	out << POLY_MAGIC << endl;
 			
