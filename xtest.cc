@@ -1,6 +1,3 @@
-#ifndef	POSADDER_H
-#define	POSADDER_H	"$Header$"
-
 //    nclip: a polygon clip library
 
 //    Copyright (C) 1993  Klamer Schutte
@@ -21,36 +18,44 @@
 //    License along with this library; if not, write to the Free
 //    Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
-// $Log$
-// Revision 1.4  2005/02/28 17:12:00  klamer
-// PL9
-//
-// Revision 1.1  1993/10/27  14:43:55  klamer
-// Initial revision
-//
-// Revision 1.1  1993/10/27  14:43:55  klamer
-// Initial revision
-//
-// Revision 1.1  1992/12/07  10:46:35  klamer
-// Initial revision
-//
+#include	<iostream.h>
 
-#ifdef __GNUG__
-#pragma interface
-#endif
-	
-enum LogicStates	{ UnKnown, True, False, TrueFalse };
+#include	"poly.h"
+#include	"poly_io.h"
+#include	"nclip.h"
 
-class PosAdder
+void
+clear(PolyPList &l)
 {
-	LogicStates		val;
-public:
-	PosAdder()
-		: val( UnKnown )
-		{ }
-	void			set( LogicStates boolean );
-	LogicStates		operator() () const
-					{ return val; }
-};
+	PolyPListIter	i(l);
+	while(i())
+		delete i.val();
+}
 
-#endif	/* POSADDER_H */
+int
+main(int, char *[])
+{
+	Poly	*a = read_poly(cin), *b = read_poly(cin);
+	PolyPList	a_min_b, b_min_a, a_and_b;
+
+	// printf("Area a %g b %g\n", a->area(), b->area());
+	cout.precision(20);
+
+	cout << "a:\n" << *a;
+	cout << "b:\n" << *b;
+
+	clip_poly( *a, *b, a_min_b, b_min_a, a_and_b );
+
+	cout << "a_min_b:\n" << a_min_b;
+	cout << "b_min_a:\n" << b_min_a;
+	cout << "a_and_b:\n" << a_and_b;
+
+	delete	a;
+	delete	b;
+
+	clear(a_min_b);
+	clear(b_min_a);
+	clear(a_and_b);
+
+	return 0;
+}

@@ -28,8 +28,8 @@
 */
 /*
  * $Log$
- * Revision 1.3  2005/02/28 17:09:17  klamer
- * PL8
+ * Revision 1.4  2005/02/28 17:12:00  klamer
+ * PL9
  *
  * Revision 1.6  1992/10/16  16:16:47  klamer
  * Gave anonymous structures and unions names;
@@ -265,7 +265,7 @@ double vv_inprod2 P_((const hvec2_t *vectorA, const hvec2_t *vectorB));
 hmat2_t *m_inv2 P_((const hmat2_t *matrix, hmat2_t *m_result));
 hmat2_t *m_tra2 P_((const hmat2_t *matrix, hmat2_t *m_result));
 hmat2_t *mm_add2 P_((const hmat2_t *matrixA, const hmat2_t *matrixB, hmat2_t *m_result));
-hmat2_t *mm_mul2 P_((const hmat2_t *matrixA, const hmat2_t *matrixB, const hmat2_t *m_result));
+hmat2_t *mm_mul2 P_((const hmat2_t *matrixA, const hmat2_t *matrixB, hmat2_t *m_result));
 hmat2_t *mm_sub2 P_((const hmat2_t *matrixA, const hmat2_t *matrixB, hmat2_t *m_result));
 hmat2_t *mtmm_mul2 P_((const hmat2_t *matrixA, const hmat2_t *matrixB, hmat2_t *m_result));
 hmat2_t *sm_mul2 P_((double scalar, const hmat2_t *matrix, hmat2_t *m_result));

@@ -21,8 +21,8 @@ static const char rcs_id[] = "$Header$";
 //    Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 // $Log$
-// Revision 1.3  2005/02/28 17:09:17  klamer
-// PL8
+// Revision 1.4  2005/02/28 17:12:00  klamer
+// PL9
 //
 // Revision 1.2  1994/01/04  12:55:37  klamer
 // Made copy constructor of PolyNode a dummy, and added one which also

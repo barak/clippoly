@@ -1,8 +1,8 @@
 static char rcs_id[] = "$Header$";
 /*
   $Log$
-  Revision 1.3  2005/02/28 17:09:17  klamer
-  PL8
+  Revision 1.4  2005/02/28 17:12:00  klamer
+  PL9
 
  * Revision 1.8  1993/01/28  15:25:47  klamer
  * Changed scaxis: now is scaled along the axis; the line-mirror behaviour
@@ -60,7 +60,8 @@ char   *gm_func;
 /****** Level 2 : Data initialisation ******/
 hmat2_t *
 m_cpy2(m_source, m_result)
-hmat2_t *m_source, *m_result;
+const hmat2_t *m_source;
+hmat2_t *m_result;
 {
    
    m_result = gm_ALLOC(hmat2_t, m_result, "m_cpy2()");
@@ -89,7 +90,8 @@ hmat2_t *m_result;
 
 hvec2_t *
 v_cpy2(v_source, v_result)
-hvec2_t *v_source, *v_result;
+const hvec2_t *v_source;
+hvec2_t *v_result;
 {
    v_result = gm_ALLOC(hvec2_t, v_result, "v_cpy2");
 
@@ -151,7 +153,8 @@ hvec2_t *v_result;
 
 hmat3_t *
 m_cpy3(m_source, m_result)
-hmat3_t *m_source, *m_result;
+const hmat3_t *m_source;
+hmat3_t *m_result;
 {
    m_result = gm_ALLOC(hmat3_t, m_result, "m_cpy3()");
 
@@ -180,7 +183,8 @@ hmat3_t *m_result;
 
 hvec3_t *
 v_cpy3(v_source, v_result)
-hvec3_t *v_source, *v_result;
+const hvec3_t *v_source;
+hvec3_t *v_result;
 {
    v_result = gm_ALLOC(hvec3_t, v_result, "v_cpy3()");
 
@@ -246,7 +250,7 @@ hvec3_t *v_result;
 /****** Level 3 : Basic lineair algebra : 2D homogeneous coordinates ******/
 double
 m_det2(matrix)
-hmat2_t *matrix;
+const hmat2_t *matrix;
 {
 
    return
@@ -264,7 +268,7 @@ hmat2_t *matrix;
 
 double
 v_len2(vector)
-hvec2_t *vector;
+const hvec2_t *vector;
 {
    double  result;
 
@@ -277,8 +281,8 @@ hvec2_t *vector;
 
 double
 vtmv_mul2(vector, matrix)
-hvec2_t *vector;
-hmat2_t *matrix;
+const hvec2_t *vector;
+const hmat2_t *matrix;
 {
 
    return
@@ -300,7 +304,8 @@ hmat2_t *matrix;
 
 double
 vv_inprod2(vectorA, vectorB)
-hvec2_t *vectorA, *vectorB;
+const hvec2_t *vectorA;
+const hvec2_t *vectorB;
 {  double  result, div;
 
    result = v_x(*vectorA) * v_x(*vectorB) + 
@@ -397,7 +402,8 @@ int rownr;
 ******/
 hmat2_t *
 m_inv2(matrix, m_result)
-hmat2_t *matrix, *m_result; 
+const hmat2_t *matrix;
+hmat2_t *m_result; 
 {
    hmat2_t m_input;
    int i, j;
@@ -422,7 +428,8 @@ hmat2_t *matrix, *m_result;
 
 hmat2_t *
 m_tra2(matrix, m_result)
-hmat2_t *matrix, *m_result;
+const hmat2_t *matrix;
+hmat2_t *m_result;
 {
    m_result = gm_ALLOC(hmat2_t, m_result, "m_tra2()");
 
@@ -458,7 +465,9 @@ hmat2_t *matrix, *m_result;
 
 hmat2_t *
 mm_add2(matrixA, matrixB, m_result)
-hmat2_t *matrixA, *matrixB, *m_result;
+const hmat2_t *matrixA;
+const hmat2_t *matrixB;
+hmat2_t *m_result;
 {
    int row, col;
 
@@ -474,7 +483,9 @@ hmat2_t *matrixA, *matrixB, *m_result;
 
 hmat2_t *
 mm_mul2(matrixA, matrixB, m_result)
-hmat2_t *matrixA, *matrixB, *m_result;
+const hmat2_t *matrixA;
+const hmat2_t *matrixB;
+hmat2_t *m_result;
 {
    int row, col, which_matrix; /* Is m_result used in place \
                 and if which matrix equals \
@@ -508,11 +519,11 @@ hmat2_t *matrixA, *matrixB, *m_result;
    {
      case 0 : return  m_result;
      case 1 : /* m_cpy2(m_result, matrixA); */
-              *matrixA = *m_result;
-              return  matrixA;
+              *(hmat2_t *)matrixA = *m_result;
+              return  (hmat2_t *)matrixA;
      case 2 : /* m_cpy2(m_result, matrixB); */
-              *matrixB = *m_result;
-              return matrixB;
+              *(hmat2_t *)matrixB = *m_result;
+              return (hmat2_t *)matrixB;
    };
 	error("This should not happen! %s %d\n", __FILE__, __LINE__ );
 	return m_result;	/* garbage... */
@@ -521,7 +532,9 @@ hmat2_t *matrixA, *matrixB, *m_result;
 
 hmat2_t *
 mm_sub2(matrixA, matrixB, m_result)
-hmat2_t *matrixA, *matrixB, *m_result;
+const hmat2_t *matrixA;
+const hmat2_t *matrixB;
+hmat2_t *m_result;
 {
    int row, col;
 
@@ -537,7 +550,9 @@ hmat2_t *matrixA, *matrixB, *m_result;
 
 hmat2_t *
 mtmm_mul2(matrixA, matrixB, m_result)
-hmat2_t *matrixA, *matrixB, *m_result;
+const hmat2_t *matrixA;
+const hmat2_t *matrixB;
+hmat2_t *m_result;
 {
    hmat2_t help;
 
@@ -555,7 +570,8 @@ hmat2_t *matrixA, *matrixB, *m_result;
 hmat2_t *
 sm_mul2(scalar, matrix, m_result)
 double  scalar;
-hmat2_t *matrix, *m_result;
+const hmat2_t *matrix;
+hmat2_t *m_result;
 {
    int row, col;
 
@@ -571,7 +587,8 @@ hmat2_t *matrix, *m_result;
 
 hmat2_t *
 vvt_mul2(vectorA, vectorB, m_result)
-hvec2_t *vectorA, *vectorB;
+const hvec2_t *vectorA;
+const hvec2_t *vectorB;
 hmat2_t *m_result;
 {
    int row, col;
@@ -587,8 +604,9 @@ hmat2_t *m_result;
 
 hvec2_t *
 mv_mul2(matrix, vector, v_result)
-hmat2_t *matrix;
-hvec2_t *vector, *v_result;
+const hmat2_t *matrix;
+const hvec2_t *vector;
+hvec2_t *v_result;
 {
    int row, inplace;
    hvec2_t buf;
@@ -612,9 +630,9 @@ hvec2_t *vector, *v_result;
    if(inplace)
    {
      /* v_cpy2(v_result, vector); */
-     *vector = *v_result;
+     *(hvec2_t *)vector = *v_result;
 
-     return  vector;
+     return  (hvec2_t *)vector;
    };
 
    return  v_result;
@@ -624,7 +642,8 @@ hvec2_t *vector, *v_result;
 hvec2_t *
 sv_mul2(scalar, vector, v_result)
 double  scalar;
-hvec2_t *vector, *v_result;
+const hvec2_t *vector;
+hvec2_t *v_result;
 {
    v_result = gm_ALLOC(hvec2_t, v_result, "sv_mul2()");
 
@@ -637,7 +656,8 @@ hvec2_t *vector, *v_result;
 
 hvec2_t *
 v_homo2(vector, v_result)
-hvec2_t *vector, *v_result;
+const hvec2_t *vector;
+hvec2_t *v_result;
 {
    v_result = gm_ALLOC(hvec2_t, v_result, "v_homo2()");
 
@@ -650,7 +670,8 @@ hvec2_t *vector, *v_result;
 
 hvec2_t *
 v_norm2(vector, v_result)
-hvec2_t *vector, *v_result;
+const hvec2_t *vector;
+hvec2_t *v_result;
 {
    double  length = sqrt(v_x(*vector) * v_x(*vector) +
            v_y(*vector) * v_y(*vector));
@@ -667,7 +688,9 @@ hvec2_t *vector, *v_result;
 
 hvec2_t *
 vv_add2(vectorA, vectorB, v_result)
-hvec2_t *vectorA, *vectorB, *v_result;
+const hvec2_t *vectorA;
+const hvec2_t *vectorB;
+hvec2_t  *v_result;
 {
    v_result = gm_ALLOC(hvec2_t, v_result, "vv_add2()");
 
@@ -681,7 +704,9 @@ hvec2_t *vectorA, *vectorB, *v_result;
 
 hvec2_t *
 vv_sub2(vectorA, vectorB, v_result)
-hvec2_t *vectorA, *vectorB, *v_result;
+const hvec2_t *vectorA;
+const hvec2_t *vectorB;
+hvec2_t  *v_result;
 {
    v_result = gm_ALLOC(hvec2_t, v_result, "vv_sub2()");
 
@@ -700,7 +725,7 @@ coordinates ******/
 /***** Function is optimized, see below !!!
 double
 m_det3(matrix)
-hmat3_t *matrix;
+const hmat3_t *matrix;
 {
    hmat2_t det2;
    double  result=0.0;
@@ -727,7 +752,7 @@ hmat3_t *matrix;
 /* return the under-determinant of a 4*4 matrix */
 static  double
 det2_dyn(matrix, row_not)
-hmat3_t *matrix;
+const hmat3_t *matrix;
 int row_not;
 {
    int row[3], count, help=0;
@@ -750,7 +775,7 @@ int row_not;
 
 double
 m_det3(matrix)
-hmat3_t *matrix;
+const hmat3_t *matrix;
 {
    double  result=0.0;
    int row, factor=-1;
@@ -764,7 +789,7 @@ hmat3_t *matrix;
 
 double
 v_len3(vector)
-hvec3_t *vector;
+const hvec3_t *vector;
 {
    double  result;
 
@@ -778,8 +803,8 @@ hvec3_t *vector;
 
 double
 vtmv_mul3(vector, matrix)
-hvec3_t *vector;
-hmat3_t *matrix;
+const hvec3_t *vector;
+const hmat3_t *matrix;
 {
 
    return
@@ -807,7 +832,8 @@ hmat3_t *matrix;
 
 double
 vv_inprod3(vectorA, vectorB)
-hvec3_t *vectorA, *vectorB;
+const hvec3_t *vectorA;
+const hvec3_t *vectorB;
 {  double  result, div;
 
    result = v_x(*vectorA) * v_x(*vectorB) + 
@@ -907,7 +933,8 @@ int rownr;
 ******/
 hmat3_t *
 m_inv3(matrix, m_result)
-hmat3_t *matrix, *m_result; 
+const hmat3_t *matrix;
+hmat3_t *m_result; 
 {
    hmat3_t m_input;
    int i;
@@ -928,7 +955,8 @@ hmat3_t *matrix, *m_result;
 
 hmat3_t *
 m_tra3(matrix, m_result)
-hmat3_t *matrix, *m_result;
+const hmat3_t *matrix;
+hmat3_t *m_result; 
 {
    m_result = gm_ALLOC(hmat3_t, m_result, "m_tra3()");
 
@@ -975,7 +1003,9 @@ hmat3_t *matrix, *m_result;
 
 hmat3_t *
 mm_add3(matrixA, matrixB, m_result)
-hmat3_t *matrixA, *matrixB, *m_result;
+const hmat3_t *matrixA;
+const hmat3_t *matrixB;
+hmat3_t *m_result;
 {
    int row, col;
 
@@ -991,7 +1021,9 @@ hmat3_t *matrixA, *matrixB, *m_result;
 
 hmat3_t *
 mm_mul3(matrixA, matrixB, m_result)
-hmat3_t *matrixA, *matrixB, *m_result;
+const hmat3_t *matrixA;
+const hmat3_t *matrixB;
+hmat3_t *m_result;
 {
    int row, col, which_matrix;
    hmat3_t buf;
@@ -1023,11 +1055,11 @@ hmat3_t *matrixA, *matrixB, *m_result;
    {
      case 0 : return  m_result;
      case 1 : /* m_cpy3(m_result, matrixA); */
-              *matrixA = *m_result;
-              return  matrixA;
+              * (hmat3_t *)matrixA = *m_result;
+              return  (hmat3_t *)matrixA;
      case 2 : /* m_cpy3(m_result, matrixB); */
-              *matrixB = *m_result;
-              return matrixB;
+              *(hmat3_t *)matrixB = *m_result;
+              return (hmat3_t *)matrixB;
    };
 	error("This should not happen! %s %d\n", __FILE__, __LINE__ );
 	return m_result;	/* garbage... */
@@ -1036,7 +1068,9 @@ hmat3_t *matrixA, *matrixB, *m_result;
 
 hmat3_t *
 mm_sub3(matrixA, matrixB, m_result)
-hmat3_t *matrixA, *matrixB, *m_result;
+const hmat3_t *matrixA;
+const hmat3_t *matrixB;
+hmat3_t *m_result;
 {
    int row, col;
 
@@ -1052,7 +1086,9 @@ hmat3_t *matrixA, *matrixB, *m_result;
 
 hmat3_t *
 mtmm_mul3(matrixA, matrixB, m_result)
-hmat3_t *matrixA, *matrixB, *m_result;
+const hmat3_t *matrixA;
+const hmat3_t *matrixB;
+hmat3_t *m_result;
 {
    hmat3_t help;
 
@@ -1070,7 +1106,8 @@ hmat3_t *matrixA, *matrixB, *m_result;
 hmat3_t *
 sm_mul3(scalar, matrix, m_result)
 double  scalar;
-hmat3_t *matrix, *m_result;
+const hmat3_t *matrix;
+hmat3_t *m_result;
 {
    int row, col;
 
@@ -1086,8 +1123,9 @@ hmat3_t *matrix, *m_result;
 
 hvec3_t *
 mv_mul3(matrix, vector, v_result)
-hmat3_t *matrix;
-hvec3_t *vector, *v_result;
+const hmat3_t *matrix;
+const hvec3_t *vector;
+hvec3_t *v_result;
 {
    int row, inplace;
    hvec3_t buf;
@@ -1112,8 +1150,8 @@ hvec3_t *vector, *v_result;
    
    if(inplace)
    {
-     v_cpy3(v_result, vector);
-     return  vector;
+     v_cpy3(v_result, (hvec3_t *)vector);
+     return (hvec3_t *) vector;
    };
 
    return  v_result;
@@ -1123,7 +1161,8 @@ hvec3_t *vector, *v_result;
 hvec3_t *
 sv_mul3(scalar, vector, v_result)
 double  scalar;
-hvec3_t *vector, *v_result;
+const hvec3_t *vector;
+hvec3_t *v_result;
 {
    v_result = gm_ALLOC(hvec3_t, v_result, "sv_mul3()");
 
@@ -1137,7 +1176,8 @@ hvec3_t *vector, *v_result;
 
 hvec3_t *
 v_homo3(vector, v_result)
-hvec3_t *vector, *v_result;
+const hvec3_t *vector;
+hvec3_t *v_result;
 {
    v_result = gm_ALLOC(hvec3_t, v_result, "v_homo3()");
 
@@ -1152,7 +1192,8 @@ hvec3_t *vector, *v_result;
 
 hvec3_t *
 v_norm3(vector, v_result)
-hvec3_t *vector, *v_result;
+const hvec3_t *vector;
+hvec3_t *v_result;
 {
    double  length = sqrt(v_x(*vector) * v_x(*vector) + 
    	                 v_y(*vector) * v_y(*vector) +
@@ -1174,7 +1215,9 @@ hvec3_t *vector, *v_result;
 
 hvec3_t *
 vv_add3(vectorA, vectorB, v_result)
-hvec3_t *vectorA, *vectorB, *v_result;
+const hvec3_t *vectorA;
+const hvec3_t *vectorB;
+hvec3_t *v_result;
 {
    v_result = gm_ALLOC(hvec3_t, v_result, "vv_add3()");
 
@@ -1189,7 +1232,9 @@ hvec3_t *vectorA, *vectorB, *v_result;
 
 hvec3_t *
 vv_cross3(vectorA, vectorB, v_result)
-hvec3_t *vectorA, *vectorB, *v_result;
+const hvec3_t *vectorA;
+const hvec3_t *vectorB;
+hvec3_t *v_result;
 {
    int which_vec; /* Is v_result used in place, if so which \
 		     vectors are equal ? */
@@ -1225,11 +1270,11 @@ hvec3_t *vectorA, *vectorB, *v_result;
    {
      case 0 : return v_result;
      case 1 : /* v_cpy3(v_result, vectorA); */
-              *vectorA = *v_result;
-              return vectorA;
+              *(hvec3_t *)vectorA = *v_result;
+              return (hvec3_t *)vectorA;
      case 2 : /* v_cpy3(v_result, vectorB); */
-              *vectorB = *v_result;
-              return vectorB;
+              *(hvec3_t *)vectorB = *v_result;
+              return (hvec3_t *)vectorB;
    };
 	error("This should not happen! %s %d\n", __FILE__, __LINE__ );
 	return v_result;	/* garbage... */
@@ -1237,7 +1282,9 @@ hvec3_t *vectorA, *vectorB, *v_result;
 
 hvec3_t *
 vv_sub3(vectorA, vectorB, v_result)
-hvec3_t *vectorA, *vectorB, *v_result;
+const hvec3_t *vectorA;
+const hvec3_t *vectorB;
+hvec3_t *v_result;
 {
    v_result = gm_ALLOC(hvec3_t, v_result, "vv_sub3()");
 
@@ -1252,7 +1299,8 @@ hvec3_t *vectorA, *vectorB, *v_result;
 
 hmat3_t *
 vvt_mul3(vectorA, vectorB, m_result)
-hvec3_t *vectorA, *vectorB;
+const hvec3_t *vectorA;
+const hvec3_t *vectorB;
 hmat3_t *m_result;
 {
    int row, col;
@@ -1374,7 +1422,7 @@ hmat2_t *m_result;
 
 hmat2_t *
 transl2(translation, m_result)
-hvec2_t *translation;
+const hvec2_t *translation;
 hmat2_t *m_result;
 {
    int i, j;
@@ -1596,7 +1644,7 @@ hmat3_t *m_result;
 
 hmat3_t *
 transl3(translation, m_result)
-hvec3_t *translation;
+const hvec3_t *translation;
 hmat3_t *m_result;
 {
    int i, j;
