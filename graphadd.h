@@ -20,11 +20,15 @@
  *    Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-/* $Log$
-/* Revision 1.5  2005/02/28 17:21:12  klamer
-/* Changed to have g++ 3.2.3 run silently using g++ -ansi -pedantic -Wall -Wno-unused -Wno-reorder.
-/* Change use of (libg++) String to ANSI C++ string.
 /*
+ * $Log$
+ * Revision 1.6  2005/02/28 17:26:49  klamer
+ * Changed comment with $Log$ to get rid of warning.
+ *
+ * Revision 1.5  2005/02/28 17:21:12  klamer
+ * Changed to have g++ 3.2.3 run silently using g++ -ansi -pedantic -Wall -Wno-unused -Wno-reorder.
+ * Change use of (libg++) String to ANSI C++ string.
+ *
  * Revision 1.3  1992/10/20  13:48:39  klamer
  * Made input arguments of v_inters const.
  *
