@@ -28,6 +28,9 @@
 */
 /*
  * $Log$
+ * Revision 1.6  2005/02/28 21:12:05  klamer
+ * Made changes such that gcc 3.4.2 compiles silent with -ansi -pedantic -Wall.
+ *
  * Revision 1.5  2005/02/28 17:21:12  klamer
  * Changed to have g++ 3.2.3 run silently using g++ -ansi -pedantic -Wall -Wno-unused -Wno-reorder.
  * Change use of (libg++) String to ANSI C++ string.
@@ -248,7 +251,7 @@ v_alloc3(hvec3_t *r)
 
 #ifdef __cplusplus
 extern "C" {
-#define	C__	};
+#define	C__	}
 #else
 #define	C__
 #endif

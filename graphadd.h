@@ -22,8 +22,14 @@
 
 /*
  * $Log$
+ * Revision 1.7  2005/02/28 21:12:05  klamer
+ * Made changes such that gcc 3.4.2 compiles silent with -ansi -pedantic -Wall.
+ *
  * Revision 1.6  2005/02/28 17:26:49  klamer
- * Changed comment with $Log$ to get rid of warning.
+ * Changed comment with $Log$
+ * Changed comment with Revision 1.7  2005/02/28 21:12:05  klamer
+ * Changed comment with Made changes such that gcc 3.4.2 compiles silent with -ansi -pedantic -Wall.
+ * Changed comment with to get rid of warning.
  *
  * Revision 1.5  2005/02/28 17:21:12  klamer
  * Changed to have g++ 3.2.3 run silently using g++ -ansi -pedantic -Wall -Wno-unused -Wno-reorder.
@@ -99,7 +105,7 @@ void	m_dupl2(hmat2_t *, hmat2_t *);
 void	m_dupl3(hmat3_t *, hmat3_t *);
 
 #ifdef __cplusplus
-};
+}
 #endif
 
 #endif

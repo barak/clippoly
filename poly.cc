@@ -21,6 +21,9 @@ static const char rcs_id[] = "$Header$";
 //    Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 // $Log$
+// Revision 1.6  2005/02/28 21:12:05  klamer
+// Made changes such that gcc 3.4.2 compiles silent with -ansi -pedantic -Wall.
+//
 // Revision 1.5  2005/02/28 17:21:12  klamer
 // Changed to have g++ 3.2.3 run silently using g++ -ansi -pedantic -Wall -Wno-unused -Wno-reorder.
 // Change use of (libg++) String to ANSI C++ string.
@@ -68,7 +71,7 @@ PolyNode::PolyNode( const PolyNode &)
 }
 
 PolyNode::PolyNode( const PolyNode &copy , const Poly *parent )
-    : p(copy.p), _link(0), _edgestate( Unknown ), prev(0), _parent_poly( parent)
+    : p(copy.p), prev(0), _link(0), _parent_poly( parent), _edgestate( Unknown )
 {
 	if (copy.next)
 	  next = new PolyNode( *copy.next, parent );
@@ -498,7 +501,7 @@ ConstPolyIter::parent(const Poly &poly)
 
 DirPolyIter::DirPolyIter( const Poly &poly, const PolyNode *node,
 								const Poly &link, IterDirection dir )
-	: _poly(poly), _dir(dir), _node(node), _linkpoly(link)
+	: _poly(poly), _linkpoly(link), _dir(dir), _node(node)
 { 
 	if (! _poly.prev)
 		_poly.make_prev();
@@ -507,8 +510,8 @@ DirPolyIter::DirPolyIter( const Poly &poly, const PolyNode *node,
 }
 
 DirPolyIter::DirPolyIter( const DirPolyIter &dpi, IterDirection dir )
-	: _poly(dpi.linkpoly()), _dir(dir), _node( dpi.node()->link() ), 
-	  _linkpoly( dpi._poly )
+	: _poly(dpi.linkpoly()), _linkpoly( dpi._poly ), _dir(dir), 
+	  _node( dpi.node()->link() )
 { 
 	if (! _poly.prev)
 		_poly.make_prev();

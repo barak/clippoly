@@ -19,13 +19,20 @@
  *    License along with this library; if not, write to the Free
  *    Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
-
 /*
  *	$Log$
- *	Revision 1.5  2005/02/28 17:21:12  klamer
- *	Changed to have g++ 3.2.3 run silently using g++ -ansi -pedantic -Wall -Wno-unused -Wno-reorder.
- *	Change use of (libg++) String to ANSI C++ string.
+ *	Revision 1.6  2005/02/28 21:12:05  klamer
+ *	Made changes such that gcc 3.4.2 compiles silent with -ansi -pedantic -Wall.
  *	
+ *	Revision 1.3  2000/11/10 07:41:07  kscp1
+ *	Added printf style attributes to warning, error and fatal as supported by GCC
+ *
+ *	Revision 1.2  1996/09/10 13:04:56  kscp1
+ *	*** empty log message ***
+ *
+ * Revision 1.1  1994/06/07  14:30:35  schutte
+ * Initial revision
+ *
  * Revision 1.5  1992/06/01  15:37:48  klamer
  * Made prototypes gcc compatible.
  *
@@ -59,15 +66,24 @@
 #define	P(x)	(/* x */)
 #endif
 #endif
+#ifdef __GNUG__ /* is it GCC or G++ ? */
+#define NORETURN_PRINTF __attribute__ ((noreturn, format(printf, 1, 2)))
+#define PRINTF __attribute__ ((format(printf, 1, 2)))
+#else
+#define NORETURN_PRINTF
+#define PRINTF
+#endif
 
 extern int	err_nr_errors, err_nr_warnings;
 /* what is the type of a pointer to a jmp_buf? On sun4 int * will do */
 extern int	*err_warning_jmpbuf, *err_error_jmpbuf, *err_fatal_jmpbuf;
 
-EC void	warning P((const char *fmt CDOTS ));
-EC void	error P((const char *fmt CDOTS ));
-EC void	fatal P((const char *fmt CDOTS ));
+EC void	warning P((const char *fmt CDOTS )) PRINTF;
+EC void	error P((const char *fmt CDOTS )) PRINTF;
+EC void	fatal P((const char *fmt CDOTS )) NORETURN_PRINTF;
 
+#undef PRINTF
+#undef NORETURN_PRINTF
 #undef EC
 #undef P
 #undef CDOTS
