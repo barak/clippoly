@@ -2,7 +2,7 @@ static const char rcs_id[] = "$Header$";
 
 //    nclip: a polygon clip library
 
-//    Copyright (C) 1993  Klamer Schutte
+//    Copyright (C) 1993  University of Twente
 
 //    klamer@mi.el.utwente.nl
 
@@ -21,8 +21,9 @@ static const char rcs_id[] = "$Header$";
 //    Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 // $Log$
-// Revision 1.4  2005/02/28 17:12:00  klamer
-// PL9
+// Revision 1.5  2005/02/28 17:21:12  klamer
+// Changed to have g++ 3.2.3 run silently using g++ -ansi -pedantic -Wall -Wno-unused -Wno-reorder.
+// Change use of (libg++) String to ANSI C++ string.
 //
 // Revision 1.2  1994/01/04  12:55:37  klamer
 // Loosened assertion in angle() from angle < 2 pi to angle <= 2 pi.
@@ -38,8 +39,8 @@ static const char rcs_id[] = "$Header$";
 #pragma implementation
 #endif
 
-#include	<assert.h>
-#include	<math.h>
+#include	<cassert>
+#include	<cmath>
 
 #ifndef M_PI
 #define M_PI            3.14159265358979323846  /* pi */

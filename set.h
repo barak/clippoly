@@ -2,8 +2,9 @@
 #define	SET_H	"$Header$"
 
 // $Log$
-// Revision 1.4  2005/02/28 17:12:00  klamer
-// PL9
+// Revision 1.5  2005/02/28 17:21:12  klamer
+// Changed to have g++ 3.2.3 run silently using g++ -ansi -pedantic -Wall -Wno-unused -Wno-reorder.
+// Change use of (libg++) String to ANSI C++ string.
 //
 // Revision 1.3  1994/11/09  08:08:23  schutte
 // constness fixes.

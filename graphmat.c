@@ -1,8 +1,9 @@
 static char rcs_id[] = "$Header$";
 /*
   $Log$
-  Revision 1.4  2005/02/28 17:12:00  klamer
-  PL9
+  Revision 1.5  2005/02/28 17:21:12  klamer
+  Changed to have g++ 3.2.3 run silently using g++ -ansi -pedantic -Wall -Wno-unused -Wno-reorder.
+  Change use of (libg++) String to ANSI C++ string.
 
  * Revision 1.8  1993/01/28  15:25:47  klamer
  * Changed scaxis: now is scaled along the axis; the line-mirror behaviour

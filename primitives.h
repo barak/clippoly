@@ -22,8 +22,9 @@
 //    Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 // $Log$
-// Revision 1.4  2005/02/28 17:12:00  klamer
-// PL9
+// Revision 1.5  2005/02/28 17:21:12  klamer
+// Changed to have g++ 3.2.3 run silently using g++ -ansi -pedantic -Wall -Wno-unused -Wno-reorder.
+// Change use of (libg++) String to ANSI C++ string.
 //
 // Revision 1.1  1993/10/27  14:43:55  klamer
 // Initial revision
@@ -39,14 +40,10 @@
 #pragma interface
 #endif
 
-#ifndef M_PI
-#include	<math.h>
-#endif
+#include <cmath>
+#include <cassert>
 #ifndef GRAPHMAT_INCLUDE
 #include	<graphmat.h>
-#endif
-#ifndef assert
-#include	<assert.h>
 #endif
 
 class Point

@@ -22,8 +22,9 @@
 //    Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 // $Log$
-// Revision 1.4  2005/02/28 17:12:00  klamer
-// PL9
+// Revision 1.5  2005/02/28 17:21:12  klamer
+// Changed to have g++ 3.2.3 run silently using g++ -ansi -pedantic -Wall -Wno-unused -Wno-reorder.
+// Change use of (libg++) String to ANSI C++ string.
 //
 // Revision 1.1  1992/12/07  10:46:35  klamer
 // Initial revision
@@ -33,27 +34,26 @@
 #pragma interface
 #endif
 
-#ifndef _IOSTREAM_H
-#include	<iostream.h>
-#endif
+#include	<iostream>
+
+#include <poly.h>
 
 #define	POLY_MAGIC	"PolyMagic"
 
 class Poly;
 class Point;
-// class PolyPList;
 class PolyNode;
 union	hvec3_t;
 
-Poly 	*read_poly( istream & );
+Poly 	*read_poly( std::istream & );
 
-istream &operator>>(istream &, Point &);
-ostream	&operator<<(ostream &, const PolyPList &);
-ostream	&operator<<(ostream &, const Poly &);
-ostream	&operator<<(ostream &, const PolyNode &);
-ostream	&operator<<(ostream &, const Point &);
-ostream	&operator<<(ostream &, enum EdgeState);
-ostream	&operator<<(ostream &, enum LogicStates);
-ostream	&operator<<(ostream &, const hvec3_t &);
+std::istream &operator>>(std::istream &, Point &);
+std::ostream	&operator<<(std::ostream &, const Poly &);
+std::ostream	&operator<<(std::ostream &, const PolyPList &);
+std::ostream	&operator<<(std::ostream &, const PolyNode &);
+std::ostream	&operator<<(std::ostream &, const Point &);
+std::ostream	&operator<<(std::ostream &, enum EdgeState);
+std::ostream	&operator<<(std::ostream &, enum LogicStates);
+std::ostream	&operator<<(std::ostream &, const hvec3_t &);
 
 #endif	/* POLY_IO_H */

@@ -1,6 +1,6 @@
 //    nclip: a polygon clip library
 
-//    Copyright (C) 1993  Klamer Schutte
+//    Copyright (C) 1993  University of Twente
 
 //    klamer@mi.el.utwente.nl
 
@@ -18,11 +18,14 @@
 //    License along with this library; if not, write to the Free
 //    Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
-#include	<iostream.h>
+#include        <cstring>
+#include	<iostream>
 
 #include	"poly.h"
 #include	"poly_io.h"
 #include	"nclip.h"
+
+using namespace ::std;
 
 void
 clear(PolyPList &l)

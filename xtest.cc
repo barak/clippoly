@@ -1,6 +1,6 @@
 //    nclip: a polygon clip library
 
-//    Copyright (C) 1993  Klamer Schutte
+//    Copyright (C) 1993  University of Twente
 
 //    klamer@mi.el.utwente.nl
 

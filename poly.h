@@ -22,8 +22,9 @@
 #define	POLY_H	"$Header$"
 
 // $Log$
-// Revision 1.4  2005/02/28 17:12:00  klamer
-// PL9
+// Revision 1.5  2005/02/28 17:21:12  klamer
+// Changed to have g++ 3.2.3 run silently using g++ -ansi -pedantic -Wall -Wno-unused -Wno-reorder.
+// Change use of (libg++) String to ANSI C++ string.
 //
 // Revision 1.2  1994/01/04  12:55:37  klamer
 // Changed PolyNode constructors.
@@ -44,6 +45,8 @@
 #pragma interface
 #endif
 
+#include <iostream>
+
 #ifndef PRIMITIVES_H
 #include	<primitives.h>
 #endif
@@ -58,7 +61,6 @@ int		intersect_right( const Edge &edge, const Point &point );
 
 enum EdgeState { Unknown, None, Shared, Inside };
 // enum LogicStates;
-class ostream;
 class Vec;
 
 class PolyNode
@@ -66,7 +68,7 @@ class PolyNode
 	friend class Poly;
 	friend class PolyIter;
 	friend class ConstPolyIter;
-	friend ostream &operator<<(ostream &, const PolyNode &);
+	friend std::ostream &operator<<(std::ostream &, const PolyNode &);
 
 public:
 	PolyNode	*link()

@@ -18,7 +18,7 @@ CFLAGS	= -g -I.
 
 # add sbscan.o to OBJ if you use libg++ 2.5.1 or libg++ 2.5.2
 # libg++ 2.5.3 does not need it. libg++ 2.4.X can be use as it is.
-OBJ	= nclip.o primitives.o posadder.o poly.o test.o poly_io.o String.o templates.o
+OBJ	= nclip.o primitives.o posadder.o poly.o test.o poly_io.o templates.o
 LIBOBJ	= err.o graphadd.o graphmat.o graphmat++.o 
 
 prog:	${OBJ} ${LIBOBJ}
@@ -30,7 +30,7 @@ purify:	${OBJ} ${LIBOBJ}
 
 test:	prog
 	prog < in_file > out_file
-	diff out_file.dist out_file
+	diff -b out_file.dist out_file
 
 clean:
 	rm -f *.o prog core out_file

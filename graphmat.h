@@ -28,8 +28,9 @@
 */
 /*
  * $Log$
- * Revision 1.4  2005/02/28 17:12:00  klamer
- * PL9
+ * Revision 1.5  2005/02/28 17:21:12  klamer
+ * Changed to have g++ 3.2.3 run silently using g++ -ansi -pedantic -Wall -Wno-unused -Wno-reorder.
+ * Change use of (libg++) String to ANSI C++ string.
  *
  * Revision 1.6  1992/10/16  16:16:47  klamer
  * Gave anonymous structures and unions names;
@@ -55,6 +56,11 @@
 #define GRAPHMAT_INCLUDE
 
 /****** Other includes ******/
+#ifdef __cplusplus
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
+#else
 #ifndef	FILE
 #include <stdio.h>
 #endif
@@ -63,6 +69,7 @@
 #endif
 #ifndef __math_h
 #include <math.h>
+#endif
 #endif
 
 

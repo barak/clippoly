@@ -2,7 +2,7 @@ static const char rcs_id[] = "$Header$";
 
 //    nclip: a polygon clip library
 
-//    Copyright (C) 1993  Klamer Schutte
+//    Copyright (C) 1993  University of Twente
 
 //    klamer@mi.el.utwente.nl
 
@@ -21,8 +21,9 @@ static const char rcs_id[] = "$Header$";
 //    Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 // $Log$
-// Revision 1.4  2005/02/28 17:12:00  klamer
-// PL9
+// Revision 1.5  2005/02/28 17:21:12  klamer
+// Changed to have g++ 3.2.3 run silently using g++ -ansi -pedantic -Wall -Wno-unused -Wno-reorder.
+// Change use of (libg++) String to ANSI C++ string.
 //
 // Revision 1.1  1992/12/07  10:46:35  klamer
 // Initial revision
@@ -32,8 +33,8 @@ static const char rcs_id[] = "$Header$";
 #pragma implementation
 #endif
 
-#include	<String.h>
-#include	<iostream.h>
+#include	<string>
+#include	<iostream>
 
 #include	<err.h>
 
@@ -50,6 +51,8 @@ static const char rcs_id[] = "$Header$";
 
 static const char h_rcs_id[] = POLY_IO_H;
 
+using namespace std;
+
 Poly 	*
 read_poly( istream &in )
 {
@@ -62,13 +65,13 @@ read_poly( istream &in )
 	while( in >> p )
 		new_poly->add( p );
 
-	String	magic;
+	string	magic;
 	
 	in.clear();
 	in >> magic;
 	
 	if (magic != POLY_MAGIC)
-		fatal("read_poly: wrong magic (%s)\n", (const char *) magic );
+		fatal("read_poly: wrong magic (%s)\n", magic.c_str());
 		
 	return new_poly;
 }
@@ -88,8 +91,8 @@ operator>>(istream &in, Point &p)
 	return in;
 }
 
-ostream	&
-operator<<(ostream &out, const PolyPList &pl)
+std::ostream	&
+operator<<(std::ostream &out, const PolyPList &pl)
 {
 	PolyPListIter	iter(pl);
 	
@@ -99,8 +102,8 @@ operator<<(ostream &out, const PolyPList &pl)
 	return out;
 }
 
-ostream &
-operator<<(ostream &out, const Poly &poly)
+std::ostream &
+operator<<(std::ostream &out, const Poly &poly)
 {
 	ConstPolyIter	iter(poly);
 	
@@ -112,8 +115,8 @@ operator<<(ostream &out, const Poly &poly)
 	return out;
 }
 
-ostream &
-operator<<(ostream &out, const PolyNode &poly)
+std::ostream &
+operator<<(std::ostream &out, const PolyNode &poly)
 {
 	out << poly.p << "next: " << poly.next << " prev: " << poly.prev 
 		<< " link: " << poly._link << " state: " 
@@ -123,16 +126,16 @@ operator<<(ostream &out, const PolyNode &poly)
 	return out;
 }
 
-ostream &
-operator<<(ostream &out, const Point &p)
+std::ostream &
+operator<<(std::ostream &out, const Point &p)
 {
 	out << p.x() << '\t' << p.y() << endl;
 	
 	return out;
 }
 
-ostream &
-operator<<(ostream &out, enum LogicStates state)
+std::ostream &
+operator<<(std::ostream &out, enum LogicStates state)
 {
 	switch(state)
 	{case UnKnown:
@@ -155,8 +158,8 @@ operator<<(ostream &out, enum LogicStates state)
 	return out;
 }
 
-ostream &
-operator<<(ostream &out, enum EdgeState state)
+std::ostream &
+operator<<(std::ostream &out, enum EdgeState state)
 {
 	switch(state)
 	{case Unknown:
@@ -179,8 +182,8 @@ operator<<(ostream &out, enum EdgeState state)
 	return out;
 }
 
-ostream &
-operator<<(ostream&out, const hvec3_t &v)
+std::ostream &
+operator<<(std::ostream&out, const hvec3_t &v)
 {
 	out << v_x(v) << ", " << v_y(v) << ", " << v_z(v) << ", " << v_w(v);
 
