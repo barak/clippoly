@@ -21,6 +21,9 @@ static const char rcs_id[] = "$Header$";
 //    Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 // $Log$
+// Revision 1.7  2005/03/11 14:18:21  klamer
+// Fixed namespace clash for abs(double) happening in RedHat 7.2 linux i386.
+//
 // Revision 1.6  2005/02/28 21:12:05  klamer
 // Made changes such that gcc 3.4.2 compiles silent with -ansi -pedantic -Wall.
 //
@@ -169,12 +172,6 @@ Poly::add( const Point &p, const Poly *parent, EdgeState edgestate )
 	prev = new_node;
 }
 	
-inline double
-abs( double x )
-{
-	return (x >= 0) ? x : -x;
-}
-
 Orientation
 Poly::orientation() const
 {
@@ -208,7 +205,7 @@ Poly::orientation() const
 	
 	assert(area != 0);
 	assert((area * tot_angle > 0) ||
-	       (abs(abs(tot_angle) - M_PI * 2.0) > 0.0001));
+	       (fabs(fabs(tot_angle) - M_PI * 2.0) > 0.0001));
 
 #ifndef notdef
 	if (area < 0)
