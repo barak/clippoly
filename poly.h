@@ -22,6 +22,9 @@
 #define	POLY_H	"$Header$"
 
 // $Log$
+// Revision 1.7  2005/03/12 16:32:36  klamer
+// Changes to keep Visual C++ (vc98) silent while compiling.
+//
 // Revision 1.6  2005/02/28 21:12:05  klamer
 // Made changes such that gcc 3.4.2 compiles silent with -ansi -pedantic -Wall.
 //
@@ -149,8 +152,8 @@ private:
 	
 public:
 	Poly( const Poly &copy )
-		: list( new PolyNode( *copy.list, this ) ), prev( 0 )
-		{ }
+		: prev( 0 )
+		{ list = new PolyNode( *copy.list, this ); }
 //	Poly( const PolyNode *copy, const Poly *parent )
 //		: list( new PolyNode( copy, parent ) ), prev(0)
 //		{ }
@@ -159,8 +162,8 @@ public:
 		{ }
 	Poly( const Point &p )
 		// : list( new PolyNode( &PolyNode(p), 0 ) ), prev(0)
-		: list( new PolyNode( p, this ) ), prev(0)
-		{ }
+		: prev(0)
+		{ list = new PolyNode( p, this ); }
 	~Poly()
 		{ delete list; }
 

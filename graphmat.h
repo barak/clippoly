@@ -28,6 +28,9 @@
 */
 /*
  * $Log$
+ * Revision 1.7  2005/03/12 16:32:36  klamer
+ * Changes to keep Visual C++ (vc98) silent while compiling.
+ *
  * Revision 1.6  2005/02/28 21:12:05  klamer
  * Made changes such that gcc 3.4.2 compiles silent with -ansi -pedantic -Wall.
  *
@@ -127,8 +130,8 @@ char		*gm_dummy; /* used for memory allocation in gm_ALLOC() */
 
 /* check if ptr is NULL, if so then allocate memory else return ptr */
 #define gm_ALLOC(type, ptr, func)  (((ptr) == NULL) ? \
-		((gm_dummy = malloc(sizeof(type))) == NULL) ? \
-	        ((type *)gm_error(NOMEM, func)) : \
+		((gm_dummy = (char *)malloc(sizeof(type))) == NULL) ? \
+	        (gm_error(NOMEM, func), (type *)NULL) : \
 		(type *)gm_dummy : (ptr)) 
 #endif
 

@@ -2,6 +2,9 @@
 #define	SET_H	"$Header$"
 
 // $Log$
+// Revision 1.6  2005/03/12 16:32:36  klamer
+// Changes to keep Visual C++ (vc98) silent while compiling.
+//
 // Revision 1.5  2005/02/28 17:21:12  klamer
 // Changed to have g++ 3.2.3 run silently using g++ -ansi -pedantic -Wall -Wno-unused -Wno-reorder.
 // Change use of (libg++) String to ANSI C++ string.
@@ -36,6 +39,8 @@
 #include	<assert.h>
 #endif
 
+#include <err.h>
+
 #ifdef sgi
 #ifdef __GNUG__
 #define	INLINE	inline
@@ -59,7 +64,8 @@ class Set
 	int			_len, used;
 	T			operator[](int cnt) const
 				{ return data[cnt]; }
-	void		operator=(const Set<T> &);	// Don't use it!
+	void		operator=(const Set<T> &)	// Don't use it!
+	{ fatal("This should not happen!\n"); }
 	void		_resize();
 	
 public:
@@ -161,7 +167,8 @@ class RSet
 	int			_len, used;
 	T			&operator[](int cnt)
 				{ return data[cnt]; }
-	void		operator=(const RSet<T> &);	// Don't use it!
+	void		operator=(const RSet<T> &)	// Don't use it!
+	{ fatal("This should not happen!\n"); }
 	void		_resize();
 	
 public:

@@ -1,6 +1,9 @@
 static char rcs_id[] = "$Header$";
 /*
   $Log$
+  Revision 1.6  2005/03/12 16:32:36  klamer
+  Changes to keep Visual C++ (vc98) silent while compiling.
+
   Revision 1.5  2005/02/28 17:21:12  klamer
   Changed to have g++ 3.2.3 run silently using g++ -ansi -pedantic -Wall -Wno-unused -Wno-reorder.
   Change use of (libg++) String to ANSI C++ string.
@@ -56,6 +59,7 @@ char   *gm_func;
      case MATSING : fatal("Graphmat-error : Matrix is singular in function : %s\n", gm_func);
      default : fatal("Graphmat-error : Undefined error in function : %s\n", gm_func);
   };
+  return 0; /*UNUSED, keep Visual C++ silent*/
 }
 
 /****** Level 2 : Data initialisation ******/
