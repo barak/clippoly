@@ -1,0 +1,27 @@
+Source: clippoly
+Section: libs
+Priority: extra
+Maintainer: Barak A. Pearlmutter <bap@debian.org>
+Build-Depends: debhelper (>= 8), dh-autoreconf
+Build-Conflicts: autoconf2.13, automake1.4
+Standards-Version: 3.9.2
+Homepage: http://clippoly.sourceforge.net
+Vcs-Git: git://git.debian.org/collab-maint/clippoly.git
+Vcs-Browser: http://git.debian.org/?p=collab-maint/clippoly.git;a=summary
+
+Package: libclippoly0
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: polygon clipping routines, runtime library
+ Robust routines for clipping polygons against each other: finding
+ unions and intersections and differences of polygonal regions.
+ Runtime library.
+
+Package: libclippoly-dev
+Section: libdevel
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libclippoly0 (= ${binary:Version})
+Description: polygon clipping routines, development library
+ Robust routines for clipping polygons against each other: finding
+ unions and intersections and differences of polygonal regions.
+ Development library.

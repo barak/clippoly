@@ -1,0 +1,5 @@
+clippoly (0.11-1) unstable; urgency=low
+
+  * Initial release (Closes: #638013)
+
+ -- Barak A. Pearlmutter <bap@debian.org>  Wed, 29 Jun 2011 15:21:36 +0200

@@ -1,0 +1,9 @@
+/*.debhelper
+/*.log
+/*.substvars
+/autoreconf.after
+/autoreconf.before
+/files
+/libclippoly-dev/
+/libclippoly0/
+/tmp/

@@ -1,0 +1,3 @@
+usr/include/clippoly/*.h
+usr/lib/lib*.so
+usr/lib/lib*.a

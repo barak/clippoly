@@ -1,0 +1,3 @@
+version=3
+opts="uversionmangle=s/^pl/0./" \
+ http://sf.net/clippoly/clippoly-(.*)\.tar\.gz

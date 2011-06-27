@@ -1,0 +1,18 @@
+#!/usr/bin/make -f
+
+dh_targets=binary binary-arch binary-indep build build-arch build-indep clean install
+
+$(dh_targets) %:
+	dh $@ --with autoreconf --parallel
+
+.PHONY: $(dh_targets)
+
+# work around autoreconf bug, http://bugs.debian.org/565663
+override_dh_autoreconf:
+	mkdir --parent --verbose m4
+	dh_autoreconf
+
+# word around quilt patch inability to preserve file modes
+override_dh_auto_test:
+	chmod a+x test0 test1 test2
+	dh_auto_test
