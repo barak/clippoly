@@ -561,10 +561,12 @@ poly_min_poly( const Poly &a, const Poly &b, PolyPList &a_min_b )
 			} 
 		}
 		if (do_intersect == 0)
+		{
 			if (cur > top)
 				a_top_node = a_iter.node();
 			else
 				a_bottom_node = a_iter.node();
+		}
 				
 		if ((a_top_node != 0) && (a_bottom_node != 0))
 			break;
