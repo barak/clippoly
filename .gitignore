@@ -1,0 +1,15 @@
+*.la
+*.lo
+*.o
+/.deps/
+/.libs/
+/Makefile.in
+/clippolytest
+/compile
+/config.guess
+/config.h
+/config.h.in
+/config.log
+/config.status
+/config.sub
+/configure
