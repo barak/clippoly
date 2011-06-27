@@ -69,6 +69,8 @@ enum EdgeState { Unknown, None, Shared, Inside };
 // enum LogicStates;
 class Vec;
 
+class Poly;
+
 class PolyNode
 {
 	friend class Poly;
