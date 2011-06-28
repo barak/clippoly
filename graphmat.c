@@ -275,8 +275,7 @@ const hvec2_t *vector;
 {
    double  result;
 
-   result = ((sqrt(v_x(*vector) * v_x(*vector) + 
-              v_y(*vector) * v_y(*vector))));
+   result = hypot(v_x(*vector), v_y(*vector));
 
    return v_w(*vector) != 0.0 ? result / v_w(*vector) : result;
 }
@@ -676,8 +675,7 @@ v_norm2(vector, v_result)
 const hvec2_t *vector;
 hvec2_t *v_result;
 {
-   double  length = sqrt(v_x(*vector) * v_x(*vector) +
-           v_y(*vector) * v_y(*vector));
+   double  length = hypot(v_x(*vector), v_y(*vector));
 
    v_result = gm_ALLOC(hvec2_t, v_result, "v_norm2()");
 
@@ -796,9 +794,7 @@ const hvec3_t *vector;
 {
    double  result;
 
-   result = ((sqrt(v_x(*vector) * v_x(*vector) + 
-            v_y(*vector) * v_y(*vector) +
-            v_z(*vector) * v_z(*vector))));
+   result = hypot(v_x(*vector), hypot(v_y(*vector), v_z(*vector)));
 
    return v_w(*vector) != 0.0 ? result / v_w(*vector) : result;
 }
@@ -1198,15 +1194,9 @@ v_norm3(vector, v_result)
 const hvec3_t *vector;
 hvec3_t *v_result;
 {
-   double  length = sqrt(v_x(*vector) * v_x(*vector) + 
-   	                 v_y(*vector) * v_y(*vector) +
-           		 v_z(*vector) * v_z(*vector));
+   double  length = hypot(v_x(*vector), hypot(v_y(*vector), v_z(*vector)));
 
    v_result = gm_ALLOC(hvec3_t, v_result, "v_norm3()");
-
-/*   length = sqrt(v_x(*vector) * v_x(*vector) + 
-//        	 v_y(*vector) * v_y(*vector) +
-//        	 v_z(*vector) * v_z(*vector));			*/
 
    v_x(*v_result) = gm_DIV(v_x(*vector), length, "v_norm2()");
    v_y(*v_result) = v_y(*vector) / length;

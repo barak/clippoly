@@ -94,7 +94,7 @@ operator-( const Point &p1, const Point &p2 )
 inline double
 len( const Point p )
 {
-	return sqrt( p.x() * p.x() + p.y() * p.y() );
+	return hypot(p.x(), p.y());
 }
  
 inline Point	
