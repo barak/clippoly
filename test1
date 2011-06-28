@@ -1,0 +1,7 @@
+#!/bin/sh -f
+
+set -e
+
+cd ${srcdir:=.}
+
+./clippolytest < t1 | diff --ignore-space-change t1.out -
