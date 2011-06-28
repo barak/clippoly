@@ -410,7 +410,7 @@ int v_inters2(
 			inp4s = v_x(qs) * v_y(qp2) - v_y(qs) * v_x(qp2);
 		int	c2s = (*S1 == q1) ? -1 : inp3s * inp4s <= 0;
 
-		// Roundig errors might make the statements below untrue
+		// Rounding errors might make the statements below untrue
 		int	failed = 0;
 		if (!((c1 == 0) || (c2 == 0) || (c1s == (c1 != 0)) || (c1s == -1)))
 		  failed = 1;
