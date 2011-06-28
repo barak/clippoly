@@ -21,12 +21,10 @@
  */
 
 /*
- * $Log$
  * Revision 1.7  2005/02/28 21:12:05  klamer
  * Made changes such that gcc 3.4.2 compiles silent with -ansi -pedantic -Wall.
  *
  * Revision 1.6  2005/02/28 17:26:49  klamer
- * Changed comment with $Log$
  * Changed comment with Revision 1.7  2005/02/28 21:12:05  klamer
  * Changed comment with Made changes such that gcc 3.4.2 compiles silent with -ansi -pedantic -Wall.
  * Changed comment with to get rid of warning.
@@ -53,7 +51,7 @@
 */
 
 #ifndef GRAPHADD_H
-#define	GRAPHADD_H	"$Header$"
+#define	GRAPHADD_H
 
 #ifndef GRAPHMAT_INCLUDE
 #include	<graphmat.h>

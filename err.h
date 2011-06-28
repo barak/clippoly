@@ -20,7 +20,6 @@
  *    Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 /*
- *	$Log$
  *	Revision 1.6  2005/02/28 21:12:05  klamer
  *	Made changes such that gcc 3.4.2 compiles silent with -ansi -pedantic -Wall.
  *	
@@ -51,7 +50,7 @@
  */
 
 #ifndef	_ERROR
-#define	_ERROR	"$Id$"
+#define	_ERROR
 
 #ifdef __cplusplus
 #define	EC	extern "C"

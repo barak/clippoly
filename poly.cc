@@ -1,5 +1,3 @@
-static const char rcs_id[] = "$Header$";
-
 //    nclip: a polygon clip library
 
 //    Copyright (C) 1993  University of Twente
@@ -20,7 +18,6 @@ static const char rcs_id[] = "$Header$";
 //    License along with this library; if not, write to the Free
 //    Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
-// $Log$
 // Revision 1.7  2005/03/11 14:18:21  klamer
 // Fixed namespace clash for abs(double) happening in RedHat 7.2 linux i386.
 //
@@ -60,8 +57,6 @@ static const char rcs_id[] = "$Header$";
 #include	"posadder.h"
 //#include	"boundingbox.h"
 //#include	"poly_use.h"
-
-static const char h_rcs_id[] = POLY_H;
 
 #ifndef M_PI
 #define M_PI            3.14159265358979323846  /* pi */

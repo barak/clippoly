@@ -27,7 +27,6 @@
 	graphmat - 3d graphics and associated matrix and vector routines
 */
 /*
- * $Log$
  * Revision 1.7  2005/03/12 16:32:36  klamer
  * Changes to keep Visual C++ (vc98) silent while compiling.
  *

@@ -1,6 +1,3 @@
-static const char rcs_id[] = "$Header$";
-
-// $Log$
 // Revision 1.5  2005/02/28 17:21:12  klamer
 // Changed to have g++ 3.2.3 run silently using g++ -ansi -pedantic -Wall -Wno-unused -Wno-reorder.
 // Change use of (libg++) String to ANSI C++ string.

@@ -1,7 +1,6 @@
 #ifndef	SET_H
-#define	SET_H	"$Header$"
+#define	SET_H
 
-// $Log$
 // Revision 1.6  2005/03/12 16:32:36  klamer
 // Changes to keep Visual C++ (vc98) silent while compiling.
 //

@@ -1,5 +1,3 @@
-static const char rcs_id[] = "$Header$";
-
 //    nclip: a polygon clip library
 
 //    Copyright (C) 1993  University of Twente
@@ -20,7 +18,6 @@ static const char rcs_id[] = "$Header$";
 //    License along with this library; if not, write to the Free
 //    Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
-// $Log$
 // Revision 1.5  2005/02/28 17:21:12  klamer
 // Changed to have g++ 3.2.3 run silently using g++ -ansi -pedantic -Wall -Wno-unused -Wno-reorder.
 // Change use of (libg++) String to ANSI C++ string.
@@ -42,8 +39,6 @@ static const char rcs_id[] = "$Header$";
 #include	<err.h>
 
 #include	"posadder.h"
-
-static const char h_rcs_id[] = POSADDER_H;
 
 void
 PosAdder::set(LogicStates boolean)

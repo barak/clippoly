@@ -19,9 +19,8 @@
  *    License along with this library; if not, write to the Free
  *    Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
-static const char rcs_id[] = "$Header$";
+
 /*
- * $Log$
  * Revision 1.2  2005/02/28 21:12:05  klamer
  * Made changes such that gcc 3.4.2 compiles silent with -ansi -pedantic -Wall.
  *
