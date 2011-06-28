@@ -326,7 +326,7 @@ int v_inters2(
 		else if ((q2 == p1) || (q2 == p2))
 		  *S1 = q2;
 		else {
-		  t=-(rpy*(-v_x(q1)+v_x(p1))+rpx*(v_y(q1)-v_y(p1)))/deel;
+		  t = -(rpy*(-v_x(q1)+v_x(p1))+rpx*(v_y(q1)-v_y(p1)))/deel;
 		  v_x(*S1) = v_x(q1)+t*rqx;
 		  v_y(*S1) = v_y(q1)+t*rqy;
 	  	  v_w(*S1) = 1;

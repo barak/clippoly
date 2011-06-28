@@ -779,7 +779,7 @@ m_det3(matrix)
 const hmat3_t *matrix;
 {
    double  result=0.0;
-   int row, factor=-1;
+   int row, factor = -1;
 
    for(row=0; row<4; row++)
      result += m_elem(*matrix, row, 0) * det2_dyn(matrix, row) *
