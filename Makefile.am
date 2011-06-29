@@ -13,7 +13,7 @@ libclippoly_la_SOURCES += nclip.cc poly.cc poly_io.cc posadder.cc	\
 primitives.cc templates.cc
 
 # LIBOBJ
-libclippoly_la_SOURCES += err.c graphadd.cc graphmat.c graphmat++.cc
+libclippoly_la_SOURCES += graphadd.cc graphmat.c graphmat++.cc
 
 check_PROGRAMS = clippolytest
 

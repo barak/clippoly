@@ -33,7 +33,7 @@
 #include	<string>
 #include	<iostream>
 
-#include	<err.h>
+#include	<error.h>
 
 #include	<poly.h>
 #include	<primitives.h>
@@ -66,7 +66,8 @@ read_poly( istream &in )
 	in >> magic;
 	
 	if (magic != POLY_MAGIC)
-		fatal("read_poly: wrong magic (%s)\n", magic.c_str());
+		error_at_line(1, 0, __FILE__, __LINE__,
+			      "read_poly: wrong magic (%s)", magic.c_str());
 		
 	return new_poly;
 }
@@ -146,7 +147,7 @@ operator<<(std::ostream &out, enum LogicStates state)
 		out << "TrueFalse";
 		break;
 	default:
-		error("<<: Unknown value in LogicStates: %d\n", (int)state);
+		error_at_line(0, 0, __FILE__, __LINE__, "Unknown value in LogicStates: %d", (int)state);
 		out << (int)state;
 	}
 	
@@ -170,7 +171,7 @@ operator<<(std::ostream &out, enum EdgeState state)
 		out << "Inside";
 		break;
 	default:
-		error("<<: Unknown value in LogicStates: %d\n", (int)state);
+		error_at_line(0, 0, __FILE__, __LINE__, "Unknown value in LogicStates: %d", (int)state);
 		out << (int)state;
 	}
 	

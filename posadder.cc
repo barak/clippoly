@@ -36,7 +36,7 @@
 #pragma implementation
 #endif
 
-#include	<err.h>
+#include	<error.h>
 
 #include	"posadder.h"
 
@@ -54,14 +54,14 @@ PosAdder::set(LogicStates boolean)
 		break;
 	case True:
 		if (val == False)
-			//error("Conflict in PosAdder::set (False, True)\n");
+			//error_at_line(0, 0, __FILE__, __LINE__, "Conflict in PosAdder::set (False, True)");
 		  val = TrueFalse;
 		else
 		  val = True;
 		break;
 	case False:
 		if (val == True)
-			//error("Conflict in PosAdder::set (True, False)\n");
+			//error_at_line(0, 0, __FILE__, __LINE__, "Conflict in PosAdder::set (True, False)");
 		  val = TrueFalse;
 		else
 		val = False;

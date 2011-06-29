@@ -51,7 +51,7 @@
 
 #include	<assert.h>
 
-#include	<err.h>
+#include	<error.h>
 
 #include	"poly.h"
 #include	"posadder.h"
@@ -65,7 +65,7 @@
 PolyNode::PolyNode( const PolyNode &)
 {
   // Argh! use constructor which sets parent!
-  error("This should not happen %s %d\n", __FILE__, __LINE__ );
+  error_at_line(0, 0, __FILE__, __LINE__, "This should not happen");
 }
 
 PolyNode::PolyNode( const PolyNode &copy , const Poly *parent )
@@ -408,7 +408,7 @@ PolyIter::add( const Point &point, int &new_point )
       return chk.node();
   
 	if (point == cur->p)
-	  warning("This should not happen! %s, %d\n", __FILE__, __LINE__ );
+	  error_at_line(0, 0, __FILE__, __LINE__, "This should not happen");
 		// return cur;
 		
 	double	d = len( cur->p - point );
@@ -419,7 +419,7 @@ PolyIter::add( const Point &point, int &new_point )
 	  ;	// Go to next node, as next node is on same side as current node
 
 	if (p->p == point)
-	  warning("This should not happen! %s, %d\n", __FILE__, __LINE__ );
+	  error_at_line(0, 0, __FILE__, __LINE__, "This should not happen");
 		// return p;
 			
 	p = new PolyNode( point, &poly, last->next );
@@ -485,7 +485,7 @@ ConstPolyIter::parent(const Poly &poly)
 		}
 	case Unknown:
 	default:
-		fatal("This should not happen %s %d\n", __FILE__, __LINE__);
+		error_at_line(1, 0, __FILE__, __LINE__, "This should not happen");
 	}
 	
 	return UnKnown;

@@ -35,7 +35,7 @@
    Author : Hans Gringhuis
 */
 
-#include	<err.h>
+#include	<error.h>
 
 #include <graphmat.h>
 
@@ -52,10 +52,10 @@ char   *gm_func;
 {
   switch(gm_errno)
   {
-     case NOMEM : fatal("Graphmat-error : Memory allocation failure in function : %s\n", gm_func);
-     case DIV0 : fatal("Graphmat-error : Division by zero in function : %s\n", gm_func);
-     case MATSING : fatal("Graphmat-error : Matrix is singular in function : %s\n", gm_func);
-     default : fatal("Graphmat-error : Undefined error in function : %s\n", gm_func);
+     case NOMEM : error(1, 0, "Graphmat-error : Memory allocation failure in function : %s", gm_func);
+     case DIV0 : error(1, 0, "Graphmat-error : Division by zero in function : %s", gm_func);
+     case MATSING : error(1, 0, "Graphmat-error : Matrix is singular in function : %s", gm_func);
+     default : error(1, 0, "Graphmat-error : Undefined error in function : %s", gm_func);
   };
   return 0; /*UNUSED, keep Visual C++ silent*/
 }
@@ -527,7 +527,7 @@ hmat2_t *m_result;
               *(hmat2_t *)matrixB = *m_result;
               return (hmat2_t *)matrixB;
    };
-	error("This should not happen! %s %d\n", __FILE__, __LINE__ );
+	error_at_line(0, 0, __FILE__, __LINE__, "This should not happen!");
 	return m_result;	/* garbage... */
 }
 
@@ -1060,7 +1060,7 @@ hmat3_t *m_result;
               *(hmat3_t *)matrixB = *m_result;
               return (hmat3_t *)matrixB;
    };
-	error("This should not happen! %s %d\n", __FILE__, __LINE__ );
+	error_at_line(0, 0, __FILE__, __LINE__, "This should not happen!");
 	return m_result;	/* garbage... */
 }
 
@@ -1269,7 +1269,7 @@ hvec3_t *v_result;
               *(hvec3_t *)vectorB = *v_result;
               return (hvec3_t *)vectorB;
    };
-	error("This should not happen! %s %d\n", __FILE__, __LINE__ );
+	error_at_line(0, 0, __FILE__, __LINE__, "This should not happen!");
 	return v_result;	/* garbage... */
 }
 

@@ -43,7 +43,7 @@
 #define M_PI            3.14159265358979323846  /* pi */
 #endif
 
-#include	<err.h>
+#include	<error.h>
 
 #include	"primitives.h"
 
@@ -64,7 +64,8 @@ void
 PointList::add( const Point &add )
 {
 	if (cur + 1 >= len)
-		fatal("PointList::add: Array too short (%d)\n", len);
+		error_at_line(0, 0, __FILE__, __LINE__,
+			      "PointList::add: Array too short (%d)", len);
 	
 	points[cur] = add;
 }

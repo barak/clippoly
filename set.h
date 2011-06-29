@@ -38,7 +38,7 @@
 #include	<assert.h>
 #endif
 
-#include <err.h>
+#include <error.h>
 
 #ifdef sgi
 #ifdef __GNUG__
@@ -64,7 +64,7 @@ class Set
 	T			operator[](int cnt) const
 				{ return data[cnt]; }
 	void		operator=(const Set<T> &)	// Don't use it!
-	{ fatal("This should not happen!\n"); }
+	{ error_at_line(1, 0, __FILE__, __LINE__, "This should not happen"); }
 	void		_resize();
 	
 public:
@@ -167,7 +167,7 @@ class RSet
 	T			&operator[](int cnt)
 				{ return data[cnt]; }
 	void		operator=(const RSet<T> &)	// Don't use it!
-	{ fatal("This should not happen!\n"); }
+	{ error_at_line(1, 0, __FILE__, __LINE__, "This should not happen"); }
 	void		_resize();
 	
 public:

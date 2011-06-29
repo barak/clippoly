@@ -42,7 +42,7 @@
 
 #include	<graphmat.h>
 #include	<graphadd.h>
-#include        <err.h>
+#include        <error.h>
 
 #include	<malloc.h>
 
@@ -212,7 +212,7 @@ label_shared( Poly & a, const Poly & b )
 		      in2 = b.has_point(a_iter.nextnode()->point());
 		  
 		  if (in1 != in2)
-		    error("This should not happen! %s %d\n", __FILE__, __LINE__ );
+		    error_at_line(0, 0, __FILE__, __LINE__, "This should not happen!");
 		  if (in1)
 		    a_iter.set_inside();
 		  else
