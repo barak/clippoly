@@ -273,11 +273,13 @@ double
 v_len2(vector)
 const hvec2_t *vector;
 {
-   double  result;
+  double length = hypot(v_x(*vector), v_y(*vector));
+  double w = v_w(*vector);
 
-   result = hypot(v_x(*vector), v_y(*vector));
-
-   return v_w(*vector) != 0.0 ? result / v_w(*vector) : result;
+  if (w != 0)
+    return length / w;
+  else
+    return length;
 }
 
 
@@ -792,11 +794,13 @@ double
 v_len3(vector)
 const hvec3_t *vector;
 {
-   double  result;
+   double length = hypot(v_x(*vector), hypot(v_y(*vector), v_z(*vector)));
+   double w = v_w(*vector);
 
-   result = hypot(v_x(*vector), hypot(v_y(*vector), v_z(*vector)));
-
-   return v_w(*vector) != 0.0 ? result / v_w(*vector) : result;
+   if (w != 0.0)
+     return length / w;
+   else
+     return length;
 }
 
 
