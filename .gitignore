@@ -3,7 +3,8 @@
 *.o
 /.deps/
 /.libs/
-/Makefile.in
+/aclocal.m4
+/autom4te.cache/
 /clippolytest
 /compile
 /config.guess
@@ -13,3 +14,12 @@
 /config.status
 /config.sub
 /configure
+/depcomp
+/install-sh
+/libtool
+/ltmain.sh
+/m4/
+/missing
+/stamp-h1
+Makefile
+Makefile.in
