@@ -1,3 +1,10 @@
+clippoly (0.11-2) unstable; urgency=low
+
+  * fix typo in debian/control
+  * work around quilt patch representation restriction issue
+
+ -- Barak A. Pearlmutter <bap@debian.org>  Thu, 18 Aug 2011 09:27:24 +0200
+
 clippoly (0.11-1) unstable; urgency=low
 
   * Initial release (Closes: #638013)
