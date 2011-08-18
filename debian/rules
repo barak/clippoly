@@ -12,7 +12,12 @@ override_dh_autoreconf:
 	mkdir --parent --verbose m4
 	dh_autoreconf
 
-# word around quilt patch inability to preserve file modes
+# Work around quilt patch inability to preserve file modes or
+# represent deleted files.  This is done here because, by coincidence,
+# it only creates trouble during testing.  (a) If test.cc is present,
+# when "make test" runs it tries to compile test.cc rather than
+# running the tests.  (b) The test scripts must be executable.
 override_dh_auto_test:
-	chmod a+x test0 test1 test2
+	chmod --changes +x test0 test1 test2
+	-rm --verbose --force test.cc err.h patchlevel.h err.3 err.c
 	dh_auto_test
