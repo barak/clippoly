@@ -1,6 +1,6 @@
 Source: clippoly
 Section: libs
-Priority: extra
+Priority: optional
 Maintainer: Barak A. Pearlmutter <bap@debian.org>
 Build-Depends: debhelper (>= 8), dh-autoreconf
 Build-Conflicts: autoconf2.13, automake1.4
