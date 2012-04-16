@@ -7,11 +7,6 @@ $(dh_targets) %:
 
 .PHONY: $(dh_targets)
 
-# work around autoreconf bug, http://bugs.debian.org/565663
-override_dh_autoreconf:
-	mkdir --parent --verbose m4
-	dh_autoreconf
-
 # Work around quilt patch inability to preserve file modes or
 # represent deleted files.  This is done here because, by coincidence,
 # it only creates trouble during testing.  (a) If test.cc is present,
