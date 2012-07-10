@@ -32,6 +32,5 @@ cpincludedir = $(includedir)/clippoly
 cpinclude_HEADERS = graphadd.h graphmat.h graphmat++.h nclip.h poly.h	\
 poly_io.h posadder.h primitives.h set.h version.h
 
-EXTRA_DIST = autogen.sh case1 case2 case3 in_file in_file.test		\
-in_file.wrong lgpl.texinfo out_file.dist t1 t1.out t2 t2.out test0	\
-test1 test2
+EXTRA_DIST = case1 case2 case3 in_file in_file.test in_file.wrong	\
+lgpl.texinfo out_file.dist t1 t1.out t2 t2.out test0 test1 test2

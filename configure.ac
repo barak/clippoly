@@ -1,7 +1,7 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ([2.67])
+AC_PREREQ([2.69])
 AC_INIT([polygon clipping library],[0.11],[klamer@mi.el.utwente.nl],[clippoly],[//http://clippoly.sourceforge.net])
 AM_INIT_AUTOMAKE([subdir-objects foreign])
 AC_CONFIG_SRCDIR([poly_io.cc])
