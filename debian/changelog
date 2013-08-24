@@ -1,8 +1,9 @@
 clippoly (0.11-4) unstable; urgency=low
 
   * flush debian/rules standard dh target phony declarations (closes: #720692)
+  * support multiarch
 
- -- Barak A. Pearlmutter <bap@debian.org>  Sat, 24 Aug 2013 17:38:17 +0100
+ -- Barak A. Pearlmutter <bap@debian.org>  Sat, 24 Aug 2013 22:47:51 +0100
 
 clippoly (0.11-3) unstable; urgency=low
 
