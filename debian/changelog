@@ -1,3 +1,10 @@
+clippoly (0.11-5) unstable; urgency=medium
+
+  * bump policy version
+  * lintian vcs-field-not-canonical
+
+ -- Barak A. Pearlmutter <bap@debian.org>  Wed, 09 Apr 2014 14:20:11 +0100
+
 clippoly (0.11-4) unstable; urgency=low
 
   * flush debian/rules standard dh target phony declarations (closes: #720692)
