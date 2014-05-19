@@ -15,6 +15,8 @@ AC_PROG_INSTALL
 
 LT_INIT
 
+PKG_INSTALLDIR
+
 # Checks for header files.
 AC_CHECK_HEADERS([float.h malloc.h stdlib.h string.h])
 

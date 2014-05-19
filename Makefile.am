@@ -49,5 +49,6 @@ clippoly.pc:
 	echo 'Libs: -L${libdir} -lclippoly'	>> $@
 	echo 'Libs.private: $(LDFLAGS) $(LIBS)'	>> $@
 
-pkgconfigdir=$(libdir)/pkgconfig
 pkgconfig_DATA = clippoly.pc
+
+MOSTLYCLEANFILES = $(pkgconfig_DATA)
