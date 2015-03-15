@@ -3,7 +3,7 @@
 
 AC_PREREQ([2.69])
 AC_INIT([polygon clipping library],[0.11],[klamer@mi.el.utwente.nl],[clippoly],[//http://clippoly.sourceforge.net])
-AM_INIT_AUTOMAKE([subdir-objects foreign])
+AM_INIT_AUTOMAKE([subdir-objects foreign -Wall])
 AC_CONFIG_SRCDIR([poly_io.cc])
 AC_CONFIG_HEADERS([config.h])
 
