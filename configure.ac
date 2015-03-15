@@ -3,7 +3,7 @@
 
 AC_PREREQ([2.69])
 AC_INIT([polygon clipping library],[0.11],[klamer@mi.el.utwente.nl],[clippoly],[//http://clippoly.sourceforge.net])
-AM_INIT_AUTOMAKE([subdir-objects foreign])
+AM_INIT_AUTOMAKE([subdir-objects foreign -Wall])
 AC_CONFIG_SRCDIR([poly_io.cc])
 AC_CONFIG_HEADERS([config.h])
 
@@ -12,8 +12,11 @@ AC_PROG_CXX
 AC_PROG_CC
 AM_PROG_CC_C_O
 AC_PROG_INSTALL
+AM_PROG_AR
 
 LT_INIT
+
+PKG_INSTALLDIR
 
 # Checks for header files.
 AC_CHECK_HEADERS([float.h malloc.h stdlib.h string.h])
@@ -22,6 +25,9 @@ AC_CONFIG_MACRO_DIR([m4])
 
 AC_LANG([C++])
 
+AX_CFLAGS_WARN_ALL
+AX_CXXFLAGS_WARN_ALL
+
 # Checks for typedefs, structures, and compiler characteristics.
 AC_C_INLINE
 AC_HEADER_STDBOOL
@@ -29,7 +35,7 @@ AC_HEADER_STDBOOL
 # Checks for library functions.
 AC_FUNC_ERROR_AT_LINE
 AC_FUNC_MALLOC
-AC_CHECK_FUNCS([hypot])
+AC_SEARCH_LIBS([hypot],[m])
 
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT

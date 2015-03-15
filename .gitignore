@@ -5,6 +5,7 @@
 /.libs/
 /aclocal.m4
 /autom4te.cache/
+/clippoly.pc
 /clippolytest
 /compile
 /config.guess

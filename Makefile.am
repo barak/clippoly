@@ -1,8 +1,6 @@
 ACLOCAL_AMFLAGS = -I m4
 
-AM_CPPFLAGS = -I. -DGEN_TEMPLATES
-AM_CXXFLAGS = -Wall
-AM_CFLAGS = -Wall
+AM_CPPFLAGS = -DGEN_TEMPLATES
 
 lib_LTLIBRARIES = libclippoly.la
 
@@ -49,5 +47,6 @@ clippoly.pc:
 	echo 'Libs: -L${libdir} -lclippoly'	>> $@
 	echo 'Libs.private: $(LDFLAGS) $(LIBS)'	>> $@
 
-pkgconfigdir=$(libdir)/pkgconfig
 pkgconfig_DATA = clippoly.pc
+
+MOSTLYCLEANFILES = $(pkgconfig_DATA)
