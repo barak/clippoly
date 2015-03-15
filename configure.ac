@@ -31,7 +31,7 @@ AC_HEADER_STDBOOL
 # Checks for library functions.
 AC_FUNC_ERROR_AT_LINE
 AC_FUNC_MALLOC
-AC_CHECK_FUNCS([hypot])
+AC_SEARCH_LIBS([hypot],[m])
 
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT
