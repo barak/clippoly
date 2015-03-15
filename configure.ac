@@ -25,6 +25,9 @@ AC_CONFIG_MACRO_DIR([m4])
 
 AC_LANG([C++])
 
+AX_CFLAGS_WARN_ALL
+AX_CXXFLAGS_WARN_ALL
+
 # Checks for typedefs, structures, and compiler characteristics.
 AC_C_INLINE
 AC_HEADER_STDBOOL

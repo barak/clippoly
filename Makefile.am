@@ -1,8 +1,6 @@
 ACLOCAL_AMFLAGS = -I m4
 
 AM_CPPFLAGS = -I. -DGEN_TEMPLATES
-AM_CXXFLAGS = -Wall
-AM_CFLAGS = -Wall
 
 lib_LTLIBRARIES = libclippoly.la
 
