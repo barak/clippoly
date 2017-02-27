@@ -1,3 +1,14 @@
+clippoly (0.11-7) unstable; urgency=medium
+
+  * bump policy version
+  * dh10
+  * build dependencies for autoconf macros
+  * harden
+  * secure repo url
+  * merge upstream tweaks: spelling
+
+ -- Barak A. Pearlmutter <bap@debian.org>  Mon, 27 Feb 2017 09:41:20 +0000
+
 clippoly (0.11-6) unstable; urgency=medium
 
   * support pkg-config clippoly by including .pc file
