@@ -7,7 +7,7 @@ Build-Conflicts: autoconf2.13, automake1.4
 Standards-Version: 3.9.8
 Homepage: http://clippoly.sourceforge.net
 Vcs-Git: git://anonscm.debian.org/collab-maint/clippoly.git
-Vcs-Browser: http://anonscm.debian.org/gitweb/?p=collab-maint/clippoly.git
+Vcs-Browser: https://anonscm.debian.org/gitweb/?p=collab-maint/clippoly.git
 
 Package: libclippoly0
 Architecture: any
