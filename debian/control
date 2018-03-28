@@ -6,8 +6,8 @@ Build-Depends: debhelper (>= 10), autoconf-archive, pkg-config
 Build-Conflicts: autoconf2.13, automake1.4
 Standards-Version: 3.9.8
 Homepage: http://clippoly.sourceforge.net
-Vcs-Git: git://anonscm.debian.org/collab-maint/clippoly.git
-Vcs-Browser: https://anonscm.debian.org/gitweb/?p=collab-maint/clippoly.git
+Vcs-Git: https://salsa.debian.org/debian/clippoly.git
+Vcs-Browser: https://salsa.debian.org/debian/clippoly
 
 Package: libclippoly0
 Architecture: any
