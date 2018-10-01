@@ -1,3 +1,9 @@
+clippoly (0.11-8) UNRELEASED; urgency=medium
+
+  * d/watch: Use https protocol
+
+ -- Ondřej Nový <onovy@debian.org>  Mon, 01 Oct 2018 10:11:14 +0200
+
 clippoly (0.11-7) unstable; urgency=medium
 
   * bump policy version
