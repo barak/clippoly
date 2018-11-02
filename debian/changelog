@@ -1,3 +1,11 @@
+clippoly (0.11-8) unstable; urgency=medium
+
+  * dh11
+  * bump policy version
+  * swizzle packaging repo to salsa
+
+ -- Barak A. Pearlmutter <bap@debian.org>  Fri, 02 Nov 2018 14:29:20 +0000
+
 clippoly (0.11-7) unstable; urgency=medium
 
   * bump policy version
