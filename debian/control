@@ -2,7 +2,7 @@ Source: clippoly
 Section: libs
 Priority: optional
 Maintainer: Barak A. Pearlmutter <bap@debian.org>
-Build-Depends: debhelper (>= 10), autoconf-archive, pkg-config
+Build-Depends: debhelper (>= 11), autoconf-archive, pkg-config
 Build-Conflicts: autoconf2.13, automake1.4
 Standards-Version: 3.9.8
 Homepage: http://clippoly.sourceforge.net
