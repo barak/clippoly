@@ -1,0 +1,3 @@
+CMDLINE=CC -g -I. -c poly_io.cc
+PWD=/usr/people/gsl/source/clippoly
+----
