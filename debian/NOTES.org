@@ -1,0 +1,41 @@
+* Notes about package: clippoly
+** Known Issues
+*** Two polygons sharing a single point
+Source: https://sourceforge.net/p/clippoly/bugs/3/
+
+Status: open
+Owner: nobody
+Labels: None
+Priority: 5
+Updated: 2008-02-26
+Created: 2008-02-26
+Creator: Anonymous
+Private: No
+
+I have two polygons that share a single point:
++--+
+| |
++--+--+
+| |
++--+
+
+Here are the points:
+(-75.6679566, 39.6222665)
+(-75.6611617, 39.6222373)
+(-75.6611617, 39.6277492)
+(-75.6679944, 39.6277492)
+And
+(-75.6747515, 39.6222373)
+(-75.6679566, 39.6222665)
+(-75.6679944, 39.6167546)
+(-75.6747515, 39.6167254)
+
+When I clip, I get an assertion:
+poly.cc:208: Orientation Poly::orientation() const: Assertion `(area * tot_angle > 0) || (fabs(fabs(tot_angle) - 3.14159265358979323846 * 2.0) > 0.0001)' failed.
+
+The part that surprises me is right before that I see this :
+This should not happen! nclip.cc 220
+
+(your line numbers may vary).
+
+I have no idea why this happening after calling clip_poly. I certainly didn't expect the assertion failure.
