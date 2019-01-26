@@ -39,3 +39,6 @@ This should not happen! nclip.cc 220
 (your line numbers may vary).
 
 I have no idea why this happening after calling clip_poly. I certainly didn't expect the assertion failure.
+** Forks and Patches
+*** Mac patches by Gregg Leichtman, circa 2000
+http://clippoly.sourceforge.net/Gregg.Leichtman/
