@@ -1,0 +1,175 @@
+Monday, August 11, 1997 - 12:10 PM
+Clippoly Version 1.5
+
+Folder: Mirror Maze:Code Development:Source Code:clippoly
+Listing 20 subfolders, 148 files, 9.5M on disk
+
+00README.txt, 20K, TEXT
+docs F, 0.7M, 12 files, 0 subfolders
+  00README.txt , 807 bytes, TEXT
+  CLASSES.txt, 1K, TEXT
+  ClipInfo.htm, 4K, TEXT
+  clipPapr.ps, 202K, TEXT
+  err.3, 1K, TEXT
+  graphadd.3, 2K, TEXT
+  graphmat.3, 17K, TEXT
+  grphmtpp.3, 1K, TEXT
+  KSchutte.htm, 6K, TEXT
+  lgpltex.txt, 25K, TEXT
+  Manifest.txt, 5K, TEXT
+  RevHist.txt, 5K, TEXT
+Main F, 4.5M, 67 files, 7 subfolders
+  clippoly.cc, 3K, TEXT
+  clippoly.exe, 238K, APPL
+  clippoly_CW012.mu, 29K, MMPr
+  clippoly_CW012.mu Data F, 0.3M, 2 files, 0 subfolders
+    clippoly_CW012.tdt, 332K, TDAT
+    CW Settings.stg, 3K, TDAT
+  err.c, 4K, TEXT
+  err.h, 2K, TEXT
+  graphadd.cc, 19K, TEXT
+  graphadd.h, 3K, TEXT
+  graphmat.cc, 47K, TEXT
+  graphmat.h, 10K, TEXT
+  grphmtpp.cc, 1K, TEXT
+  grphmtpp.h, 4K, TEXT
+  Makefile, 1K, TEXT
+  makePure.cov, 528 bytes, TEXT
+  nclip.cc, 19K, TEXT
+  nclip.h, 2K, TEXT
+  OldProj F, 1.0M, 3 files, 0 subfolders
+    clippoly_CW009.mu, 257K, MMPR
+    clippoly_CW010.mu, 263K, MMPR
+    clippoly_CW011.mu, 486K, MMPR
+  poly.cc, 14K, TEXT
+  poly.h, 8K, TEXT
+  polyio.cc, 4K, TEXT
+  polyio.h, 2K, TEXT
+  posadder.cc, 2K, TEXT
+  posadder.h, 1K, TEXT
+  prcomppp.pch, 795 bytes, TEXT
+  primitvs.cc, 2K, TEXT
+  primitvs.h, 6K, TEXT
+  sbscan.cc, 1K, TEXT
+  set.h, 5K, TEXT
+  String.cc, 1007 bytes, TEXT
+  String.h, 908 bytes, TEXT
+  templats.cc, 771 bytes, TEXT
+  testCase F, 1.1M, 26 files, 0 subfolders
+    case1, 638 bytes, TEXT
+    case1.out, 784 bytes, TEXT
+    case2, 512 bytes, TEXT
+    case2.out, 765 bytes, TEXT
+    case3, 542 bytes, TEXT
+    case3.out, 818 bytes, TEXT
+    gslBug1, 584 bytes, TEXT
+    gslBug1.out, 660 bytes, TEXT
+    gslBug2, 636 bytes, TEXT
+    gslBug2.out, 624 bytes, TEXT
+    inFile, 473 bytes, TEXT
+    inFile.out, 770 bytes, TEXT
+    inFile.tst, 739 bytes, TEXT
+    inFile.wrg, 455 bytes, TEXT
+    jkBug1, 1K, TEXT
+    jkBug1.out, 583 bytes, TEXT
+    jkBug2, 1K, TEXT
+    jkBug2.out, 591 bytes, TEXT
+    nasty1, 796 bytes, TEXT
+    nasty1.out, 708 bytes, TEXT
+    outFile, 891 bytes, TEXT
+    outFile.dst, 909 bytes, TEXT
+    twobars, 804 bytes, TEXT
+    twobars.out, 751 bytes, TEXT
+    ztBug1, 465 bytes, TEXT
+    ztBug1.out, 544 bytes, TEXT
+  unusedCo.de F, 0.3M, 7 files, 3 subfolders
+    CC F, 94K, 2 files, 0 subfolders
+      String.cc, 1007 bytes, TEXT
+      String.h, 886 bytes, TEXT
+    iiFiles F, 0.1M, 3 files, 0 subfolders
+      nclip.ii, 581 bytes, TEXT
+      polyio.ii, 483 bytes, TEXT
+      test.ii, 480 bytes, TEXT
+    patchlvl.h, 431 bytes, TEXT
+    RCS F, 47K, 1 files, 0 subfolders
+      tmpltscc.v, 781 bytes, TEXT
+MatLab.MEX F, 4.2M, 68 files, 10 subfolders
+  4IBM_PC F, 94K, 2 files, 0 subfolders
+    CPPMEX.BAT, 17K, TEXT
+    ibmPc.h, 644 bytes, TEXT
+  4Matlab F, 0.5M, 21 files, 2 subfolders
+    MatLabCo.de F, 0.1M, 4 files, 0 subfolders
+      plotClip.m, 5K, TEXT
+      plotMClp.m, 6K, TEXT
+      pltPolys.m, 3K, TEXT
+      polyArea.m, 1K, TEXT
+    testCase F, 0.3M, 17 files, 0 subfolders
+      case1.mat, 2K, MATW
+      case2.mat, 2K, MATW
+      case3.mat, 2K, MATW
+      gslBug1.mat, 1K, MATW
+      gslBug2.mat, 1K, MATW
+      inFile.mat, 2K, MATW
+      inFilgsl.mat, 2K, MATW
+      jkBug1.mat, 892 bytes, MATW
+      jkBug2.mat, 924 bytes, MATW
+      nasty1.mat, 1K, MATW
+      Overlap1.mat, 2K, MATW
+      Overlap2.mat, 2K, MATW
+      plyInsid.mat, 1K, MATW
+      twobars.mat, 1K, MATW
+      twoBoxes.mat, 180 bytes, MATW
+      twostars.mat, 2K, MATW
+      ztBug1.mat, 180 bytes, MATW
+  clipMEX_CW012M5.mu, 29K, MMPr
+  clipMEX_CW012M5.mu Data F, 0.2M, 2 files, 0 subfolders
+    clipMEX_CW012M5.tdt, 250K, TDAT
+    CW Settings.stg, 3K, TDAT
+  clippoly.cc, 7K, TEXT
+  clippoly.mex, 373K, MEX0
+  graphadd.cc, 19K, TEXT
+  graphadd.h, 3K, TEXT
+  graphmat.cc, 49K, TEXT
+  graphmat.h, 11K, TEXT
+  grphmtpp.h, 4K, TEXT
+  nclip.cc, 19K, TEXT
+  nclip.h, 2K, TEXT
+  OldProj F, 1.2M, 7 files, 0 subfolders
+    clipMEX_CW009M4.mu, 280K, MMPR
+    clipMEX_CW009M4.mu.exp, 422 bytes, TEXT
+    clipMEX_CW010M4.mu, 252K, MMPR
+    clipMEX_CW010M4.mu.exp, 422 bytes, TEXT
+    clipMEX_CW011M4.mu, 305K, MMPR
+    clipMEX_CW011M4.mu.exp, 422 bytes, TEXT
+    clipMEX_CW011M5.mu, 233K, MMPR
+  poly.cc, 15K, TEXT
+  poly.h, 9K, TEXT
+  polyio.cc, 10K, TEXT
+  polyio.h, 3K, TEXT
+  posadder.cc, 2K, TEXT
+  posadder.h, 1K, TEXT
+  prcomppp.pch, 1K, TEXT
+  primitvs.cc, 2K, TEXT
+  primitvs.h, 6K, TEXT
+  set.h, 5K, TEXT
+  String.cc, 1K, TEXT
+  String.h, 984 bytes, TEXT
+  unusedCo.de F, 0.6M, 14 files, 3 subfolders
+    CC F, 94K, 2 files, 0 subfolders
+      String.cc, 1007 bytes, TEXT
+      String.h, 886 bytes, TEXT
+    err.c, 4K, TEXT
+    err.h, 2K, TEXT
+    grphmtpp.cc, 1K, TEXT
+    iiFiles F, 0.1M, 3 files, 0 subfolders
+      nclip.ii, 581 bytes, TEXT
+      poly_io.ii, 483 bytes, TEXT
+      test.ii, 480 bytes, TEXT
+    Makefile, 1K, TEXT
+    makePure.cov, 528 bytes, TEXT
+    patchlvl.h, 431 bytes, TEXT
+    RCS F, 47K, 1 files, 0 subfolders
+      tmpltscc.v, 781 bytes, TEXT
+    sbscan.cc, 1K, TEXT
+    templats.cc, 771 bytes, TEXT
+

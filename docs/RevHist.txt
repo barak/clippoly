@@ -1,0 +1,122 @@
+Revision history for Macintosh port of clippoly code:
+
+Version 1.5: gsl
+
+Fixed bug in plotMClp m-file function which caused failure due to
+incorrect indexing through the polygons to be clipped.
+
+MatLab M-file pltpolys now can handle line types with up to 3 
+characters instead of just 2.
+
+Rewrote routine which determines the orientation of vertices in
+a polygon (i.e. clockwise or counterclockwise). New algorithm
+should be more computationally efficient and less prone to rounding
+error, since only one cross-product is used versus N - 1 where N is
+the number of polygon vertices.
+
+Fixed a bug in the intersection code. A fuzzy check I had introduced
+for parallel lines failed when one or both line segements were
+very small. The check has been returned to its original state
+where two segments are considered parallel only if their cross product
+is identically zero. This fixed the bug found in test case gslBug2.
+
+Changed some MEX code that wrote errors to stderr to now write to the
+MatLab command window.
+
+Ported code to MetroWerks CodeWarrior 10.0. CW now requires that the 
+SIOUX library or console.stubs.c source file be present, if ANSI C or
+ANSI C++ libraries are included in the link; therefore, I now include
+console.stubs.c in in the MEX project. The old CW 9 project is still 
+included in the distribution.
+
+Inlining is now on by default. The CW 9 project still has inlining off by
+default, since I no longer have this version on my system and cannot
+edit the project file.
+
+Instruction scheduling is now set to the 601 CPU by default. You should
+recompile for your CPU. See the readme file under the compilation
+heading for more info.
+
+Added some guidelines to the readme file for submission of bug reports.
+
+Ported code to MetroWerks CodeWarrior 11.0. CW no longer uses either
+the SIOUX library or console.stubs.c source file. Also some of
+the MetroWerks library names were changed and were placed in different
+folders than in CW 10.0. This port required two types of changes to the
+source code. (1) The string.h and poly.h header files had dummy definitions
+of "class istream;" and "class ostream;" near the top of each respective
+file. CW 11 choked on this declaring that these dummy definitions were
+redeclarations.  Therefore, I removed the dummy definitions. (2) This 
+necessitated a change in the order of several of the include files in 
+several of the source files so that the iostream.h header file occurred
+before any use of istream or ostream in string.h or poly.h. These changes
+only affected the standalone executable. The MEX function code was 
+unaffected, since it does not use istream or ostream.
+
+In CW 11 MetroWerks removed the definition of the constant pi in math.h, 
+since they claim that pi is not part of the ANSI definition; therefore, I
+have placed the definition of pi directly into the primitivs.h header 
+file. This change affected both the standalone executable and the MEX
+function code.
+
+Ported code to MatLab 5.0. There is now a compiler switch in header file
+prcomppp.pch which determines if the code is supposed to compile for
+MatLab 4.x or 5.x. This switch is in file ibmPc.h for IBM platforms.
+
+MEX function test cases and MatLab M-files are now inside the 4Matlab
+folder.
+
+The code now compiles for the IBM PC using the Watcom compiler. Thanks go
+to Marcel Breuers. Renamed graphmat.c to graphmat.cc to make it compatible 
+with IBM PC compilation. Renamed test.cc to clippoly.cc. Also added assert 
+header to appropriate files for IBM PC. Moved one #ifdef mac_h to allow
+M_PI define to be seen by both Mac and PC compilers.
+
+Updated M-files to run under both Matlab 4.x and 5.x.
+
+Moved old Mac project files into MatLab.MEX/4Matlab/OldProj.
+
+Ported code to CW Pro R1 (i.e. CW 12).
+
+A dynamic link library (DLL) is now included for IBM PC use with MatLab 
+5.x.
+
+Version 1.4: gsl 2/5/97
+
+Fixed failure to handle case gslBug1. I had changed some of Klamer's
+code when I first got it, in an attempt to fix another bug, realized 
+the changes were incorrect, changed all the code back, but missed 
+this piece.
+
+Fixed area calculation routine. I did not get it quite right in 
+version 1.2. I also improved the efficiency of the orientation 
+routine. Since it parallels the area calculation code it was tuned 
+at the same time.
+
+Version 1.3: ks 1/27/97
+
+Fixed failure to handle pathological case where vertex intersected an
+edge and caused a self-intersecting polygon to be output. Case is
+shown in ztBug1.
+
+Version 1.2: gsl 1/24/97
+
+Fixed failure of intersection code to handle two pathological cases 
+shown in cases jkBug1 and jkBug2 which failed due to rounding errors 
+on the order of 10^-16.
+
+Removed extra calculations in polyArea function.
+
+Version 1.1: gsl
+
+Fixed failure for degenerate case nasty1. This fix allows clippoly 
+to produce self-intersections near a vertex, but prevents a crash.
+
+Version 1.0: gsl
+
+Ported code from its UNIX origin to the Macintosh.
+
+It is now a standalone application and a MatLab MEX
+function.
+
+Released port to the world at large.

@@ -1,0 +1,12 @@
+//#include <MacHeaders.h>
+#if __MWERKS__ < 0x1800 // added for CW Pro R1 (version # is 0x1800). gsl 7/22/97
+#pragma precompile_target "prcomppp"
+#else
+#include <MSLHeaders++.h>
+#endif
+
+#define __malloc_h 1
+#define mac_h 1
+#define Point PointClipPoly //Point is already defined in the Mac Headers, so redefine for
+                            //Schutte's Point class.
+

@@ -1,0 +1,6 @@
+CMDLINE=CC -g -I. -c nclip.cc
+PWD=/usr/people/gsl/source/clippoly
+----
+__cl__21SetIter__pt__7_P4PolyFv
+_resize__17Set__pt__7_P4PolyFv
+_resize__23RSet__pt__11_9NodePEdgeFv

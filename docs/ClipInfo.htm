@@ -1,0 +1,101 @@
+<TITLE>Clippoly information</TITLE>
+
+<H1>Clippoly README documents</H1>
+<HR>
+
+<H2>Objective</H2>
+
+I decided to
+put together a set of files such that you can run 
+experiments with the clipping code. Main objective from my side
+is to get the library better debugged. The code is copyrighted
+with the 
+<A HREF="lgpl.html">GNU Library General Public License</A>. 
+Basically, this means
+that you can use and pass around the code, but cannot pretend
+you wrote it. Using it in a commercial product is, at least,
+difficult. If the use of the LGPL is a major problem for you,
+please let me know, perhaps we can work out an arrangement.
+
+<H2>Environment</H2>
+
+You will need a C++ compiler with templates to compile the code;
+development work has been done with g++ on Sun sparc, sunos 4.1.X.
+(Most recent version used is g++ 2.6.3.) g++ 2.6.1 does NOT work due to a
+bug in g++ 2.6.1 concering constructor calls.
+It is also compiled using Sun C++ 3.0 and 4.0(a cfront based compiler), and on
+a SGI machine using g++ 2.5.7.
+With some effort it could be made to run on a compiler without
+templates (such as cfront 2.1). I know there is a bug in the code which
+reveals itself using ULTRIX. I will fix it sometime.<P>
+
+The code is released as alpha code. For you, that means minimal
+documents (including comments), and almost guaranteed some bugs.
+Also will the interface to next versions almost certainly change.<P>
+
+If you don't have g++, but a cfront based compiler like Sun C++ 3.0, then
+you should compile the files from the CC subdirectory to this directory.
+The String.{cc,h} files are not a complete implementation of a String class;
+they only provide what is used in the file poly_io.cc. For a good String
+class you can try the libg++ library (which I assume is installed if you
+have g++.)
+Also, rename Makefile.CC to Makefile. If you don't have g++ nor a cfront
+based compiler then you are on your own.<P>
+
+Before compiling, skim through the Makefile. Three differences can be made:
+<UL>
+<LI> Changing the C compiler. Standard is cc. gcc -traditional can be used on
+  systems with proper header files (this excludes SunOS 4.1.X)
+<LI> Adding the notion of a .cc file as a C++ source file. Some make's (like
+  SGI's) do not standard recognize a .cc file as C++
+<LI> Patching libg++. Early versions of libg++ 2.5 (notably, 2.5.1 and 2.5.2)
+  suffered a bug which caused the test porgram to hang. If you add
+  sbscan.cc to the program (replacing the one in libg++) this bug is fixed.
+  Better off course is to upgrade to a more recent libg++!
+  Note that libg++ 2.4.X does not have this bug, and can be used without
+  (known) problems.
+</UL>
+
+<H2>Files:</H2>
+
+In the tar file you can find the test program for the nclip
+library. In the tar file is:
+
+<DL>
+<DT>lgpl.texinfo<DD> texinfo style version of the 
+<A HREF="lgpl.html">copyright statement</A>.
+
+<DT>test.cc<DD> The wrapper in which we can test. Reads two clockwise
+	oriented polygons from stdin, and clips those. Results
+	comes on stdout. Examples format for input can be found in
+	in_file.
+
+<DT>nclip.cc<DD>	The actual clip routine. Only file in the nclip
+	library which is decent documented.
+
+<DT>nclip.h nclip.cc poly.cc poly.h poly_io.cc poly_io.h posadder.cc posadder.h
+primitives.cc primitives.h set.h<DD>
+	The rest of the nclip library. Not of real interest, but needed to
+	get nclip running.
+
+<DT>sbscan.cc<DD>
+	Part of libg++. It is a patched version of a file from libg++ 2.5.1
+
+<DT>err.* graph*<DD>
+	files, part of the 
+<A HREF="http://utelmi01.el.utwente.nl:1994/">
+University of Twente Measurement Laboratory</A> in-house library. 
+   Not likely to
+	have big errors. They even come with documentation!
+	(*.3, nroff (== UNIX man) format)
+	They should be compiled with a K&R C compiler (like gcc -traditional.)
+
+<DT><A HREF="CLASSES">CLASSES</A><DD>
+	Some documentation about the classes used.
+</DL>
+
+<P><HR>
+<ADDRESS>
+<A HREF="http://www.ph.tn.tudelft.nl/People/klamer/Klamer.html">KS</A>
+</ADDRESS>
+

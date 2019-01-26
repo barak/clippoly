@@ -1,0 +1,17 @@
+//#include <MacHeaders.h> removed. not needed in MEX function. gsl 5/12/97
+#pragma precompile_target "prcomppp"
+
+#define __malloc_h 1
+#define mac_h 1
+#define Point PointClipPoly //Point is already defined in the Mac Headers, so redefine for
+                            //Schutte's Point class.
+// assertions must be output to the MatLab command window. gsl 10/30/96
+#define assert(x)      if ( ! (x) ) { mexPrintf("Assertion failed in %s, line: %d.\n",__FILE__,__LINE__); mexErrMsgTxt("Exiting."); }  /* send assertions to MatLab output window. gsl 10/25/96 */
+
+/* Uncomment #define for MatLab version 4xx below, if compiling for that version. */
+/* #define MatLabV4 */
+#ifndef MatLabV4
+#define MatLabV5
+#endif
+
+#include "CodeWarrior.MEX.prefix"

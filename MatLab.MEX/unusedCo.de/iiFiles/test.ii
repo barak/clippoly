@@ -1,0 +1,3 @@
+CMDLINE=CC -g -I. -c test.cc
+PWD=/usr/people/gsl/source/clippoly
+----

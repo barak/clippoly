@@ -1,0 +1,118 @@
+#
+# $Id: Makefile.linux,v 1.1.1.1 2000/09/12 09:34:32 binder Exp $
+#
+
+# (GNU-)Makefile for linux/unix. Tested with gcc/g++ 2.95 on RedHat Linux 6.2
+# and on DEC UNIX V4.0. The code works also with native compilers under DEC UNIX
+
+# Dependencies for  source files are  generated automatically for compilers that
+# support the -MM option. All generated object files  as well as the library and
+# the  executable (test program)  are placed in a  sub-dir  defined by the shell
+# command uname.
+
+# -- gcc/g++ configuration -----------------------------------------------------
+
+CXX=g++
+CC=gcc
+OBJ-DIR=$(shell uname)
+MKDIRHIER=mkdirhier
+
+CXXFLAGS=-O -W -Wall
+CFLAGS=-O2 -W -Wall
+
+# -- cxx/cc configuration (OSF1) -----------------------------------------------
+
+##CXX=cxx
+##CC=cc
+##OBJ-DIR=$(shell uname)
+##MKDIRHIER=mkdirhier
+##LDFLAGS=-Wl,-expect_unresolved,\*
+##DEPCC=gcc
+##DEPCXX=g++
+
+# -- end of system settings ----------------------------------------------------
+
+C-SRC=  err.c
+CCC-SRC=String.cc nclip.cc posadder.cc graphadd.cc graphmat.cc poly.cc \
+	templats.cc grphmtpp.cc polyio.cc primitvs.cc
+
+LIBNAME=pclip
+
+C-OBJ=$(C-SRC:%.c=$(OBJ-DIR)/%.o)
+CCC-OBJ=$(CCC-SRC:%.cc=$(OBJ-DIR)/%.o)
+
+OBJS=$(C-OBJ) $(CCC-OBJ) $(OBJ-DIR)/test.o
+
+
+all:	$(OBJ-DIR)/cliptest
+
+
+$(OBJ-DIR)/cliptest: shared
+	$(CXX) $(OBJ-DIR)/test.o $(LDFLAGS) -Wl,-rpath,$(OBJ-DIR) -L$(OBJ-DIR) \
+		-l$(LIBNAME) -lm -o $(OBJ-DIR)/cliptest
+	ln -sf $(OBJ-DIR)/cliptest cliptest.$(OBJ-DIR)
+
+shared:	$(OBJS)
+	$(CXX) -shared $(OBJS) $(LDFLAGS) -o $(OBJ-DIR)/lib$(LIBNAME).so
+
+archive:$(OBJS)
+	ar -r $(OBJ-DIR)/lib$(LIBNAME).a $(OBJS)
+
+
+clean:
+	rm -rf $(OBJ-DIR) -f cliptest.$(OBJ-DIR)
+
+
+
+
+#-------------------------------------------------------------------------------
+# .cc -> .o
+#-------------------------------------------------------------------------------
+$(OBJ-DIR)/%.o:	%.cc
+	${CXX} -c ${CXXFLAGS}  $< -o $@
+
+#-------------------------------------------------------------------------------
+# .c -> .o
+#-------------------------------------------------------------------------------
+$(OBJ-DIR)/%.o:	%.c
+	${CC} -c ${CFLAGS}  $< -o $@
+
+
+
+#-------------------------------------------------------------------------------
+#	automatically generated dependencies (CC-Files)
+#-------------------------------------------------------------------------------
+DFLAGS=-MM
+ifndef DEPCXX
+	DEPCXX	= ${CXX}
+endif
+
+DPATH=$(OBJ-DIR)/.depend
+
+CCC-DEP	= $(CCC-SRC:%.cc=${DPATH}/%.dcc)
+
+${DPATH}/%.dcc: %.cc
+	@-${MKDIRHIER} ${DPATH}
+	@${SHELL} -ec '${DEPCXX} ${DFLAGS} $< | sed '\''s:$*.o:${OBJ-DIR}/& $@:g'\'' > $@'
+
+-include $(CCC-DEP)
+
+#-------------------------------------------------------------------------------
+
+#-------------------------------------------------------------------------------
+#	automatically generated dependencies (C-Files)
+#-------------------------------------------------------------------------------
+ifndef DEPCC
+	DEPCC	= ${CC}
+endif
+
+C-DEP	= $(C-SRC:%.c=${DPATH}/%.dc)
+
+${DPATH}/%.dc: %.c
+	@-${MKDIRHIER} ${DPATH}
+	@${SHELL} -ec '${DEPCC} ${DFLAGS} $< | sed '\''s:$*.o:${OBJ-DIR}/& $@:g'\'' > $@'
+
+
+-include $(C-DEP)
+
+#-------------------------------------------------------------------------------
