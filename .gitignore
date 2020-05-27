@@ -3,7 +3,9 @@
 *.o
 /.deps/
 /.libs/
+/.pc/
 /aclocal.m4
+/ar-lib
 /autom4te.cache/
 /clippoly.pc
 /clippolytest
@@ -22,5 +24,8 @@
 /m4/
 /missing
 /stamp-h1
+/test*.log
+/test*.trs
+/test-driver
 Makefile
 Makefile.in

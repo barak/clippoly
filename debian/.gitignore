@@ -3,7 +3,9 @@
 /*.substvars
 /autoreconf.after
 /autoreconf.before
+/debhelper-build-stamp
 /files
 /libclippoly-dev/
 /libclippoly0/
+/patches/
 /tmp/
