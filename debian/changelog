@@ -1,12 +1,13 @@
-clippoly (0.11-9) UNRELEASED; urgency=medium
+clippoly (0.11-9) unstable; urgency=medium
 
   [ Ondřej Nový ]
   * d/watch: Use https protocol
 
   [ Barak A. Pearlmutter ]
   * bump policy
+  * debhelper 13
 
- -- Barak A. Pearlmutter <bap@debian.org>  Sat, 26 Jan 2019 20:07:14 +0000
+ -- Barak A. Pearlmutter <bap@debian.org>  Wed, 27 May 2020 19:53:57 +0100
 
 clippoly (0.11-8) unstable; urgency=medium
 
