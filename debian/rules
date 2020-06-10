@@ -6,11 +6,10 @@ export DEB_BUILD_MAINT_OPTIONS = hardening=+all
 	dh $@
 
 # Work around quilt patch inability to preserve file modes or
-# represent deleted files.  This is done here because, by coincidence,
-# it only creates trouble during testing.  (a) If test.cc is present,
+# represent file deletion.  This is done here because, by coincidence,
+# it creates trouble only during testing.  (a) If test.cc is present,
 # when "make test" runs it tries to compile test.cc rather than
 # running the tests.  (b) The test scripts must be executable.
-override_dh_auto_test:
+execute_before_dh_auto_test:
 	chmod --changes +x test0 test1 test2
 	-rm --verbose --force test.cc err.h patchlevel.h err.3 err.c
-	dh_auto_test
