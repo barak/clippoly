@@ -481,7 +481,7 @@ hmat2_t *m_result;
      for(col=0; col<3; col++)
         m_elem(*m_result, row, col) = m_elem(*matrixA, row, col) + m_elem(*matrixB, row, col);
 
-	return m_result;
+   return m_result;
 }
 
 
@@ -1018,7 +1018,7 @@ hmat3_t *m_result;
      for(col=0; col<4; col++)
         m_elem(*m_result, row, col) = m_elem(*matrixA, row, col) + m_elem(*matrixB, row, col);
 
-	return m_result;
+   return m_result;
 }
 
 
