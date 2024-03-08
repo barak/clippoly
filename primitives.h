@@ -47,158 +47,194 @@
 
 class Point
 {
-	double	_x, _y;
-	
-public:
-	Point()
-		{ }
-	Point( double x, double y )
-		: _x(x), _y(y)
-		{ }
-	Point( const hvec2_t &h )
-		: _x(v_x(h)), _y(v_y(h))
-		{ }
+  double _x, _y;
 
-	double	x() const
-		{ return _x; }
-	double	&x()
-		{ return _x; }
-	double	y() const
-		{ return _y; }
-	double	&y()
-		{ return _y; }
-			
-	// operator hvec2_t();	// Does crash g++ 2.2.1 when used :-(
-	hvec2_t	hvec() const
-//		{ hvec2_t res; v_fill2( x(), y(), 1.0, &res ); return res; }
-		{ hvec2_t res; v_x(res) = x(); v_y(res) = y(); v_w(res) = 1;
-			return res; }
-	const Point &operator=( const hvec2_t &copy )
-		{ _x = v_x(copy); _y = v_y( copy); return *this; }
-	const Point &operator=( const Point &copy )
-		{ _x = copy.x(); _y = copy.y(); return *this; }
+public:
+    Point ()
+  {
+  }
+  Point (double x, double y):_x (x), _y (y)
+  {
+  }
+  Point (const hvec2_t & h):_x (v_x (h)), _y (v_y (h))
+  {
+  }
+
+  double x () const
+  {
+    return _x;
+  }
+  double &x ()
+  {
+    return _x;
+  }
+  double y () const
+  {
+    return _y;
+  }
+  double &y ()
+  {
+    return _y;
+  }
+
+  // operator hvec2_t();  // Does crash g++ 2.2.1 when used :-(
+  hvec2_t hvec () const
+//              { hvec2_t res; v_fill2( x(), y(), 1.0, &res ); return res; }
+  {
+    hvec2_t res;
+      v_x (res) = x ();
+      v_y (res) = y ();
+      v_w (res) = 1;
+      return res;
+  }
+  const Point & operator= (const hvec2_t & copy)
+  {
+    _x = v_x (copy);
+    _y = v_y (copy);
+    return *this;
+  }
+  const Point & operator= (const Point & copy)
+  {
+    _x = copy.x ();
+    _y = copy.y ();
+    return *this;
+  }
 };
 
-inline Point	
-operator+( const Point &p1, const Point &p2 )
+inline Point
+operator+ (const Point & p1, const Point & p2)
 {
-	return Point( p1.x() + p2.x(), p1.y() + p2.y() );
+  return Point (p1.x () + p2.x (), p1.y () + p2.y ());
 }
-	
-inline Point	
-operator-( const Point &p1, const Point &p2 )
+
+inline Point
+operator- (const Point & p1, const Point & p2)
 {
-	return Point( p1.x() - p2.x(), p1.y() - p2.y() );
+  return Point (p1.x () - p2.x (), p1.y () - p2.y ());
 }
 
 inline double
-len( const Point p )
+len (const Point p)
 {
-	return hypot(p.x(), p.y());
+  return hypot (p.x (), p.y ());
 }
- 
-inline Point	
-operator/( const Point &p, double div )
+
+inline Point
+operator/ (const Point & p, double div)
 {
-	return Point( p.x() / div, p.y() / div );
+  return Point (p.x () / div, p.y () / div);
 }
 
 inline int
-operator==( const Point &p1, const Point &p2 )
+operator== (const Point & p1, const Point & p2)
 {
-	return (p1.x() == p2.x()) && (p1.y() == p2.y());
+  return (p1.x () == p2.x ()) && (p1.y () == p2.y ());
 }
 
 inline int
-operator!=( const Point &p1, const Point &p2 )
+operator!= (const Point & p1, const Point & p2)
 {
-	return (p1.x() != p2.x()) || (p1.y() != p2.y());
+  return (p1.x () != p2.x ()) || (p1.y () != p2.y ());
 }
 
 inline int
-operator<( const Point &p1, const Point &p2 )
+operator< (const Point & p1, const Point & p2)
 {
-	return (p1.y() < p2.y()) || ((p1.y() == p2.y()) && (p1.x() < p2.x()));
+  return (p1.y () < p2.y ()) || ((p1.y () == p2.y ()) && (p1.x () < p2.x ()));
 }
 
 inline int
-operator>( const Point &p1, const Point &p2 )
+operator> (const Point & p1, const Point & p2)
 {
-	return (p1.y() > p2.y()) || ((p1.y() == p2.y()) && (p1.x() > p2.x()));
+  return (p1.y () > p2.y ()) || ((p1.y () == p2.y ()) && (p1.x () > p2.x ()));
 }
 
-double	angle( const Point &p1, const Point &p2, const Point &p3 );
+double angle (const Point & p1, const Point & p2, const Point & p3);
 
 inline double
-atan( const Point &p )
+atan (const Point & p)
 {
-	assert( (p.x() != 0) || (p.y() != 0) );
-	return atan2( p.y(), p.x() );
+  assert ((p.x () != 0) || (p.y () != 0));
+  return atan2 (p.y (), p.x ());
 }
 
-inline Point 
-point(const hvec3_t &p)
+inline Point
+point (const hvec3_t & p)
 {
-	hvec3_t	pn;
-	v_homo3( &p, &pn );
-	
-	return Point( v_x(pn), v_y(pn) );
+  hvec3_t pn;
+  v_homo3 (&p, &pn);
+
+  return Point (v_x (pn), v_y (pn));
 }
 
 class PointList
 {
-	friend class PointListIter;
-	
-	int	len, cur;
-	Point	*points;
+  friend class PointListIter;
 
-	static const int	def_len; //	= 16;
-	// Make copy constructor and assignment unusable
-	PointList( PointList &copy );
-	PointList &operator=( const PointList &copy );
-		
+  int len, cur;
+  Point *points;
+
+  static const int def_len;	//     = 16;
+  // Make copy constructor and assignment unusable
+    PointList (PointList & copy);
+    PointList & operator= (const PointList & copy);
+
 public:
-	PointList( int nr = def_len );
-	~PointList();
-	
-	void	add( const Point &add );
+    PointList (int nr = def_len);
+   ~PointList ();
+
+  void add (const Point & add);
 };
 
 class PointListIter
 {
-	const PointList	&pl;
-	int				cnt;
-	
+  const PointList & pl;
+  int cnt;
+
 public:
-	PointListIter( const PointList &list )
-		: pl( list ), cnt( -1 )
-		{ }
-	
-	int	operator() ()
-		{ if (++cnt < pl.cur) return 1; else return 0; }
-	
-	const Point	&point() const
-		{ return pl.points[cnt]; }
+    PointListIter (const PointList & list):pl (list), cnt (-1)
+  {
+  }
+
+  int operator () ()
+  {
+    if (++cnt < pl.cur)
+      return 1;
+    else
+      return 0;
+  }
+
+  const Point & point () const
+  {
+    return pl.points[cnt];
+  }
 };
 
 class Edge
 {
-	Point	point1, point2;
-	// int		shared;
-	
+  Point point1, point2;
+  // int          shared;
+
 public:
-	Edge( const Point &p1, const Point &p2 ) //, int share = -1 )
-		: point1( p1 ), point2( p2 ) //, shared( share )
-		{ }
-	Point	middle() const
-		{ return (point1 + point2) / 2.0; }
-	// void	set_shared( int val )
-	//	{ shared = val; }
-	
-	const Point	&p1() const
-		{ return point1; } 
-	const Point 	&p2() const
-		{ return point2; }	
+    Edge (const Point & p1, const Point & p2)	//, int share = -1 )
+  : point1 (p1), point2 (p2)	//, shared( share )
+  {
+  }
+  Point middle () const
+  {
+    return (point1 + point2) / 2.0;
+  }
+  // void set_shared( int val )
+  //      { shared = val; }
+
+  const Point & p1 () const
+  {
+    return point1;
+  }
+  const Point & p2 () const
+  {
+    return point2;
+  }
 };
 
-#endif	/* PRIMITIVES_H */
+#endif /* PRIMITIVES_H */

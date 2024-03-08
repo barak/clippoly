@@ -38,19 +38,22 @@
 #ifdef __GNUG__
 #pragma interface
 #endif
-	
-enum LogicStates	{ UnKnown, True, False, TrueFalse };
+
+enum LogicStates
+{ UnKnown, True, False, TrueFalse };
 
 class PosAdder
 {
-	LogicStates		val;
+  LogicStates val;
 public:
-	PosAdder()
-		: val( UnKnown )
-		{ }
-	void			set( LogicStates boolean );
-	LogicStates		operator() () const
-					{ return val; }
+    PosAdder ():val (UnKnown)
+  {
+  }
+  void set (LogicStates boolean);
+  LogicStates operator () () const
+  {
+    return val;
+  }
 };
 
-#endif	/* POSADDER_H */
+#endif /* POSADDER_H */

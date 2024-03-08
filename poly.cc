@@ -55,526 +55,541 @@
 
 #include	"poly.h"
 #include	"posadder.h"
-//#include	"boundingbox.h"
-//#include	"poly_use.h"
+//#include      "boundingbox.h"
+//#include      "poly_use.h"
 
 #ifndef M_PI
-#define M_PI            3.14159265358979323846  /* pi */
+#define M_PI            3.14159265358979323846	/* pi */
 #endif
 
-PolyNode::PolyNode( const PolyNode &)
+PolyNode::PolyNode (const PolyNode &)
 {
   // Argh! use constructor which sets parent!
-  error_at_line(0, 0, __FILE__, __LINE__, "This should not happen");
+  error_at_line (0, 0, __FILE__, __LINE__, "This should not happen");
 }
 
-PolyNode::PolyNode( const PolyNode &copy , const Poly *parent )
-    : p(copy.p), prev(0), _link(0), _parent_poly( parent), _edgestate( Unknown )
+PolyNode::PolyNode (const PolyNode & copy, const Poly *parent):
+p (copy.p),
+prev (0),
+_link (0),
+_parent_poly (parent),
+_edgestate (Unknown)
 {
-	if (copy.next)
-	  next = new PolyNode( *copy.next, parent );
-	else
-		next = 0;
+  if (copy.next)
+    next = new PolyNode (*copy.next, parent);
+  else
+    next = 0;
 }
 
-PolyNode::~PolyNode()
+PolyNode::~PolyNode ()
 {
-	if (next)
-		delete next;
+  if (next)
+    delete next;
 }
 
 const Poly *
-PolyNode::parent_poly() const
+PolyNode::parent_poly () const
 {
-	assert(_parent_poly != 0);
-	
-	return _parent_poly;
+  assert (_parent_poly != 0);
+
+  return _parent_poly;
 }
 
-NodePEdge::NodePEdge( const DirPolyIter &dpi )
+NodePEdge::NodePEdge (const DirPolyIter & dpi)
 {
-	const PolyNode	*node = dpi.node(),
-					*link = node->link();
-	
-	if (link)
-		if (link < node)
-			n1 = link;
-		else
-			n1 = node;
-	else
-		n1 = node;
+  const PolyNode *node = dpi.node (), *link = node->link ();
 
-	node = dpi.nextnode();
-	link = node->link();
-	
-	if (link)
-		if (link < node)
-			n2 = link;
-		else
-			n2 = node;
-	else
-		n2 = node;
-}
+  if (link)
+    if (link < node)
+      n1 = link;
+    else
+      n1 = node;
+  else
+    n1 = node;
 
-void
-Poly::make_prev() const
-{
-	PolyIter	iter(*(Poly *)this);
-	PolyNode	*last = 0;
-	
-	while(iter())
-	{
-		iter.node()->prev = last;
-		last = iter.node();
-	}
-	
-	((Poly *)this)->prev = last;
-}
+  node = dpi.nextnode ();
+  link = node->link ();
 
-const PolyNode *
-Poly::nextnode(const PolyNode *node) const
-{
-	if (node->next)
-		return node->next;
-
-	return list;
-}
-
-const PolyNode *
-Poly::prevnode(const PolyNode *node) const
-{
-	assert(prev);
-	
-	if (node->prev)
-		return node->prev;
-
-	return prev;
+  if (link)
+    if (link < node)
+      n2 = link;
+    else
+      n2 = node;
+  else
+    n2 = node;
 }
 
 void
-Poly::add( const Point &p, const Poly *parent, EdgeState edgestate )
+Poly::make_prev () const
 {
-	if (!prev)
-		make_prev();
-		
-	PolyNode	*new_node = new PolyNode( p, parent, edgestate );
-	
-	new_node->prev = prev;
-	new_node->next = 0;
-	
-	assert( prev->next == 0 );
-	prev->next = new_node;
-	prev = new_node;
+  PolyIter iter (*(Poly *) this);
+  PolyNode *last = 0;
+
+  while (iter ())
+    {
+      iter.node ()->prev = last;
+      last = iter.node ();
+    }
+
+  ((Poly *) this)->prev = last;
 }
-	
-Orientation
-Poly::orientation() const
+
+const PolyNode *
+Poly::nextnode (const PolyNode *node) const
 {
-	if (!prev)
-		make_prev();
-		
-	ConstPolyIter	iter(*this);
-	
-	double	tot_angle = 0;
-	double	area = 0;
-	Point	first;
-	int	first_flag = 1;
-	
-	while(iter())
+  if (node->next)
+    return node->next;
+
+  return list;
+}
+
+const PolyNode *
+Poly::prevnode (const PolyNode *node) const
+{
+  assert (prev);
+
+  if (node->prev)
+    return node->prev;
+
+  return prev;
+}
+
+void
+Poly::add (const Point & p, const Poly *parent, EdgeState edgestate)
+{
+  if (!prev)
+    make_prev ();
+
+  PolyNode *new_node = new PolyNode (p, parent, edgestate);
+
+  new_node->prev = prev;
+  new_node->next = 0;
+
+  assert (prev->next == 0);
+  prev->next = new_node;
+  prev = new_node;
+}
+
+Orientation Poly::orientation ()const
+{
+  if (!prev)
+    make_prev ();
+
+  ConstPolyIter
+  iter (*this);
+
+  double
+    tot_angle = 0;
+  double
+    area = 0;
+  Point
+    first;
+  int
+    first_flag = 1;
+
+  while (iter ())
+    {
+      tot_angle += angle (iter.prevpoint (), iter.point (),
+			  iter.nextpoint ()) - M_PI;
+      if (first_flag)
 	{
-		tot_angle += angle( iter.prevpoint(), iter.point(), 
-						iter.nextpoint() ) - M_PI;
-		if (first_flag)
-		{
-			first_flag = 0;
-			first = iter.point();
-			continue;
-		}
-		// Point	&p1 = iter.point(), &p2 = iter.nextpoint();
-		// NOTE: last step in iter also is not needed!
-		Point	p1 = iter.point() - first, 
-			p2 = iter.nextpoint() - first;
-		area += p1.x() * p2.y() - p2.x() * p1.y();
+	  first_flag = 0;
+	  first = iter.point ();
+	  continue;
 	}
-	area /= 2.0;
-	
-	assert(area != 0);
-	assert((area * tot_angle > 0) ||
-	       (fabs(fabs(tot_angle) - M_PI * 2.0) > 0.0001));
+      // Point        &p1 = iter.point(), &p2 = iter.nextpoint();
+      // NOTE: last step in iter also is not needed!
+      Point
+	p1 = iter.point () - first, p2 = iter.nextpoint () - first;
+      area += p1.x () * p2.y () - p2.x () * p1.y ();
+    }
+  area /= 2.0;
+
+  assert (area != 0);
+  assert ((area * tot_angle > 0) ||
+	  (fabs (fabs (tot_angle) - M_PI * 2.0) > 0.0001));
 
 #ifndef notdef
-	if (area < 0)
-		return ClockWise;
-	else
-		return CounterClockWise;
+  if (area < 0)
+    return ClockWise;
+  else
+    return CounterClockWise;
 #else
-	if (tot_angle < 0)
-	{
-		assert(tot_angle < -M_PI * 1.9999);
-		assert(tot_angle > -M_PI * 2.0001);
+  if (tot_angle < 0)
+    {
+      assert (tot_angle < -M_PI * 1.9999);
+      assert (tot_angle > -M_PI * 2.0001);
 
-		return ClockWise;
-	} else {
-		assert(tot_angle > M_PI * 1.9999);
-		assert(tot_angle < M_PI * 2.0001);
+      return ClockWise;
+    }
+  else
+    {
+      assert (tot_angle > M_PI * 1.9999);
+      assert (tot_angle < M_PI * 2.0001);
 
-		return CounterClockWise;
-	}
+      return CounterClockWise;
+    }
 #endif
 }
 
 
 double
-Poly::area() const
+Poly::area () const
 {
-	if (!prev)
-		make_prev();
-		
-	ConstPolyIter	iter(*this);
-	
-	double	ret = 0;
-	
-	Point	first;
-	int	first_flag = 1;
-	
-	while(iter())
-	{
-		if (first_flag)
-		{
-			first_flag = 0;
-			first = iter.point();
-			continue;
-		}
-		Point	p1 = iter.point() - first, 
-			p2 = iter.nextpoint() - first;
-		ret += p1.x() * p2.y() - p2.x() * p1.y();
-	}
+  if (!prev)
+    make_prev ();
 
-	return ret / 2.0;
+  ConstPolyIter iter (*this);
+
+  double ret = 0;
+
+  Point first;
+  int first_flag = 1;
+
+  while (iter ())
+    {
+      if (first_flag)
+	{
+	  first_flag = 0;
+	  first = iter.point ();
+	  continue;
+	}
+      Point p1 = iter.point () - first, p2 = iter.nextpoint () - first;
+      ret += p1.x () * p2.y () - p2.x () * p1.y ();
+    }
+
+  return ret / 2.0;
 }
 
 void
-Poly::revert()
+Poly::revert ()
 {
   if (!prev)
-    make_prev();
-  
-  PolyNode	*next;
-  
-  for(PolyNode *cur = list; cur != 0; cur = next)
-  {
-    next = cur->next;
-    cur->next = cur->prev;
-    cur->prev = next;
-  }
-  
-  PolyNode	*tmp = prev;
+    make_prev ();
+
+  PolyNode *next;
+
+  for (PolyNode * cur = list; cur != 0; cur = next)
+    {
+      next = cur->next;
+      cur->next = cur->prev;
+      cur->prev = next;
+    }
+
+  PolyNode *tmp = prev;
   prev = list;
   list = tmp;
-  
+
   // warning("NYI %s %d\n", __FILE__, __LINE__);
 }
 
 int
-intersect_right( const Edge &edge, const Point &point )
+intersect_right (const Edge & edge, const Point & point)
 {
-	if ((edge.p1().y() >= point.y()) && (edge.p2().y() >= point.y()))
-		return 0;
-	if ((edge.p1().y() < point.y()) && (edge.p2().y() < point.y()))
-		return 0;
-		
-	if (edge.p1().y() == edge.p2().y())
-		return 0;		// Tricky! This could give errors!
-		
-	double x = (point.y() - edge.p1().y()) * 
-		(edge.p2().x() - edge.p1().x()) / (edge.p2().y() - edge.p1().y())
-		+ edge.p1().x();
-		
-	if (x > point.x())	// Tricky! Is >= better?
-		return 1;
-	return 0;
+  if ((edge.p1 ().y () >= point.y ()) && (edge.p2 ().y () >= point.y ()))
+    return 0;
+  if ((edge.p1 ().y () < point.y ()) && (edge.p2 ().y () < point.y ()))
+    return 0;
+
+  if (edge.p1 ().y () == edge.p2 ().y ())
+    return 0;			// Tricky! This could give errors!
+
+  double x = (point.y () - edge.p1 ().y ()) *
+    (edge.p2 ().x () - edge.p1 ().x ()) / (edge.p2 ().y () - edge.p1 ().y ())
+    + edge.p1 ().x ();
+
+  if (x > point.x ())		// Tricky! Is >= better?
+    return 1;
+  return 0;
 }
 
 // is point inside *this?
-int	
-Poly::has_point( const Point &point ) const
+int
+Poly::has_point (const Point & point) const
 {
-	PolyIter	iter( *(Poly *)((void *)this) );
-	int		cnt = 0;
-	
-	while(iter())
-		cnt += intersect_right( iter.edge(), point );
-		
-	return cnt % 2; 
+  PolyIter iter (*(Poly *) ((void *) this));
+  int cnt = 0;
+
+  while (iter ())
+    cnt += intersect_right (iter.edge (), point);
+
+  return cnt % 2;
 }
 
 double
-Poly::xmin() const
+Poly::xmin () const
 {
-	ConstPolyIter	iter(*this);
-	
-	iter();
-	double	res = iter.point().x();
+  ConstPolyIter iter (*this);
 
-	while(iter())
-	{
-		double	c = iter.point().x();
-		if (c < res)
-			res = c;
-	}
-	
-	return res;
+  iter ();
+  double res = iter.point ().x ();
+
+  while (iter ())
+    {
+      double c = iter.point ().x ();
+      if (c < res)
+	res = c;
+    }
+
+  return res;
 }
 
 double
-Poly::xmax() const
+Poly::xmax () const
 {
-	ConstPolyIter	iter(*this);
-	
-	iter();
-	double	res = iter.point().x();
+  ConstPolyIter iter (*this);
 
-	while(iter())
-	{
-		double	c = iter.point().x();
-		if (c > res)
-			res = c;
-	}
-	
-	return res;
+  iter ();
+  double res = iter.point ().x ();
+
+  while (iter ())
+    {
+      double c = iter.point ().x ();
+      if (c > res)
+	res = c;
+    }
+
+  return res;
 }
 
 double
-Poly::ymin() const
+Poly::ymin () const
 {
-	ConstPolyIter	iter(*this);
-	
-	iter();
-	double	res = iter.point().y();
+  ConstPolyIter iter (*this);
 
-	while(iter())
-	{
-		double	c = iter.point().y();
-		if (c < res)
-			res = c;
-	}
-	
-	return res;
+  iter ();
+  double res = iter.point ().y ();
+
+  while (iter ())
+    {
+      double c = iter.point ().y ();
+      if (c < res)
+	res = c;
+    }
+
+  return res;
 }
 
 double
-Poly::ymax() const
+Poly::ymax () const
 {
-	ConstPolyIter	iter(*this);
-	
-	iter();
-	double	res = iter.point().y();
+  ConstPolyIter iter (*this);
 
-	while(iter())
-	{
-		double	c = iter.point().y();
-		if (c > res)
-			res = c;
-	}
-	
-	return res;
+  iter ();
+  double res = iter.point ().y ();
+
+  while (iter ())
+    {
+      double c = iter.point ().y ();
+      if (c > res)
+	res = c;
+    }
+
+  return res;
 }
 
-PolyIter::PolyIter( Poly &_poly )
-	: poly(_poly), app_next(poly.list)
-{ 
+PolyIter::PolyIter (Poly & _poly):poly (_poly), app_next (poly.list)
+{
 }
 
 int
-PolyIter::operator() ()
+PolyIter::operator () ()
 {
-	cur = app_next;
-	
-	if (cur != 0)
+  cur = app_next;
+
+  if (cur != 0)
+    {
+      app_next = cur->next;
+      return 1;
+    }
+  else
+    return 0;
+}
+
+PolyNode *
+PolyIter::add (const Point & point, int &new_point)
+{
+  PolyIter chk (poly);
+
+  while (chk ())
+    if (point == chk.node ()->point ())
+      return chk.node ();
+
+  if (point == cur->p)
+    error_at_line (0, 0, __FILE__, __LINE__, "This should not happen");
+  // return cur;
+
+  double d = len (cur->p - point);
+  assert (d <= len (cur->p - AppNext ()->p));
+  PolyNode *last = cur, *p = next (cur);
+
+  for (; d > len (cur->p - p->p); last = p, p = next (p))
+    ;				// Go to next node, as next node is on same side as current node
+
+  if (p->p == point)
+    error_at_line (0, 0, __FILE__, __LINE__, "This should not happen");
+  // return p;
+
+  p = new PolyNode (point, &poly, last->next);
+  new_point++;
+  last->next = p;
+  if (p->next)
+    p->next->prev = p;
+  else if (poly.prev)
+    {
+      assert (poly.prev == last);
+      poly.prev = p;
+    }
+  p->prev = last;
+
+  return p;
+}
+
+int
+PolyIter::add_point (PolyIter & a, PolyIter & b, const Point & p)
+{
+  int res = 0;
+
+  PolyNode *node_a = a.add (p, res);
+  PolyNode *node_b = b.add (p, res);
+
+  assert ((node_a->_link == 0) || (node_a->_link == node_b));
+  node_a->_link = node_b;
+  assert ((node_b->_link == 0) || (node_b->_link == node_a));
+  node_b->_link = node_a;
+
+  return res;
+}
+
+ConstPolyIter::ConstPolyIter (const Poly & _poly):
+polyiter (*(Poly *)(void *) &_poly)
+{
+}
+
+LogicStates ConstPolyIter::parent (const Poly & poly)
+{
+  switch (node ()->edgestate ())
+    {
+    case None:
+      if (&poly == node ()->parent_poly ())
+	return True;
+      else
 	{
-		app_next = cur->next;
-		return 1;
-	} else
-		return 0;
-}
-
-PolyNode *	
-PolyIter::add( const Point &point, int &new_point )
-{
-  PolyIter	chk(poly);
-  
-  while(chk())
-    if (point == chk.node()->point())
-      return chk.node();
-  
-	if (point == cur->p)
-	  error_at_line(0, 0, __FILE__, __LINE__, "This should not happen");
-		// return cur;
-		
-	double	d = len( cur->p - point );
-	assert( d <= len( cur->p - AppNext()->p ) );
-	PolyNode	*last = cur, *p = next( cur );
-	
-	for(  ;d > len( cur->p - p->p ); last = p, p = next( p ))
-	  ;	// Go to next node, as next node is on same side as current node
-
-	if (p->p == point)
-	  error_at_line(0, 0, __FILE__, __LINE__, "This should not happen");
-		// return p;
-			
-	p = new PolyNode( point, &poly, last->next );
-	new_point++;
-	last->next = p;
-	if (p->next)
-		p->next->prev = p;
-	else if (poly.prev)
-	{
-		assert(poly.prev == last);
-		poly.prev = p;
+	  if (node ()->link () != 0)
+	    return UnKnown;	// Prob. True
+	  else
+	    return False;
 	}
-	p->prev = last;
-	
-	return p;
-}
-
-int	
-PolyIter::add_point( PolyIter &a, PolyIter &b, const Point &p )
-{
-  int	res = 0;
-  
-	PolyNode	*node_a = a.add( p, res );
-	PolyNode	*node_b = b.add( p, res );
-
-	assert((node_a->_link == 0) || (node_a->_link == node_b));	
-	node_a->_link = node_b;
-	assert((node_b->_link == 0) || (node_b->_link == node_a));	
-	node_b->_link = node_a;
-	
-	return res;
-}
-
-ConstPolyIter::ConstPolyIter( const Poly &_poly )
-	: polyiter( *(Poly *)(void *)&_poly )
-{ 
-}
-
-LogicStates
-ConstPolyIter::parent(const Poly &poly)
-{
-	switch(node()->edgestate())
-	{case None:
-		if (&poly == node()->parent_poly())
-			return True;
-		else
-		  {
-		    if (node()->link() != 0)
-		      return UnKnown; // Prob. True
-		    else
-		      return False;
-		  }
-	case Shared:
-		return UnKnown;
-	case Inside:
-		if (&poly == node()->parent_poly())
-			return UnKnown;
-		else {
-		  if (node()->link() != 0)
-		    return UnKnown;
-		  else
-		    return True;
-		}
-	case Unknown:
-	default:
-		error_at_line(1, 0, __FILE__, __LINE__, "This should not happen");
-	}
-	
+    case Shared:
+      return UnKnown;
+    case Inside:
+      if (&poly == node ()->parent_poly ())
 	return UnKnown;
+      else
+	{
+	  if (node ()->link () != 0)
+	    return UnKnown;
+	  else
+	    return True;
+	}
+    case Unknown:
+    default:
+      error_at_line (1, 0, __FILE__, __LINE__, "This should not happen");
+    }
+
+  return UnKnown;
 }
 
-DirPolyIter::DirPolyIter( const Poly &poly, const PolyNode *node,
-								const Poly &link, IterDirection dir )
-	: _poly(poly), _linkpoly(link), _dir(dir), _node(node)
-{ 
-	if (! _poly.prev)
-		_poly.make_prev();
-	if (!_linkpoly.prev)
-		_linkpoly.make_prev();
+DirPolyIter::DirPolyIter (const Poly & poly, const PolyNode *node,
+			  const Poly & link, IterDirection dir):
+_poly (poly),
+_linkpoly (link),
+_dir (dir),
+_node (node)
+{
+  if (!_poly.prev)
+    _poly.make_prev ();
+  if (!_linkpoly.prev)
+    _linkpoly.make_prev ();
 }
 
-DirPolyIter::DirPolyIter( const DirPolyIter &dpi, IterDirection dir )
-	: _poly(dpi.linkpoly()), _linkpoly( dpi._poly ), _dir(dir), 
-	  _node( dpi.node()->link() )
-{ 
-	if (! _poly.prev)
-		_poly.make_prev();
-	if (!_linkpoly.prev)
-		_linkpoly.make_prev();
+DirPolyIter::DirPolyIter (const DirPolyIter & dpi, IterDirection dir):
+_poly (dpi.linkpoly ()),
+_linkpoly (dpi._poly),
+_dir (dir),
+_node (dpi.node ()->link ())
+{
+  if (!_poly.prev)
+    _poly.make_prev ();
+  if (!_linkpoly.prev)
+    _linkpoly.make_prev ();
 }
 
 const PolyNode *
-DirPolyIter::nextnode() const
+DirPolyIter::nextnode () const
 {
-	switch(dir())
-	{case FORWARD:
-		return _poly.nextnode(node());
-	case BACKWARD:
-		return  _poly.prevnode(node());
-	default:
-		assert(0);
-	}
-	return 0;	// Should not be reached
+  switch (dir ())
+    {
+    case FORWARD:
+      return _poly.nextnode (node ());
+    case BACKWARD:
+      return _poly.prevnode (node ());
+    default:
+      assert (0);
+    }
+  return 0;			// Should not be reached
 }
 
 const PolyNode *
-DirPolyIter::prevnode() const
+DirPolyIter::prevnode () const
 {
-	switch(dir())
-	{case FORWARD:
-		return _poly.prevnode(node());
-	case BACKWARD:
-		return  _poly.nextnode(node());
-	default:
-		assert(0);
-	}
-	return 0;	// Should not be reached
+  switch (dir ())
+    {
+    case FORWARD:
+      return _poly.prevnode (node ());
+    case BACKWARD:
+      return _poly.nextnode (node ());
+    default:
+      assert (0);
+    }
+  return 0;			// Should not be reached
 }
 
-EdgeState
-DirPolyIter::edgestate() const
+EdgeState DirPolyIter::edgestate ()const
 {
-	if (dir() == FORWARD)
-		return node()->edgestate();
-		
-	return nextnode()->edgestate();
+  if (dir () == FORWARD)
+    return node ()->edgestate ();
+
+  return nextnode ()->edgestate ();
 }
 
 #ifdef notdef
 int
-Poly::intersect_table( int hor, Vec &intersection_table, double h )
+Poly::intersect_table (int hor, Vec & intersection_table, double h)
 {
-	ConstPolyIter	iter(*this);
-	iter();
-	BoundingBox	bbox(iter.point());
-	while(iter())
-		bbox.add(iter.point());
+  ConstPolyIter iter (*this);
+  iter ();
+  BoundingBox bbox (iter.point ());
+  while (iter ())
+    bbox.add (iter.point ());
 
-	Point	left( hor ? bbox.xmin()-1 : 0, hor ? 0 : bbox.ymin()-1 ), 
-			right( hor ? bbox.xmax()+1 : 0, hor ? 0 : bbox.ymax()+1 );
-	
-	if (hor)
-		left.y() = right.y() = h;
-	else
-		left.x() = right.x() = h;
+  Point left (hor ? bbox.xmin () - 1 : 0, hor ? 0 : bbox.ymin () - 1),
+    right (hor ? bbox.xmax () + 1 : 0, hor ? 0 : bbox.ymax () + 1);
 
-	int		nr_inters;
-	
-	if (hor)
-		create_intersection_table(*this, left, right, 
-						nr_inters, intersection_table, x, y );
-	else
-		create_intersection_table(*this, left, right, 
-						nr_inters, intersection_table, y, x );
-	
-	return nr_inters;
+  if (hor)
+    left.y () = right.y () = h;
+  else
+    left.x () = right.x () = h;
+
+  int nr_inters;
+
+  if (hor)
+    create_intersection_table (*this, left, right,
+			       nr_inters, intersection_table, x, y);
+  else
+    create_intersection_table (*this, left, right,
+			       nr_inters, intersection_table, y, x);
+
+  return nr_inters;
 }
 #endif

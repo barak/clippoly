@@ -40,49 +40,51 @@
 #include	<cmath>
 
 #ifndef M_PI
-#define M_PI            3.14159265358979323846  /* pi */
+#define M_PI            3.14159265358979323846	/* pi */
 #endif
 
 #include	<error.h>
 
 #include	"primitives.h"
 
-const int PointList::def_len = 16;
+const int
+  PointList::def_len = 16;
 
-PointList::PointList( int nr )
-	: len( nr ), cur( 0 ), points( new Point[ nr ] )
+PointList::PointList (int nr):
+len (nr),
+cur (0),
+points (new Point[nr])
 {
-	assert( nr > 0 );
+  assert (nr > 0);
 }
 
-PointList::~PointList()
+PointList::~PointList ()
 {
-	delete [] points;
+  delete[]points;
 }
 
 void
-PointList::add( const Point &add )
+PointList::add (const Point & add)
 {
-	if (cur + 1 >= len)
-		error_at_line(0, 0, __FILE__, __LINE__,
-			      "PointList::add: Array too short (%d)", len);
-	
-	points[cur] = add;
+  if (cur + 1 >= len)
+    error_at_line (0, 0, __FILE__, __LINE__,
+		   "PointList::add: Array too short (%d)", len);
+
+  points[cur] = add;
 }
 
 double
-angle(const Point &p1, const Point &p2, const Point &p3)
+angle (const Point & p1, const Point & p2, const Point & p3)
 {
-	Point	d1 = p1 - p2, d2 = p3 - p2;
-	
-	double	res = atan( d2 ) - atan( d1 );
-	
-	if (res < 0)
-		res += M_PI * 2;
+  Point d1 = p1 - p2, d2 = p3 - p2;
 
-	assert( res >= 0 );
-	assert( res <= M_PI * 2 );
-			
-	return res;
+  double res = atan (d2) - atan (d1);
+
+  if (res < 0)
+    res += M_PI * 2;
+
+  assert (res >= 0);
+  assert (res <= M_PI * 2);
+
+  return res;
 }
-

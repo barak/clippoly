@@ -40,148 +40,143 @@
 #include	<posadder.h>
 
 #include	<graphmat.h>
-//#include	"poly3node.h"
-//#include	"poly3.h"
-//#include	"poly2.h"
+//#include      "poly3node.h"
+//#include      "poly3.h"
+//#include      "poly2.h"
 
 #include	"poly_io.h"
 
 using namespace std;
 
-Poly 	*
-read_poly( istream &in )
+Poly *
+read_poly (istream & in)
 {
-	Point	p;
-	
-	in >> p;
-	
-	Poly	*new_poly = new Poly( p );
-	
-	while( in >> p )
-		new_poly->add( p );
+  Point p;
 
-	string	magic;
-	
-	in.clear();
-	in >> magic;
-	
-	if (magic != POLY_MAGIC)
-		error_at_line(1, 0, __FILE__, __LINE__,
-			      "read_poly: wrong magic (%s)", magic.c_str());
-		
-	return new_poly;
-}
-		
-istream &
-operator>>(istream &in, Point &p)
-{
-	double	x, y;
-	
-	in >> x >> y;
+  in >> p;
 
-	if (!in)	// Failure?
-		return in;
-	
-	p = Point(x,y);
+  Poly *new_poly = new Poly (p);
 
-	return in;
+  while (in >> p)
+    new_poly->add (p);
+
+  string magic;
+
+  in.clear ();
+  in >> magic;
+
+  if (magic != POLY_MAGIC)
+    error_at_line (1, 0, __FILE__, __LINE__,
+		   "read_poly: wrong magic (%s)", magic.c_str ());
+
+  return new_poly;
 }
 
-std::ostream	&
-operator<<(std::ostream &out, const PolyPList &pl)
+istream & operator>> (istream & in, Point & p)
 {
-	PolyPListIter	iter(pl);
-	
-	while(iter())
-		out << *iter.val();
-		
-	return out;
+  double x, y;
+
+  in >> x >> y;
+
+  if (!in)			// Failure?
+    return in;
+
+  p = Point (x, y);
+
+  return in;
 }
 
-std::ostream &
-operator<<(std::ostream &out, const Poly &poly)
+std::ostream & operator<< (std::ostream & out, const PolyPList & pl)
 {
-	ConstPolyIter	iter(poly);
-	
-	while(iter())
-		out << (iter.point());
+  PolyPListIter iter (pl);
 
-	out << POLY_MAGIC << endl;
-			
-	return out;
+  while (iter ())
+    out << *iter.val ();
+
+  return out;
 }
 
-std::ostream &
-operator<<(std::ostream &out, const PolyNode &poly)
+std::ostream & operator<< (std::ostream & out, const Poly & poly)
 {
-	out << poly.p << "next: " << poly.next << " prev: " << poly.prev 
-		<< " link: " << poly._link << " state: " 
-		<< poly.edgestate() 
-		<< " parent: " << (void *) poly._parent_poly << endl;
-	
-	return out;
+  ConstPolyIter iter (poly);
+
+  while (iter ())
+    out << (iter.point ());
+
+  out << POLY_MAGIC << endl;
+
+  return out;
 }
 
-std::ostream &
-operator<<(std::ostream &out, const Point &p)
+std::ostream & operator<< (std::ostream & out, const PolyNode & poly)
 {
-	out << p.x() << '\t' << p.y() << endl;
-	
-	return out;
+  out << poly.p << "next: " << poly.next << " prev: " << poly.prev
+    << " link: " << poly._link << " state: "
+    << poly.edgestate () << " parent: " << (void *) poly._parent_poly << endl;
+
+  return out;
 }
 
-std::ostream &
-operator<<(std::ostream &out, enum LogicStates state)
+std::ostream & operator<< (std::ostream & out, const Point & p)
 {
-	switch(state)
-	{case UnKnown:
-		out << "UnKnown";
-		break;
-	case True:
-		out << "True";
-		break;
-	case False:
-		out << "False";
-		break;
-	case TrueFalse:
-		out << "TrueFalse";
-		break;
-	default:
-		error_at_line(0, 0, __FILE__, __LINE__, "Unknown value in LogicStates: %d", (int)state);
-		out << (int)state;
-	}
-	
-	return out;
+  out << p.x () << '\t' << p.y () << endl;
+
+  return out;
 }
 
-std::ostream &
-operator<<(std::ostream &out, enum EdgeState state)
+std::ostream & operator<< (std::ostream & out, enum LogicStates state)
 {
-	switch(state)
-	{case Unknown:
-		out << "Unknown";
-		break;
-	case None:
-		out << "None";
-		break;
-	case Shared:
-		out << "Shared";
-		break;
-	case Inside:
-		out << "Inside";
-		break;
-	default:
-		error_at_line(0, 0, __FILE__, __LINE__, "Unknown value in LogicStates: %d", (int)state);
-		out << (int)state;
-	}
-	
-	return out;
+  switch (state)
+    {
+    case UnKnown:
+      out << "UnKnown";
+      break;
+    case True:
+      out << "True";
+      break;
+    case False:
+      out << "False";
+      break;
+    case TrueFalse:
+      out << "TrueFalse";
+      break;
+    default:
+      error_at_line (0, 0, __FILE__, __LINE__,
+		     "Unknown value in LogicStates: %d", (int) state);
+      out << (int) state;
+    }
+
+  return out;
 }
 
-std::ostream &
-operator<<(std::ostream&out, const hvec3_t &v)
+std::ostream & operator<< (std::ostream & out, enum EdgeState state)
 {
-	out << v_x(v) << ", " << v_y(v) << ", " << v_z(v) << ", " << v_w(v);
+  switch (state)
+    {
+    case Unknown:
+      out << "Unknown";
+      break;
+    case None:
+      out << "None";
+      break;
+    case Shared:
+      out << "Shared";
+      break;
+    case Inside:
+      out << "Inside";
+      break;
+    default:
+      error_at_line (0, 0, __FILE__, __LINE__,
+		     "Unknown value in LogicStates: %d", (int) state);
+      out << (int) state;
+    }
 
-	return out;
-} 
+  return out;
+}
+
+std::ostream & operator<< (std::ostream & out, const hvec3_t & v)
+{
+  out << v_x (v) << ", " << v_y (v) << ", " << v_z (v) << ", " << v_w (v);
+
+  return out;
+}
