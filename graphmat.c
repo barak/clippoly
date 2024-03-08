@@ -401,7 +401,7 @@ reduce_row2 (m_input, m_result, rownr)
   double factor;
 
   if (m_elem (*m_input, rownr, rownr) == 0.0)
-    /* interchange this row with another row to  
+    /* interchange this row with another row to
        bring a nonzero entry in the main diagonal */
     interchangerow2 (m_input, m_result, rownr);
 
@@ -943,7 +943,7 @@ reduce_row3 (m_input, m_result, rownr)
   double factor;
 
   if (m_elem (*m_input, rownr, rownr) == 0.0)
-    /* interchange this row with another row to  
+    /* interchange this row with another row to
        bring a nonzero entry in the main diagonal */
     interchangerow3 (m_input, m_result, rownr);
 

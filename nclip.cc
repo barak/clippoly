@@ -173,7 +173,7 @@ label_shared (Poly & a, const Poly & b)
       if ((b1 = a_iter.node ()->link ()) &&
 	  (b2 = a_iter.nextnode ()->link ()))
 	{
-	  // Seems shared -- but check 
+	  // Seems shared -- but check
 	  // that b1 and b2 are also connected!
 	  if ((b.nextnode (b1) == b2) || (b.nextnode (b2) == b1))
 	    {
@@ -308,7 +308,7 @@ make_poly (const Point & start_point, const Point & point,
       assert ((other_angle != 0) ||
 	      (inp2 != 0) || (follow.linknextpoint () == point));
       //assert((cur_angle == other_angle) ||
-      //       ((((cur_angle - other_angle) > 0)) 
+      //       ((((cur_angle - other_angle) > 0))
       //      ^ condition));
 #ifdef notdef
       if ((other_angle != 0) && (other_angle == cur_angle ?
@@ -471,7 +471,7 @@ assign_polys (const Poly & a, const Poly & b, const PolyPList & in_list,
       else if (a_parent () == True)
 	a_min_b.add (poly);
       else if (a_parent () == UnKnown && b_parent () == UnKnown)
-	// a and b had all sides shared -- 
+	// a and b had all sides shared --
 	// so probably they are similar
 	a_and_b.add (poly);
       else
@@ -488,7 +488,7 @@ assign_polys (const Poly & a, const Poly & b, const PolyPList & in_list,
       else if (a_parent () == True)
 	a_min_b.add (poly);
       // else if (a_parent() == UnKnown && b_parent() == UnKnown)
-      //      // a and b had all sides shared -- 
+      //      // a and b had all sides shared --
       //      // so probably they are similar
       //      a_and_b.add(poly);
       else
@@ -505,7 +505,7 @@ assign_polys (const Poly & a, const Poly & b, const PolyPList & in_list,
 void
 poly_min_poly (const Poly & a, const Poly & b, PolyPList & a_min_b)
 {
-  // b is inside a. 
+  // b is inside a.
   // This means we have to split a, as we don't allow polygons with holes.
   // Split a in three parts: left of b, b and right of b
   // Split over line top from b, bottom from b.
@@ -637,7 +637,7 @@ clip_poly (const Poly & a_org, const Poly & b_org,
 
   if (nr_intersect == 0)
     {
-      // Two case are possible: a and b are disjunct, 
+      // Two case are possible: a and b are disjunct,
       // or one is inside the other.
       if (a.has_point (b.firstpoint ()))
 	{

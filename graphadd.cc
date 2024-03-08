@@ -202,7 +202,7 @@ v_inters2 (const hvec2_t & p1,
   deel = rpx * rqy - rpy * rqx;
 // every value below EPSILON is considered as being 0. Hence, we do not intro-
 // duce numerical inaccuracies
-  // if (deel == 0) // 
+  // if (deel == 0) //
   //if(Dabs(deel)<EPSILON)        /* parallel */
   if (ChkZero (deel))		/* parallel */
     {
@@ -249,8 +249,8 @@ v_inters2 (const hvec2_t & p1,
       double inpr = v_x (q1p1) * v_y (q1q2) - v_y (q1p1) * v_x (q1q2);
 
       // If this product is not zero then p1 is not on q1-q2!
-      // if (inpr != 0) // 
-      //if (!(Dabs(inpr)<EPSILON))    
+      // if (inpr != 0) //
+      //if (!(Dabs(inpr)<EPSILON))
       if (!ChkZero (inpr))
 	return 0;
 #endif

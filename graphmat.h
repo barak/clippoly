@@ -92,7 +92,7 @@
 #define gm_NEW(type, ptr, func)  \
 		(((gm_dummy = malloc(sizeof(type))) == NULL) ? \
 	        ((type *)gm_error(NOMEM, func)) : \
-		(type *)gm_dummy)  
+		(type *)gm_dummy)
 */
 
 typedef enum

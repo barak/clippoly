@@ -328,7 +328,7 @@ public:
     DirPolyIter (const Poly & poly, const PolyNode * node,
 		 const Poly & link, IterDirection dir);
 
-  // Continue on link  
+  // Continue on link
     DirPolyIter (const DirPolyIter & dpi, IterDirection dir);
 
   void next ()
