@@ -2,7 +2,7 @@ Source: clippoly
 Section: libs
 Priority: optional
 Maintainer: Barak A. Pearlmutter <bap@debian.org>
-Build-Depends: dpkg-dev (>= 1.22.5), debhelper-compat (= 13), autoconf-archive, pkg-config
+Build-Depends: dpkg-dev (>= 1.22.5), debhelper-compat (= 13), autoconf-archive, pkgconf | pkg-config
 Standards-Version: 4.6.2
 Rules-Requires-Root: no
 Homepage: https://clippoly.sourceforge.net
