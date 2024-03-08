@@ -25,36 +25,46 @@
 #include	"poly_io.h"
 #include	"nclip.h"
 
-using namespace ::std;
+using
+  namespace::std;
 
 void
-clear(PolyPList &l)
+clear (PolyPList & l)
 {
-	PolyPListIter	i(l);
-	while(i())
-		delete i.val();
+  PolyPListIter
+  i (l);
+  while (i ())
+    delete
+      i.
+    val ();
 }
 
 int
-main(int, char *[])
+main (int, char *[])
 {
-	Poly	*a = read_poly(cin), *b = read_poly(cin);
-	PolyPList	a_min_b, b_min_a, a_and_b;
+  Poly *
+    a = read_poly (cin), *b = read_poly (cin);
+  PolyPList
+    a_min_b,
+    b_min_a,
+    a_and_b;
 
-	// printf("Area a %g b %g\n", a->area(), b->area());
+  // printf("Area a %g b %g\n", a->area(), b->area());
 
-	clip_poly( *a, *b, a_min_b, b_min_a, a_and_b );
+  clip_poly (*a, *b, a_min_b, b_min_a, a_and_b);
 
-	cout << "a_min_b:\n" << a_min_b;
-	cout << "b_min_a:\n" << b_min_a;
-	cout << "a_and_b:\n" << a_and_b;
+  cout << "a_min_b:\n" << a_min_b;
+  cout << "b_min_a:\n" << b_min_a;
+  cout << "a_and_b:\n" << a_and_b;
 
-	delete	a;
-	delete	b;
+  delete
+    a;
+  delete
+    b;
 
-	clear(a_min_b);
-	clear(b_min_a);
-	clear(a_and_b);
+  clear (a_min_b);
+  clear (b_min_a);
+  clear (a_and_b);
 
-	return 0;
+  return 0;
 }

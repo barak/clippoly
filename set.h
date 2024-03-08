@@ -44,203 +44,251 @@
 #ifdef __GNUG__
 #define	INLINE	inline
 #else
-#define	INLINE	// Nothing
+#define	INLINE			// Nothing
 // The CC with Irix 5.2 is too stupid for these inline's
 #endif
 #else
 #define	INLINE	inline
 #endif
 
-template <class T> class SetIter;
-template <class T> class RSetIter;
+template < class T > class SetIter;
+template < class T > class RSetIter;
 
-template <class T>
-class Set
+template < class T > class Set
 {
-	friend class	SetIter<T>;
-	
-	T			*data;
-	int			_len, used;
-	T			operator[](int cnt) const
-				{ return data[cnt]; }
-	void		operator=(const Set<T> &)	// Don't use it!
-	{ error_at_line(1, 0, __FILE__, __LINE__, "This should not happen"); }
-	void		_resize();
-	
+  friend class SetIter < T >;
+
+  T *data;
+  int _len, used;
+  T operator[] (int cnt) const
+  {
+    return data[cnt];
+  }
+  void operator= (const Set < T > &)	// Don't use it!
+  {
+    error_at_line (1, 0, __FILE__, __LINE__, "This should not happen");
+  }
+  void _resize ();
+
 public:
-	Set( int size = 64 )
-		: data( new T [size] ), _len(size), used(0)
-		{ }
-	~Set()
-		{	delete [] data; }
-	
-	int 		contains( T elem ) const 
-				{	return seek( elem ) >= 0; }
-	int			seek( T elem ) const
-				{	SetIter<T>	iter(*this);
-					while(iter())
-						if (iter.val() == elem)
-							return iter.cnt();
-					return -1;	}
-	void		add( T elem )
-				{	if (!contains(elem))
-					{	if (used + 1 >= _len)
-							_resize();
-						data[used] = elem;
-						used++; 	} }
-	void		del( T elem )
-			{	int	i = seek(elem);
-				if (i >= 0)
-				{	data[i] = data[used-1];
-					used--;	} }
-	int			empty() const
-				{	return used == 0; }
-	T			first()
-				{	assert(used > 0);
-					return data[0]; }
-	int			length() const
-				{	return used; }
+Set (int size = 64):data (new T[size]), _len (size), used (0)
+  {
+  }
+  ~Set ()
+  {
+    delete[]data;
+  }
+
+  int contains (T elem) const
+  {
+    return seek (elem) >= 0;
+  }
+  int seek (T elem) const
+  {
+    SetIter < T > iter (*this);
+    while (iter ())
+      if (iter.val () == elem)
+	return iter.cnt ();
+    return -1;
+  }
+  void add (T elem)
+  {
+    if (!contains (elem))
+      {
+	if (used + 1 >= _len)
+	  _resize ();
+	data[used] = elem;
+	used++;
+      }
+  }
+  void del (T elem)
+  {
+    int i = seek (elem);
+    if (i >= 0)
+      {
+	data[i] = data[used - 1];
+	used--;
+      }
+  }
+  int empty () const
+  {
+    return used == 0;
+  }
+  T first ()
+  {
+    assert (used > 0);
+    return data[0];
+  }
+  int length () const
+  {
+    return used;
+  }
 };
 
-template <class T> void
-Set<T>::_resize()
+template < class T > void Set < T >::_resize ()
 {
-	T	*new_data = new T [_len * 2];
-	for(int i = 0; i < _len; i++)
-		new_data[i] = data[i];
-	delete [] data;
-	data = new_data;
-	_len *= 2;
+  T *new_data = new T[_len * 2];
+  for (int i = 0; i < _len; i++)
+    new_data[i] = data[i];
+  delete[]data;
+  data = new_data;
+  _len *= 2;
 }
 
-template <class T>
-class SetIter
+template < class T > class SetIter
 {
-	int			_cnt;
-	const Set<T>	&_set;
-	const Set<T>	&set()
-					{ return _set; }
-				
+  int _cnt;
+  const Set < T > &_set;
+  const Set < T > &set ()
+  {
+    return _set;
+  }
+
 public:
-	SetIter( const Set<T> &set )
-		: _cnt(-1), _set(set)
-		{ }
-	
-	INLINE int			operator() ();
+  SetIter (const Set < T > &set):_cnt (-1), _set (set)
+  {
+  }
+
+  INLINE int operator () ();
 #ifdef notdef
-				{	if (cnt() >= (_set.used-1))
-						return 0;
-					_cnt++;
-					return 1;	}
+  {
+    if (cnt () >= (_set.used - 1))
+      return 0;
+    _cnt++;
+    return 1;
+  }
 #endif
-	inline T			val() const;
+  inline T val () const;
 #ifdef notdef
-				{ return _set[_cnt]; }
+  {
+    return _set[_cnt];
+  }
 #endif
-	int			cnt() const
-				{ return _cnt; }
+  int cnt () const
+  {
+    return _cnt;
+  }
 };
-	
-template <class T> INLINE int
-SetIter<T>::operator() ()
+
+template < class T > INLINE int SetIter < T >::operator () ()
 {
-	if (cnt() >= (_set.used-1))
-		return 0;
-	_cnt++;
-	return 1;
+  if (cnt () >= (_set.used - 1))
+    return 0;
+  _cnt++;
+  return 1;
 }
 
-template <class T> inline T
-  SetIter<T>::val() const
+template < class T > inline T SetIter < T >::val ()const
 {
   return _set[_cnt];
 }
 
 
-template <class T>
-class RSet
+template < class T > class RSet
 {
-	friend class	RSetIter<T>;
-	
-	T			*data;
-	int			_len, used;
-	T			&operator[](int cnt)
-				{ return data[cnt]; }
-	void		operator=(const RSet<T> &)	// Don't use it!
-	{ error_at_line(1, 0, __FILE__, __LINE__, "This should not happen"); }
-	void		_resize();
-	
+  friend class RSetIter < T >;
+
+  T *data;
+  int _len, used;
+  T & operator[](int cnt)
+  { return data[cnt];
+  }
+  void operator= (const RSet < T > &)	// Don't use it!
+  {
+    error_at_line (1, 0, __FILE__, __LINE__, "This should not happen");
+  }
+  void _resize ();
+
 public:
-	RSet( int size = 64 )
-		: data( new T [size] ), _len(size), used(0)
-		{ }
-	~RSet()
-		{	delete [] data; }
-	
-	int 		contains( const T &elem ) const 
-				{	return seek( elem ) >= 0; }
-	int			seek( const T &elem ) const
-				{	for(int i = 0; i < used; i++)
-						if (data[i] == elem)
-							return i;
-					return -1;	}
-	void		add( const T &elem )
-				{	if (!contains(elem))
-					{	if (used +1 >= _len)
-							_resize();
-						data[used] = elem;
-						used++; 	} }
-	int			length() const
-				{	return used; }
-	void		clear()
-			{	used = 0; }
+RSet (int size = 64):data (new T[size]), _len (size), used (0)
+  {
+  }
+  ~RSet ()
+  {
+    delete[]data;
+  }
+
+  int contains (const T & elem) const
+  {
+    return seek (elem) >= 0;
+  }
+  int seek (const T & elem) const
+  {
+    for (int i = 0; i < used; i++)
+      if (data[i] == elem)
+	return i;
+    return -1;
+  }
+  void add (const T & elem)
+  {
+    if (!contains (elem))
+      {
+	if (used + 1 >= _len)
+	  _resize ();
+	data[used] = elem;
+	used++;
+      }
+  }
+  int length () const
+  {
+    return used;
+  }
+  void clear ()
+  {
+    used = 0;
+  }
 };
 
-template <class T> void
-RSet<T>::_resize()
+template < class T > void RSet < T >::_resize ()
 {
-	T	*new_data = new T [_len * 2];
-	for(int i = 0; i < _len; i++)
-		new_data[i] = data[i];
-	delete [] data;
-	data = new_data;
-	_len *= 2;
+  T *new_data = new T[_len * 2];
+  for (int i = 0; i < _len; i++)
+    new_data[i] = data[i];
+  delete[]data;
+  data = new_data;
+  _len *= 2;
 }
 
-template <class T>
-class RSetIter
+template < class T > class RSetIter
 {
-	int			_cnt;
-	const RSet<T>	&_set;
-	const RSet<T>	&set()
-					{ return _set; }
-				
+  int _cnt;
+  const RSet < T > &_set;
+  const RSet < T > &set ()
+  {
+    return _set;
+  }
+
 public:
-	RSetIter( const RSet<T> &set )
-		: _cnt(-1), _set(set)
-		{ }
-	
-	INLINE int			operator() ();
+  RSetIter (const RSet < T > &set):_cnt (-1), _set (set)
+  {
+  }
+
+  INLINE int operator () ();
 #ifdef notdef
-				{	if (_cnt >= (_set.used-1))
-						return 0;
-					_cnt++;
-					return 1;	}
+  {
+    if (_cnt >= (_set.used - 1))
+      return 0;
+    _cnt++;
+    return 1;
+  }
 #endif
-	const T			&val() const
-				{ return _set.data[_cnt]; }
-	int			cnt() const
-				{ return _cnt; }
+  const T & val () const
+  {
+    return _set.data[_cnt];
+  }
+  int cnt () const
+  {
+    return _cnt;
+  }
 };
 
-template <class T> INLINE int
-  RSetIter<T>::operator() ()
-{       
-  if (_cnt >= (_set.used-1))
+template < class T > INLINE int RSetIter < T >::operator () ()
+{
+  if (_cnt >= (_set.used - 1))
     return 0;
   _cnt++;
-  return 1;     
+  return 1;
 }
 
 
-#endif	/* SET_H */
+#endif /* SET_H */

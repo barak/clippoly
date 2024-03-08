@@ -9,6 +9,6 @@
 #include	"set.h"
 #include	"poly.h"
 
-template class SetIter<Poly *>;
-template class Set<Poly *>;
-template class  RSet<NodePEdge>;
+template class SetIter < Poly * >;
+template class Set < Poly * >;
+template class RSet < NodePEdge >;

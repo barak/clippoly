@@ -41,32 +41,31 @@
 #include	"posadder.h"
 
 void
-PosAdder::set(LogicStates boolean)
+PosAdder::set (LogicStates boolean)
 {
   if (val == TrueFalse)
     return;
-  
-	switch(boolean)
-	{case UnKnown:
-		break;
-   case TrueFalse:
-		val = TrueFalse;
-		break;
-	case True:
-		if (val == False)
-			//error_at_line(0, 0, __FILE__, __LINE__, "Conflict in PosAdder::set (False, True)");
-		  val = TrueFalse;
-		else
-		  val = True;
-		break;
-	case False:
-		if (val == True)
-			//error_at_line(0, 0, __FILE__, __LINE__, "Conflict in PosAdder::set (True, False)");
-		  val = TrueFalse;
-		else
-		val = False;
-		break;
-	}
+
+  switch (boolean)
+    {
+    case UnKnown:
+      break;
+    case TrueFalse:
+      val = TrueFalse;
+      break;
+    case True:
+      if (val == False)
+	//error_at_line(0, 0, __FILE__, __LINE__, "Conflict in PosAdder::set (False, True)");
+	val = TrueFalse;
+      else
+	val = True;
+      break;
+    case False:
+      if (val == True)
+	//error_at_line(0, 0, __FILE__, __LINE__, "Conflict in PosAdder::set (True, False)");
+	val = TrueFalse;
+      else
+	val = False;
+      break;
+    }
 }
-		
-	

@@ -82,7 +82,7 @@
 
 /* macro's for accessing the data elements of a vector or a matrix */
 #define m_elem(mat, i, j)	((mat).m[(i)][(j)])
-#define v_elem(vec, i) 		((vec).a[(int)(i)]) 
+#define v_elem(vec, i) 		((vec).a[(int)(i)])
 #define v_x(vec)		((vec).s.x)
 #define v_y(vec)		((vec).s.y)
 #define v_z(vec)		((vec).s.z)
@@ -97,41 +97,42 @@
 
 typedef enum
 {
-    DIV0, NOMEM, MATSING
+  DIV0, NOMEM, MATSING
 } gm_error_t;
 
 #ifdef __cplusplus
-extern "C" void gm_error( int, const char * );
+extern "C" void gm_error (int, const char *);
 #ifdef __GNUG__
 #pragma interface
 #endif
 
 inline void *
-gm_alloc( /*const*/ void *ptr, const char *func, int len )
+gm_alloc ( /*const */ void *ptr, const char *func, int len)
 {
-	if (ptr != 0)
-		return ptr;
-	else
-	{
-		void	*gm_dummy;
+  if (ptr != 0)
+    return ptr;
+  else
+    {
+      void *gm_dummy;
 
-		if ((gm_dummy = malloc(len)) == NULL)
-			return gm_error(NOMEM,func), (void *)0;
-		else
-			return gm_dummy;
-	}
+      if ((gm_dummy = malloc (len)) == NULL)
+	return gm_error (NOMEM, func), (void *) 0;
+      else
+	return gm_dummy;
+    }
 }
+
 #define	gm_ALLOC(type, ptr, func)	((type *) \
 					  gm_alloc(ptr, func, sizeof(type))
 #else
 /****** Globals ******/
-char		*gm_dummy; /* used for memory allocation in gm_ALLOC() */
+char *gm_dummy;			/* used for memory allocation in gm_ALLOC() */
 
 /* check if ptr is NULL, if so then allocate memory else return ptr */
 #define gm_ALLOC(type, ptr, func)  (((ptr) == NULL) ? \
 		((gm_dummy = (char *)malloc(sizeof(type))) == NULL) ? \
 	        (gm_error(NOMEM, func), (type *)NULL) : \
-		(type *)gm_dummy : (ptr)) 
+		(type *)gm_dummy : (ptr))
 #endif
 
 /* if ptr is NULL then deallocate used space pointed by ptr */
@@ -145,39 +146,39 @@ char		*gm_dummy; /* used for memory allocation in gm_ALLOC() */
 /****** Level 1 : data definition ******/
 typedef union hvec2_t
 {
-	double a[3];
-	struct hvec2_s
-	{
-		double	x, y, w; 
-	} s;
+  double a[3];
+  struct hvec2_s
+  {
+    double x, y, w;
+  } s;
 } hvec2_t;
 
 
 typedef union hvec3_t
 {
-	double a[4];
-	struct hvec3_s
-	{
-		double x, y, z, w;
-	} s;
+  double a[4];
+  struct hvec3_s
+  {
+    double x, y, z, w;
+  } s;
 } hvec3_t;
 
 
 typedef struct hmat2_t
 {
-	double m[3][3];
+  double m[3][3];
 } hmat2_t;
 
 
 typedef struct hmat3_t
 {
-	double m[4][4];
+  double m[4][4];
 } hmat3_t;
 
 
 typedef enum
 {
-	X_AXIS, Y_AXIS, Z_AXIS
+  X_AXIS, Y_AXIS, Z_AXIS
 } b_axis;
 
 
@@ -195,134 +196,157 @@ typedef enum
 #define v_alloc3(v_result)	gm_ALLOC(hvec3_t, (v_result), "v_alloc3()")
 #else
 inline void *
-Alloc(unsigned int x )
+Alloc (unsigned int x)
 {
-	void	*res;
+  void *res;
 
-	res = malloc(x);
-	if (res == 0)
-		gm_error(NOMEM,"Alloc");
+  res = malloc (x);
+  if (res == 0)
+    gm_error (NOMEM, "Alloc");
 
-	return res;
+  return res;
 }
 
 
 inline hmat2_t *
-m_alloc2(hmat2_t *r)
+m_alloc2 (hmat2_t *r)
 {
-	if (r)
-		return r;
-	else
-		return (hmat2_t *) Alloc(sizeof(hmat2_t));
+  if (r)
+    return r;
+  else
+    return (hmat2_t *) Alloc (sizeof (hmat2_t));
 }
 
 inline hmat3_t *
-m_alloc3(hmat3_t *r)
+m_alloc3 (hmat3_t *r)
 {
-	if (r)
-		return r;
-	else
-		return (hmat3_t *) Alloc(sizeof(hmat3_t));
+  if (r)
+    return r;
+  else
+    return (hmat3_t *) Alloc (sizeof (hmat3_t));
 }
 
 inline hvec2_t *
-v_alloc2(hvec2_t *r)
+v_alloc2 (hvec2_t *r)
 {
-	if (r)
-		return r;
-	else
-		return (hvec2_t *) Alloc(sizeof(hvec2_t));
+  if (r)
+    return r;
+  else
+    return (hvec2_t *) Alloc (sizeof (hvec2_t));
 }
 
 inline hvec3_t *
-v_alloc3(hvec3_t *r)
+v_alloc3 (hvec3_t *r)
 {
-	if (r)
-		return r;
-	else
-		return (hvec3_t *) Alloc(sizeof(hvec3_t));
+  if (r)
+    return r;
+  else
+    return (hvec3_t *) Alloc (sizeof (hvec3_t));
 }
 #endif
 
 /****** FUNCTION DEFINITIONS ******/
 #if defined(__STDC__) || defined(__cplusplus)
-# define P_(s) s
+#define P_(s) s
 #else
-# define P_(s) ()
+#define P_(s) ()
 #endif
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #define	C__	}
 #else
 #define	C__
 #endif
 
-hmat2_t *m_cpy2 P_((const hmat2_t *m_source, hmat2_t *m_result));
-hmat2_t *m_unity2 P_((hmat2_t *m_result));
-hvec2_t *v_cpy2 P_((const hvec2_t *v_source, hvec2_t *v_result));
-hvec2_t *v_fill2 P_((double x, double y, double w, hvec2_t *v_result));
-hvec2_t *v_unity2 P_((b_axis axis, hvec2_t *v_result));
-hvec2_t *v_zero2 P_((hvec2_t *v_result));
-hmat3_t *m_cpy3 P_((const hmat3_t *m_source, hmat3_t *m_result));
-hmat3_t *m_unity3 P_((hmat3_t *m_result));
-hvec3_t *v_cpy3 P_((const hvec3_t *v_source, hvec3_t *v_result));
-hvec3_t *v_fill3 P_((double x, double y, double z, double w, hvec3_t *v_result));
-hvec3_t *v_unity3 P_((b_axis axis, hvec3_t *v_result));
-hvec3_t *v_zero3 P_((hvec3_t *v_result));
-double m_det2 P_((const hmat2_t *matrix));
-double v_len2 P_((const hvec2_t *vector));
-double vtmv_mul2 P_((const hvec2_t *vector, const hmat2_t *matrix));
-double vv_inprod2 P_((const hvec2_t *vectorA, const hvec2_t *vectorB));
-hmat2_t *m_inv2 P_((const hmat2_t *matrix, hmat2_t *m_result));
-hmat2_t *m_tra2 P_((const hmat2_t *matrix, hmat2_t *m_result));
-hmat2_t *mm_add2 P_((const hmat2_t *matrixA, const hmat2_t *matrixB, hmat2_t *m_result));
-hmat2_t *mm_mul2 P_((const hmat2_t *matrixA, const hmat2_t *matrixB, hmat2_t *m_result));
-hmat2_t *mm_sub2 P_((const hmat2_t *matrixA, const hmat2_t *matrixB, hmat2_t *m_result));
-hmat2_t *mtmm_mul2 P_((const hmat2_t *matrixA, const hmat2_t *matrixB, hmat2_t *m_result));
-hmat2_t *sm_mul2 P_((double scalar, const hmat2_t *matrix, hmat2_t *m_result));
-hmat2_t *vvt_mul2 P_((const hvec2_t *vectorA, const hvec2_t *vectorB, hmat2_t *m_result));
-hvec2_t *mv_mul2 P_((const hmat2_t *matrix, const hvec2_t *vector, hvec2_t *v_result));
-hvec2_t *sv_mul2 P_((double scalar, const hvec2_t *vector, hvec2_t *v_result));
-hvec2_t *v_homo2 P_((const hvec2_t *vector, hvec2_t *v_result));
-hvec2_t *v_norm2 P_((const hvec2_t *vector, hvec2_t *v_result));
-hvec2_t *vv_add2 P_((const hvec2_t *vectorA, const hvec2_t *vectorB, hvec2_t *v_result));
-hvec2_t *vv_sub2 P_((const hvec2_t *vectorA, const hvec2_t *vectorB, hvec2_t *v_result));
-double m_det3 P_((const hmat3_t *matrix));
-double v_len3 P_((const hvec3_t *vector));
-double vtmv_mul3 P_((const hvec3_t *vector, const hmat3_t *matrix));
-double vv_inprod3 P_((const hvec3_t *vectorA, const hvec3_t *vectorB));
-hmat3_t *m_inv3 P_((const hmat3_t *matrix, hmat3_t *m_result));
-hmat3_t *m_tra3 P_((const hmat3_t *matrix, hmat3_t *m_result));
-hmat3_t *mm_add3 P_((const hmat3_t *matrixA, const hmat3_t *matrixB, hmat3_t *m_result));
-hmat3_t *mm_mul3 P_((const hmat3_t *matrixA, const hmat3_t *matrixB, hmat3_t *m_result));
-hmat3_t *mm_sub3 P_((const hmat3_t *matrixA, const hmat3_t *matrixB, hmat3_t *m_result));
-hmat3_t *mtmm_mul3 P_((const hmat3_t *matrixA, const hmat3_t *matrixB, hmat3_t *m_result));
-hmat3_t *sm_mul3 P_((double scalar, const hmat3_t *matrix, hmat3_t *m_result));
-hvec3_t *mv_mul3 P_((const hmat3_t *matrix, const hvec3_t *vector, hvec3_t *v_result));
-hvec3_t *sv_mul3 P_((double scalar, const hvec3_t *vector, hvec3_t *v_result));
-hvec3_t *v_homo3 P_((const hvec3_t *vector, hvec3_t *v_result));
-hvec3_t *v_norm3 P_((const hvec3_t *vector, hvec3_t *v_result));
-hvec3_t *vv_add3 P_((const hvec3_t *vectorA, const hvec3_t *vectorB, hvec3_t *v_result));
-hvec3_t *vv_cross3 P_((const hvec3_t *vectorA, const hvec3_t *vectorB, hvec3_t *v_result));
-hvec3_t *vv_sub3 P_((const hvec3_t *vectorA, const hvec3_t *vectorB, hvec3_t *v_result));
-hmat3_t *vvt_mul3 P_((const hvec3_t *vectorA, const hvec3_t *vectorB, hmat3_t *m_result));
-hmat2_t *miraxis2 P_((b_axis axis, hmat2_t *m_result));
-hmat2_t *mirorig2 P_((hmat2_t *m_result));
-hmat2_t *rot2 P_((double rotation, hmat2_t *m_result));
-hmat2_t *scaorig2 P_((double scale, hmat2_t *m_result));
-hmat2_t *scaxis2 P_((double scale, b_axis axis, hmat2_t *m_result));
-hmat2_t *transl2 P_((const hvec2_t *translation, hmat2_t *m_result));
-hmat3_t *miraxis3 P_((b_axis axis, hmat3_t *m_result));
-hmat3_t *mirorig3 P_((hmat3_t *m_result));
-hmat3_t *mirplane3 P_((b_axis plane, hmat3_t *m_result));
-hmat3_t *prjorthaxis P_((b_axis axis, hmat3_t *m_result));
-hmat3_t *prjpersaxis P_((b_axis axis, hmat3_t *m_result));
-hmat3_t *rot3 P_((double rotation, b_axis axis, hmat3_t *m_result));
-hmat3_t *scaorig3 P_((double scale, hmat3_t *m_result));
-hmat3_t *scaplane3 P_((double scale, b_axis plane, hmat3_t *m_result));
-hmat3_t *scaxis3 P_((double scale, b_axis axis, hmat3_t *m_result));
-hmat3_t *transl3 P_((const hvec3_t *translation, hmat3_t *m_result));
+hmat2_t *m_cpy2 P_ ((const hmat2_t * m_source, hmat2_t * m_result));
+hmat2_t *m_unity2 P_ ((hmat2_t * m_result));
+hvec2_t *v_cpy2 P_ ((const hvec2_t * v_source, hvec2_t * v_result));
+hvec2_t *v_fill2 P_ ((double x, double y, double w, hvec2_t * v_result));
+hvec2_t *v_unity2 P_ ((b_axis axis, hvec2_t * v_result));
+hvec2_t *v_zero2 P_ ((hvec2_t * v_result));
+hmat3_t *m_cpy3 P_ ((const hmat3_t * m_source, hmat3_t * m_result));
+hmat3_t *m_unity3 P_ ((hmat3_t * m_result));
+hvec3_t *v_cpy3 P_ ((const hvec3_t * v_source, hvec3_t * v_result));
+hvec3_t *v_fill3
+P_ ((double x, double y, double z, double w, hvec3_t * v_result));
+hvec3_t *v_unity3 P_ ((b_axis axis, hvec3_t * v_result));
+hvec3_t *v_zero3 P_ ((hvec3_t * v_result));
+double m_det2 P_ ((const hmat2_t * matrix));
+double v_len2 P_ ((const hvec2_t * vector));
+double vtmv_mul2 P_ ((const hvec2_t * vector, const hmat2_t * matrix));
+double vv_inprod2 P_ ((const hvec2_t * vectorA, const hvec2_t * vectorB));
+hmat2_t *m_inv2 P_ ((const hmat2_t * matrix, hmat2_t * m_result));
+hmat2_t *m_tra2 P_ ((const hmat2_t * matrix, hmat2_t * m_result));
+hmat2_t *mm_add2
+P_ ((const hmat2_t * matrixA, const hmat2_t * matrixB, hmat2_t * m_result));
+hmat2_t *mm_mul2
+P_ ((const hmat2_t * matrixA, const hmat2_t * matrixB, hmat2_t * m_result));
+hmat2_t *mm_sub2
+P_ ((const hmat2_t * matrixA, const hmat2_t * matrixB, hmat2_t * m_result));
+hmat2_t *mtmm_mul2
+P_ ((const hmat2_t * matrixA, const hmat2_t * matrixB, hmat2_t * m_result));
+hmat2_t *sm_mul2
+P_ ((double scalar, const hmat2_t * matrix, hmat2_t * m_result));
+hmat2_t *vvt_mul2
+P_ ((const hvec2_t * vectorA, const hvec2_t * vectorB, hmat2_t * m_result));
+hvec2_t *mv_mul2
+P_ ((const hmat2_t * matrix, const hvec2_t * vector, hvec2_t * v_result));
+hvec2_t *sv_mul2
+P_ ((double scalar, const hvec2_t * vector, hvec2_t * v_result));
+hvec2_t *v_homo2 P_ ((const hvec2_t * vector, hvec2_t * v_result));
+hvec2_t *v_norm2 P_ ((const hvec2_t * vector, hvec2_t * v_result));
+hvec2_t *vv_add2
+P_ ((const hvec2_t * vectorA, const hvec2_t * vectorB, hvec2_t * v_result));
+hvec2_t *vv_sub2
+P_ ((const hvec2_t * vectorA, const hvec2_t * vectorB, hvec2_t * v_result));
+double m_det3 P_ ((const hmat3_t * matrix));
+double v_len3 P_ ((const hvec3_t * vector));
+double vtmv_mul3 P_ ((const hvec3_t * vector, const hmat3_t * matrix));
+double vv_inprod3 P_ ((const hvec3_t * vectorA, const hvec3_t * vectorB));
+hmat3_t *m_inv3 P_ ((const hmat3_t * matrix, hmat3_t * m_result));
+hmat3_t *m_tra3 P_ ((const hmat3_t * matrix, hmat3_t * m_result));
+hmat3_t *mm_add3
+P_ ((const hmat3_t * matrixA, const hmat3_t * matrixB, hmat3_t * m_result));
+hmat3_t *mm_mul3
+P_ ((const hmat3_t * matrixA, const hmat3_t * matrixB, hmat3_t * m_result));
+hmat3_t *mm_sub3
+P_ ((const hmat3_t * matrixA, const hmat3_t * matrixB, hmat3_t * m_result));
+hmat3_t *mtmm_mul3
+P_ ((const hmat3_t * matrixA, const hmat3_t * matrixB, hmat3_t * m_result));
+hmat3_t *sm_mul3
+P_ ((double scalar, const hmat3_t * matrix, hmat3_t * m_result));
+hvec3_t *mv_mul3
+P_ ((const hmat3_t * matrix, const hvec3_t * vector, hvec3_t * v_result));
+hvec3_t *sv_mul3
+P_ ((double scalar, const hvec3_t * vector, hvec3_t * v_result));
+hvec3_t *v_homo3 P_ ((const hvec3_t * vector, hvec3_t * v_result));
+hvec3_t *v_norm3 P_ ((const hvec3_t * vector, hvec3_t * v_result));
+hvec3_t *vv_add3
+P_ ((const hvec3_t * vectorA, const hvec3_t * vectorB, hvec3_t * v_result));
+hvec3_t *vv_cross3
+P_ ((const hvec3_t * vectorA, const hvec3_t * vectorB, hvec3_t * v_result));
+hvec3_t *vv_sub3
+P_ ((const hvec3_t * vectorA, const hvec3_t * vectorB, hvec3_t * v_result));
+hmat3_t *vvt_mul3
+P_ ((const hvec3_t * vectorA, const hvec3_t * vectorB, hmat3_t * m_result));
+hmat2_t *miraxis2 P_ ((b_axis axis, hmat2_t * m_result));
+hmat2_t *mirorig2 P_ ((hmat2_t * m_result));
+hmat2_t *rot2 P_ ((double rotation, hmat2_t * m_result));
+hmat2_t *scaorig2 P_ ((double scale, hmat2_t * m_result));
+hmat2_t *scaxis2 P_ ((double scale, b_axis axis, hmat2_t * m_result));
+hmat2_t *transl2 P_ ((const hvec2_t * translation, hmat2_t * m_result));
+hmat3_t *miraxis3 P_ ((b_axis axis, hmat3_t * m_result));
+hmat3_t *mirorig3 P_ ((hmat3_t * m_result));
+hmat3_t *mirplane3 P_ ((b_axis plane, hmat3_t * m_result));
+hmat3_t *prjorthaxis P_ ((b_axis axis, hmat3_t * m_result));
+hmat3_t *prjpersaxis P_ ((b_axis axis, hmat3_t * m_result));
+hmat3_t *rot3 P_ ((double rotation, b_axis axis, hmat3_t * m_result));
+hmat3_t *scaorig3 P_ ((double scale, hmat3_t * m_result));
+hmat3_t *scaplane3 P_ ((double scale, b_axis plane, hmat3_t * m_result));
+hmat3_t *scaxis3 P_ ((double scale, b_axis axis, hmat3_t * m_result));
+hmat3_t *transl3 P_ ((const hvec3_t * translation, hmat3_t * m_result));
 
 C__
 #undef C__

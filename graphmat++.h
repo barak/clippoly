@@ -51,181 +51,180 @@
 #endif
 
 inline hvec2_t
-operator-( const hvec2_t &h )
+operator- (const hvec2_t & h)
 {
-	hvec2_t	ret;
+  hvec2_t ret;
 
-	v_fill2(-v_x(h),-v_y(h),v_w(h), &ret);
+  v_fill2 (-v_x (h), -v_y (h), v_w (h), &ret);
 
-	return ret;
+  return ret;
 }
 
 inline hvec2_t
-operator-( const hvec2_t &l,  const hvec2_t &r )
+operator- (const hvec2_t & l, const hvec2_t & r)
 {
-	hvec2_t	ret;
+  hvec2_t ret;
 
-	vv_sub2( &l, &r, &ret );
+  vv_sub2 (&l, &r, &ret);
 
-	return ret;
+  return ret;
 }
 
 inline hvec2_t
-operator+(  const hvec2_t &l,  const hvec2_t &r )
+operator+ (const hvec2_t & l, const hvec2_t & r)
 {
-	hvec2_t	ret;
+  hvec2_t ret;
 
-	vv_add2( &l, &r, &ret );
+  vv_add2 (&l, &r, &ret);
 
-	return ret;
+  return ret;
 }
 
 inline hvec2_t
-operator*( const hmat2_t &m, const hvec2_t &v )
+operator* (const hmat2_t & m, const hvec2_t & v)
 {
-	hvec2_t	ret;
+  hvec2_t ret;
 
-	mv_mul2( &m, &v, &ret );
+  mv_mul2 (&m, &v, &ret);
 
-	return ret;
+  return ret;
 }
 
 inline hvec2_t
-operator*( double s, const hvec2_t &v )
+operator* (double s, const hvec2_t & v)
 {
-	hvec2_t	ret;
+  hvec2_t ret;
 
-	sv_mul2( s, &v, &ret );
+  sv_mul2 (s, &v, &ret);
 
-	return ret;
+  return ret;
 }
 
-inline hvec2_t 
-operator/( const hvec2_t &v, double div )
+inline hvec2_t
+operator/ (const hvec2_t & v, double div)
 {
-	hvec2_t	ret;
-	
-	sv_mul2( 1.0/div, &v, &ret );
+  hvec2_t ret;
 
-	return ret;
-}
+  sv_mul2 (1.0 / div, &v, &ret);
 
-inline hvec2_t const &
-operator+=( hvec2_t &v, const hvec2_t &add )
-{
-	vv_add2( &v, &add, &v );
-
-	return v;
+  return ret;
 }
 
 inline hvec2_t const &
-operator-=( hvec2_t &v, const hvec2_t &sub )
+operator+= (hvec2_t & v, const hvec2_t & add)
 {
-	vv_sub2( &v, &sub, &v );
+  vv_add2 (&v, &add, &v);
 
-	return v;
+  return v;
 }
 
 inline hvec2_t const &
-operator*=( hvec2_t &v, double mul )
+operator-= (hvec2_t & v, const hvec2_t & sub)
 {
-	sv_mul2( mul, &v, &v );
+  vv_sub2 (&v, &sub, &v);
 
-	return v;
+  return v;
 }
 
 inline hvec2_t const &
-operator/=( hvec2_t &v, double div )
+operator*= (hvec2_t & v, double mul)
 {
-	sv_mul2( 1.0/div, &v, &v );
+  sv_mul2 (mul, &v, &v);
 
-	return v;
+  return v;
+}
+
+inline hvec2_t const &
+operator/= (hvec2_t & v, double div)
+{
+  sv_mul2 (1.0 / div, &v, &v);
+
+  return v;
 }
 
 inline double
-len(  const hvec2_t &v )
+len (const hvec2_t & v)
 {
-	return v_len2( &v );
+  return v_len2 (&v);
 }
 
 inline hvec3_t
-operator-( const hvec3_t &h )
+operator- (const hvec3_t & h)
 {
-	hvec3_t	ret;
+  hvec3_t ret;
 
-	v_fill3(-v_x(h),-v_y(h), -v_z(h), v_w(h), &ret);
+  v_fill3 (-v_x (h), -v_y (h), -v_z (h), v_w (h), &ret);
 
-	return ret;
+  return ret;
 }
 
 inline hmat3_t
-operator*( const hmat3_t &l, const hmat3_t &r )
+operator* (const hmat3_t & l, const hmat3_t & r)
 {
-	hmat3_t	res;
-	
-	mm_mul3(&l, &r, &res);
-	
-	return res;
+  hmat3_t res;
+
+  mm_mul3 (&l, &r, &res);
+
+  return res;
 }
 
 inline hvec3_t
-operator*( const hmat3_t &m, const hvec3_t &v )
+operator* (const hmat3_t & m, const hvec3_t & v)
 {
-	hvec3_t	res;
-	
-	mv_mul3(&m, &v, &res);
-	
-	return res;
+  hvec3_t res;
+
+  mv_mul3 (&m, &v, &res);
+
+  return res;
 }
 
 inline hvec3_t
-operator-( const hvec3_t &l, const hvec3_t &r )
+operator- (const hvec3_t & l, const hvec3_t & r)
 {
-	hvec3_t	res;
-	
-	vv_sub3( &l, &r, &res );
-	
-	return res;
+  hvec3_t res;
+
+  vv_sub3 (&l, &r, &res);
+
+  return res;
 }
 
 inline hvec3_t
-operator*( const hvec3_t &v, double s )
+operator* (const hvec3_t & v, double s)
 {
-        hvec3_t ret;
+  hvec3_t ret;
 
-        sv_mul3( s, &v, &ret );
+  sv_mul3 (s, &v, &ret);
 
-        return ret;
+  return ret;
 }
 
 
 inline hvec3_t
-operator*( double s, const hvec3_t &v )
+operator* (double s, const hvec3_t & v)
 {
-        hvec3_t ret;
+  hvec3_t ret;
 
-        sv_mul3( s, &v, &ret );
+  sv_mul3 (s, &v, &ret);
 
-        return ret;
+  return ret;
 }
 
 inline hvec3_t
-operator+(  const hvec3_t &l,  const hvec3_t &r )
+operator+ (const hvec3_t & l, const hvec3_t & r)
 {
-	hvec3_t	ret;
+  hvec3_t ret;
 
-	vv_add3( &l, &r, &ret );
+  vv_add3 (&l, &r, &ret);
 
-	return ret;
+  return ret;
 }
 
 inline hvec3_t const &
-operator-=( hvec3_t &v, const hvec3_t &sub )
+operator-= (hvec3_t & v, const hvec3_t & sub)
 {
-	vv_sub3( &v, &sub, &v );
+  vv_sub3 (&v, &sub, &v);
 
-	return v;
+  return v;
 }
 
 #endif
-

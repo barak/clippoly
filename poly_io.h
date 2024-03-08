@@ -42,17 +42,17 @@
 class Poly;
 class Point;
 class PolyNode;
-union	hvec3_t;
+union hvec3_t;
 
-Poly 	*read_poly( std::istream & );
+Poly *read_poly (std::istream &);
 
-std::istream &operator>>(std::istream &, Point &);
-std::ostream	&operator<<(std::ostream &, const Poly &);
-std::ostream	&operator<<(std::ostream &, const PolyPList &);
-std::ostream	&operator<<(std::ostream &, const PolyNode &);
-std::ostream	&operator<<(std::ostream &, const Point &);
-std::ostream	&operator<<(std::ostream &, enum EdgeState);
-std::ostream	&operator<<(std::ostream &, enum LogicStates);
-std::ostream	&operator<<(std::ostream &, const hvec3_t &);
+std::istream & operator>> (std::istream &, Point &);
+std::ostream & operator<< (std::ostream &, const Poly &);
+std::ostream & operator<< (std::ostream &, const PolyPList &);
+std::ostream & operator<< (std::ostream &, const PolyNode &);
+std::ostream & operator<< (std::ostream &, const Point &);
+std::ostream & operator<< (std::ostream &, enum EdgeState);
+std::ostream & operator<< (std::ostream &, enum LogicStates);
+std::ostream & operator<< (std::ostream &, const hvec3_t &);
 
-#endif	/* POLY_IO_H */
+#endif /* POLY_IO_H */

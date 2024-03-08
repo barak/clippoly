@@ -84,27 +84,23 @@
 
 #ifdef __cplusplus
 
-int v_inters2(
-	const hvec2_t &p1,
-	const hvec2_t &p2,
-	const hvec2_t &q1,
-	const hvec2_t &q2,
-	hvec2_t *S1,
-	hvec2_t *S2
-	);
+int v_inters2 (const hvec2_t & p1,
+	       const hvec2_t & p2,
+	       const hvec2_t & q1,
+	       const hvec2_t & q2, hvec2_t * S1, hvec2_t * S2);
 
-extern "C" {
+extern "C"
+{
 #endif
 
 
-void	v_dupl2(hvec2_t *, hvec2_t *);
-void	v_dupl3(hvec3_t *, hvec3_t *);
-void	m_dupl2(hmat2_t *, hmat2_t *);
-void	m_dupl3(hmat3_t *, hmat3_t *);
+  void v_dupl2 (hvec2_t *, hvec2_t *);
+  void v_dupl3 (hvec3_t *, hvec3_t *);
+  void m_dupl2 (hmat2_t *, hmat2_t *);
+  void m_dupl3 (hmat3_t *, hmat3_t *);
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif
-
